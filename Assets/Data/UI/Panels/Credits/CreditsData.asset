@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e482b1d8c5efa844b98bd7fa62a02964, type: 3}
+  m_Name: CreditsData
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  DisplayStyle: {fileID: 11400000, guid: 8464971f712bc214a97cf0e375453220, type: 2}
+  Data:
+  - DisplayName: Symptoms Please
+    Foldout: 1
+    Headings:
+    - DisplayName: 
+      Foldout: 1
+      Designations:
+      - DisplayName: About
+        Foldout: 1
+        Names:
+        - Symptoms Please is an education game designed to increase knowledge of
+          sex and relationships. It is my final year disseration artefact.
+      - DisplayName: Creator
+        Foldout: 1
+        Names:
+        - Zoe Rowbotham

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26c6776dfd1d7a459f5498c5f9cddf9, type: 3}
+  m_Name: MainUIPanelsFlow
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  StartingPanel: panel_main_menu
+  Flow:
+    m_nodes:
+    - PanelID: panel_main_menu
+      Transitions:
+      - panel_settings
+      - panel_day_start
+      - panel_profile
+      - panel_online
+    - PanelID: panel_profile
+      Transitions:
+      - panel_main_menu
+    - PanelID: panel_settings
+      Transitions:
+      - panel_main_menu
+      - panel_credits
+    - PanelID: panel_credits
+      Transitions:
+      - panel_settings
+    - PanelID: panel_online
+      Transitions:
+      - panel_main_menu
+    - PanelID: panel_day_start
+      Transitions: []
+    - PanelID: panel_day_end
+      Transitions:
+      - panel_day_start

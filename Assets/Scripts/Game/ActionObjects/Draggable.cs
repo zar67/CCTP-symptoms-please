@@ -1,18 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
 {
+    public static event Action<Draggable> OnDraggableOnPatient;
+
     [SerializeField] private Canvas m_canvas = default;
     [SerializeField] private RectTransform m_canvasRectTransform = default;
+    [SerializeField] private RectTransform m_deskRectTransform = default;
     [SerializeField] private RectTransform m_dragRectTransform = default;
 
     private Vector2 m_startingPosition;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        m_startingPosition = m_dragRectTransform.anchoredPosition;
+        m_startingPosition = m_dragRectTransform.position;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -40,9 +44,23 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Check if over patient
-        // Invoke event if over patient
-        // return to starting position if outside of desk area
+        var corners = new Vector3[4];
+        m_deskRectTransform.GetWorldCorners(corners);
+        var deskWorldRect = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
+
+        if (m_dragRectTransform.position.x > deskWorldRect.position.x &&
+            m_dragRectTransform.position.x < deskWorldRect.position.x + deskWorldRect.width &&
+            m_dragRectTransform.position.y > deskWorldRect.position.y &&
+            m_dragRectTransform.position.y < deskWorldRect.position.y + deskWorldRect.height)
+        {
+
+            // Validate Position In Desk
+        }
+        else
+        {
+            m_dragRectTransform.position = m_startingPosition;
+            OnDraggableOnPatient?.Invoke(this);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)

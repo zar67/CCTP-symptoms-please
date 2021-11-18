@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 134.25
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -402,6 +402,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_panelID: panel_main_menu
   m_disablePreviousPanel: 1
+  m_interactables:
+  - {fileID: 7538170267309895825}
+  - {fileID: 5781917414032961006}
+  - {fileID: 8911240895141697181}
+  - {fileID: 6646613555140409588}
 --- !u!114 &3948612164035989221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,7 +582,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -711,7 +716,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 134.25
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1383,7 +1388,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 134.25
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

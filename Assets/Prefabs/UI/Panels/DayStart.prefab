@@ -538,6 +538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_panelID: panel_day_start
   m_disablePreviousPanel: 1
+  m_interactables:
+  - {fileID: 2520998901620641962}
 --- !u!1 &2210977522779293874
 GameObject:
   m_ObjectHideFlags: 0

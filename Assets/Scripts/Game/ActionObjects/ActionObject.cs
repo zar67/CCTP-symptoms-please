@@ -3,10 +3,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
+public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
 {
-    public static event Action<Draggable> OnDraggableOnPatient;
+    public static event Action<ActionObject> OnDraggableOnPatient;
 
+    public ActionType ActionType => m_actionType;
+
+    [Header("Action Values")]
+    [SerializeField] private ActionType m_actionType = default;
+
+    [Header("References")]
     [SerializeField] private Canvas m_canvas = default;
     [SerializeField] private RectTransform m_canvasRectTransform = default;
     [SerializeField] private RectTransform m_deskRectTransform = default;

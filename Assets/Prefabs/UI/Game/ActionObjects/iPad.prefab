@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1480d90d2dc600f46b028a96e44d9f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_actionType: 3
   m_canvas: {fileID: 0}
   m_canvasRectTransform: {fileID: 0}
   m_deskRectTransform: {fileID: 0}

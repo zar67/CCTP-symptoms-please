@@ -7,10 +7,18 @@ namespace SymptomsPlease.UI.Popups
     {
         [SerializeField] private PopupData m_popupdata = default;
         [SerializeField] private string m_popupType = default;
+        [SerializeField] private bool m_open = true;
 
         public override void Trigger()
         {
-            m_popupdata.OpenPopup(m_popupType);
+            if (m_open)
+            {
+                m_popupdata.OpenPopup(m_popupType);
+            }
+            else
+            {
+                m_popupdata.ClosePopup(m_popupType);
+            }
         }
     }
 }

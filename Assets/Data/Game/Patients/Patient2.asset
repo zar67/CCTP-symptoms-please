@@ -21,3 +21,14 @@ MonoBehaviour:
   m_iconSymptoms:
   - {fileID: 21300000, guid: b3ecddce590791747a37bb8866ce033a, type: 3}
   - {fileID: 21300000, guid: 0fd6df0142830ea47bfe6bf826344a7c, type: 3}
+  m_actionEffectivenessMap:
+  - Effectiveness: 0
+    Type: 4
+  - Effectiveness: 1
+    Type: 3
+  - Effectiveness: 2
+    Type: 2
+  - Effectiveness: 3
+    Type: 1
+  - Effectiveness: 4
+    Type: 0

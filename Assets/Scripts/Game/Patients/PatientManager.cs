@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PatientManager : MonoBehaviour
 {
-    public static event Action OnPatientSeen;
+    public static event Action<bool> OnPatientSeen;
     public static event Action<PatientData> OnNextPatient;
 
     [SerializeField] private GameObject m_patientHolder = default;
@@ -40,9 +40,9 @@ public class PatientManager : MonoBehaviour
     private void OnPlayerAction(ActionObject action)
     {
         // Handle Action Done
-        Debug.Log(action.ActionType);
+        ActionEffectiveness effectiveness = m_currentPatient.GetActionEffectiveness(action.ActionType);
 
-        OnPatientSeen?.Invoke();
+        OnPatientSeen?.Invoke((int)effectiveness > 2);
 
         m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(GenerateNextPatient);
     }

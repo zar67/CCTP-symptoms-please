@@ -1,3 +1,4 @@
+using DG.Tweening;
 using SymptomsPlease.SceneManagement;
 using SymptomsPlease.Transitions;
 using SymptomsPlease.UI.Panels;
@@ -8,6 +9,9 @@ public class DayCycle : MonoBehaviour
 {
     public static event Action<int> OnTimerValueChanged;
 
+    public static int PatientSeenInDay => m_patientsSeen;
+    public static int PatientsHelpedInDay => m_patientsHelped;
+
     [SerializeField] private int m_dayLengthInMinutes = 1;
 
     [Header("Day End Transition Values")]
@@ -16,12 +20,17 @@ public class DayCycle : MonoBehaviour
     [SerializeField] private string m_dayEndPanel = "panel_day_end";
     [SerializeField] private SceneTransitionData m_sceneTransitionData = default;
 
+    private static int m_patientsSeen = 0;
+    private static int m_patientsHelped = 0;
+
     private float m_dayTimer = 0;
     private float m_previousTimerValue = 0;
 
     private void Awake()
     {
         m_previousTimerValue = m_dayLengthInMinutes;
+        m_patientsSeen = 0;
+        m_patientsHelped = 0;
     }
 
     private void OnEnable()
@@ -57,10 +66,18 @@ public class DayCycle : MonoBehaviour
         }
     }
 
-    private void OnPatientSeen()
+    private void OnPatientSeen(bool helped)
     {
+        m_patientsSeen++;
+
+        if (helped)
+        {
+            m_patientsHelped++;
+        }
+
         if (m_dayTimer >= m_dayLengthInMinutes * 60)
         {
+            DOTween.Clear(true);
             m_panelsData.SetupInitialPanel(m_dayEndPanel);
             m_sceneTransitionData.State = TransitionData.TransitionState.OUT;
             m_sceneData.TransitionToScene(m_sceneTransitionData);

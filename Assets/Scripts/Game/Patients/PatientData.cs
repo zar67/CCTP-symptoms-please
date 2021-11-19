@@ -1,10 +1,12 @@
 using SymptomsPlease.ScriptableObjects;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SymptomsPlease/Game/PatientData")]
 public class PatientData : GameScriptableObject
 {
+    [Serializable]
     struct ActionEffectivenessMap
     {
         public ActionEffectiveness Effectiveness;

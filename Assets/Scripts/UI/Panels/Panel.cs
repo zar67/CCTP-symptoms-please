@@ -20,7 +20,7 @@ namespace SymptomsPlease.UI.Panels
 
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             TransitionManager.OnTransitionBegin.Subscribe(OnTransitionBegin);
             TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
@@ -31,7 +31,7 @@ namespace SymptomsPlease.UI.Panels
             }
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             TransitionManager.OnTransitionBegin.UnSubscribe(OnTransitionBegin);
             TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);

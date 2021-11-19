@@ -9,9 +9,9 @@ public enum ActionType
 
 public enum ActionEffectiveness
 {
-    BEST,
-    GOOD,
-    NEUTRAL,
+    WORST,
     BAD,
-    WORST
+    NEUTRAL,
+    GOOD,
+    BEST
 }

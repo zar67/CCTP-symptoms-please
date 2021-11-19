@@ -25,7 +25,7 @@ public class DisplaySymptomsManager : MonoBehaviour
         PatientManager.OnNextPatient -= OnNextPatient;
     }
 
-    private void OnPatientSeen()
+    private void OnPatientSeen(bool helped)
     {
         foreach (SymptomBubble bubble in m_symptomBubbles)
         {

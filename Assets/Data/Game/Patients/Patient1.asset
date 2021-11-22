@@ -15,20 +15,4 @@ MonoBehaviour:
   m_developerDescription: 
   m_patientName: Benji Button
   m_mainAppointmentInfo: Have a really weird rash.
-  m_writtenSymptoms:
-  - Feeling Ill
-  - Itchy
-  m_iconSymptoms:
-  - {fileID: 21300000, guid: 8f6722485a87b1348a4b4043cc51ced2, type: 3}
-  - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_actionEffectivenessMap:
-  - Effectiveness: 0
-    Type: 0
-  - Effectiveness: 1
-    Type: 1
-  - Effectiveness: 2
-    Type: 2
-  - Effectiveness: 3
-    Type: 3
-  - Effectiveness: 4
-    Type: 4
+  m_afflictionData: {fileID: 11400000, guid: 0e7da38f0155a2343b24c8062935aabd, type: 2}

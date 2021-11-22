@@ -50,7 +50,7 @@ public class PatientManager : MonoBehaviour
     {
         // Handle Possible Events
 
-        ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].GetActionEffectiveness(action.ActionType);
+        ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
 
         PatientSeenInDay++;
 

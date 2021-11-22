@@ -35,30 +35,30 @@ public class DisplaySymptomsManager : MonoBehaviour
 
     private void OnNextPatient(PatientData patient)
     {
-        int numWrittenSymptoms = patient.WrittenSymptomsCount;
-        int numIconSymptoms = patient.IconSymptomsCount;
+        int numWrittenSymptoms = patient.AfflictionData.WrittenSymptomsCount;
+        int numIconSymptoms = patient.AfflictionData.IconSymptomsCount;
 
-        if (patient.WrittenSymptomsCount + patient.IconSymptomsCount > m_symptomBubbles.Length)
+        if (patient.AfflictionData.WrittenSymptomsCount + patient.AfflictionData.IconSymptomsCount > m_symptomBubbles.Length)
         {
-            int writtenSymptomsMax = Mathf.Min(patient.WrittenSymptomsCount, m_symptomBubbles.Length);
+            int writtenSymptomsMax = Mathf.Min(patient.AfflictionData.WrittenSymptomsCount, m_symptomBubbles.Length);
 
             numWrittenSymptoms = Random.Range(0, writtenSymptomsMax + 1);
-            numIconSymptoms = Mathf.Min(m_symptomBubbles.Length - numWrittenSymptoms, patient.IconSymptomsCount);
+            numIconSymptoms = Mathf.Min(m_symptomBubbles.Length - numWrittenSymptoms, patient.AfflictionData.IconSymptomsCount);
 
             for (int i = 0; i < m_symptomBubbles.Length - (numWrittenSymptoms + numIconSymptoms); i++)
             {
-                if (numWrittenSymptoms == patient.WrittenSymptomsCount &&
-                    numIconSymptoms == patient.IconSymptomsCount)
+                if (numWrittenSymptoms == patient.AfflictionData.WrittenSymptomsCount &&
+                    numIconSymptoms == patient.AfflictionData.IconSymptomsCount)
                 {
                     break;
                 }
 
-                if (numWrittenSymptoms < patient.WrittenSymptomsCount)
+                if (numWrittenSymptoms < patient.AfflictionData.WrittenSymptomsCount)
                 {
                     numWrittenSymptoms++;
                 }
 
-                if (numIconSymptoms < patient.IconSymptomsCount)
+                if (numIconSymptoms < patient.AfflictionData.IconSymptomsCount)
                 {
                     numIconSymptoms++;
                 }
@@ -66,13 +66,13 @@ public class DisplaySymptomsManager : MonoBehaviour
         }
 
         int count = 0;
-        foreach (string writtenSymptom in patient.GetRandomStringSymptom(numWrittenSymptoms))
+        foreach (string writtenSymptom in patient.AfflictionData.GetRandomStringSymptom(numWrittenSymptoms))
         {
             m_symptomBubbles[count].SetWrittenSymptomText(writtenSymptom);
             count++;
         }
 
-        foreach (Sprite iconSymptom in patient.GetRandomIconSymptom(numIconSymptoms))
+        foreach (Sprite iconSymptom in patient.AfflictionData.GetRandomIconSymptom(numIconSymptoms))
         {
             m_symptomBubbles[count].SetIconSymptomSprite(iconSymptom);
             count++;

@@ -15,22 +15,4 @@ MonoBehaviour:
   m_developerDescription: 
   m_patientName: Testy McTestFace
   m_mainAppointmentInfo: Testies are hurting.
-  m_writtenSymptoms:
-  - Test
-  - Test2
-  - Test3
-  - Test4
-  m_iconSymptoms:
-  - {fileID: 21300000, guid: b3ecddce590791747a37bb8866ce033a, type: 3}
-  - {fileID: 21300000, guid: 0fd6df0142830ea47bfe6bf826344a7c, type: 3}
-  m_actionEffectivenessMap:
-  - Effectiveness: 0
-    Type: 4
-  - Effectiveness: 1
-    Type: 3
-  - Effectiveness: 2
-    Type: 2
-  - Effectiveness: 3
-    Type: 1
-  - Effectiveness: 4
-    Type: 0
+  m_afflictionData: {fileID: 11400000, guid: 65f9f67ca07a13e488c0da89ef309a7a, type: 2}

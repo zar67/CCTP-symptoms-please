@@ -1016,10 +1016,12 @@ MonoBehaviour:
   m_interactables:
   - {fileID: 2049567138811307249}
   - {fileID: 4502516301517505389}
+  m_dayNumberText: {fileID: 3122834938655129485}
   m_patientsSeenText: {fileID: 5100171152137297700}
   m_patientsHelpedText: {fileID: 7114059384723961992}
   m_successRateText: {fileID: 5910501674833901988}
   m_scoreText: {fileID: 2357618549056133973}
+  m_continueButton: {fileID: 4502516301517505389}
 --- !u!1 &3418783220392830395
 GameObject:
   m_ObjectHideFlags: 0

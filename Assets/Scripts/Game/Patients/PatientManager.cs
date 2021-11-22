@@ -61,7 +61,8 @@ public class PatientManager : MonoBehaviour
 
         DayCycle.IncreaseScore(((int)effectiveness - 2) * m_actionScoreMultiplier);
 
-        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count - 1; 
+        m_currentPatientIndex++;
+        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count; 
         OnPatientSeen?.Invoke(m_isDayOver);
 
         m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
@@ -84,7 +85,6 @@ public class PatientManager : MonoBehaviour
             m_patientHolder.transform.position = m_tweenStartPosition;
             m_patientHolder.transform.DOMove(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
-            m_currentPatientIndex++;
             OnNextPatient?.Invoke(PatientsInDay[m_currentPatientIndex]);
         }
     }

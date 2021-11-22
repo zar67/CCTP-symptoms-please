@@ -15,6 +15,8 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private GameObject m_patientHolder = default;
     [SerializeField] private float m_tweenAnimationDuration = 1.5f;
 
+    [SerializeField] private float m_actionScoreMultiplier = 10.0f;
+
     [Header("Patients")]
     [SerializeField] private int m_numberPatientsInDay = 10;
     [SerializeField] private PatientData[] m_patientDatas = default;
@@ -46,7 +48,8 @@ public class PatientManager : MonoBehaviour
 
     private void OnPlayerAction(ActionObject action)
     {
-        // Handle Action Done
+        // Handle Possible Events
+
         ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].GetActionEffectiveness(action.ActionType);
 
         PatientSeenInDay++;
@@ -56,7 +59,9 @@ public class PatientManager : MonoBehaviour
             PatientsHelpedInDay++;
         }
 
-        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count; 
+        DayCycle.IncreaseScore(((int)effectiveness - 2) * m_actionScoreMultiplier);
+
+        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count - 1; 
         OnPatientSeen?.Invoke(m_isDayOver);
 
         m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);

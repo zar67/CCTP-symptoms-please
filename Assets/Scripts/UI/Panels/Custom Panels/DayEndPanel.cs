@@ -8,6 +8,7 @@ public class DayEndPanel : Panel
     [SerializeField] private TextMeshProUGUI m_patientsSeenText = default;
     [SerializeField] private TextMeshProUGUI m_patientsHelpedText = default;
     [SerializeField] private TextMeshProUGUI m_successRateText = default;
+    [SerializeField] private TextMeshProUGUI m_scoreText = default;
 
     protected override void OnEnable()
     {
@@ -24,5 +25,7 @@ public class DayEndPanel : Panel
         {
             m_successRateText.text = "0%";
         }
+
+        m_scoreText.text = DayCycle.Score.ToString();
     }
 }

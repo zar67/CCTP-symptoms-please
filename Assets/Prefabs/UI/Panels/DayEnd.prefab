@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58.4
+  m_fontSize: 58.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_patientsSeenText: {fileID: 5100171152137297700}
   m_patientsHelpedText: {fileID: 7114059384723961992}
   m_successRateText: {fileID: 5910501674833901988}
+  m_scoreText: {fileID: 2357618549056133973}
 --- !u!1 &3418783220392830395
 GameObject:
   m_ObjectHideFlags: 0

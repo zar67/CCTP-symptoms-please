@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Patient1
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_patientName: Benji Button
+  m_mainAppointmentInfo: Have a really weird rash.
   m_writtenSymptoms:
   - Feeling Ill
   - Itchy

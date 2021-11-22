@@ -13,14 +13,20 @@ public class PatientData : GameScriptableObject
         public ActionType Type;
     }
 
+    public string PatientName => m_patientName;
+
+    public string MainAppointmentInfo => m_mainAppointmentInfo;
+
     public int WrittenSymptomsCount => m_writtenSymptoms.Length;
 
     public int IconSymptomsCount => m_iconSymptoms.Length;
 
-    [SerializeField] string[] m_writtenSymptoms = { };
-    [SerializeField] Sprite[] m_iconSymptoms = { };
+    [SerializeField] private string m_patientName;
+    [SerializeField] private string m_mainAppointmentInfo;
+    [SerializeField] private string[] m_writtenSymptoms = { };
+    [SerializeField] private Sprite[] m_iconSymptoms = { };
 
-    [SerializeField] ActionEffectivenessMap[] m_actionEffectivenessMap = { };
+    [SerializeField] private ActionEffectivenessMap[] m_actionEffectivenessMap = { };
 
     private Dictionary<ActionType, ActionEffectiveness> m_actionEffectivenessDictionary;
 

@@ -13,12 +13,12 @@ public class DayEndPanel : Panel
     {
         base.OnEnable();
 
-        m_patientsSeenText.text = DayCycle.PatientSeenInDay.ToString();
-        m_patientsHelpedText.text = DayCycle.PatientsHelpedInDay.ToString();
+        m_patientsSeenText.text = PatientManager.PatientSeenInDay.ToString();
+        m_patientsHelpedText.text = PatientManager.PatientsHelpedInDay.ToString();
 
-        if (DayCycle.PatientSeenInDay > 0)
+        if (PatientManager.PatientSeenInDay > 0)
         {
-            m_successRateText.text = ((int)((float)DayCycle.PatientsHelpedInDay / (float)DayCycle.PatientSeenInDay * 100)).ToString() + "%";
+            m_successRateText.text = ((int)((float)PatientManager.PatientsHelpedInDay / (float)PatientManager.PatientSeenInDay * 100)).ToString() + "%";
         }
         else
         {

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Patient2
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_patientName: Testy McTestFace
+  m_mainAppointmentInfo: Testies are hurting.
   m_writtenSymptoms:
   - Test
   - Test2

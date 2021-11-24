@@ -48,9 +48,22 @@ public class PatientManager : MonoBehaviour
 
     private void OnPlayerAction(ActionObject action)
     {
-        // Handle Possible Events
-
         ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
+
+        if ((int)effectiveness < 0)
+        {
+            DayEventsManager.AddEvent(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
+        }
+
+        if ((int)effectiveness < -1)
+        {
+            DayEventsManager.AddEvent(DayEventType.PATIENT_COMPLAINS);
+        }
+
+        if ((int)effectiveness > 1)
+        {
+            DayEventsManager.AddEvent(DayEventType.PATIENT_CURED);
+        }
 
         PatientSeenInDay++;
 

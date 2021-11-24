@@ -1,34 +1,42 @@
 using SymptomsPlease.SaveSystem;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallback
+public class DayEventsManager : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallback
 {
-    public const string SAVE_IDENTIFIER = "GameData";
-
     public struct SaveData
     {
-        public int DayNumber;
+        public List<DayEvent> Events;
     }
 
-    public static int DayNumber;
+    public const string SAVE_IDENTIFIER = "DayEvents";
+
+    public static List<DayEvent> DayEvents = new List<DayEvent>();
 
     public void SaveCreation(SaveFile file)
     {
         if (!file.HasObject(SAVE_IDENTIFIER))
         {
-            file.SaveObject(SAVE_IDENTIFIER, new SaveData() { DayNumber = 1 });
+            file.SaveObject(SAVE_IDENTIFIER, new SaveData() { Events = new List<DayEvent>() });
         }
     }
 
     public void LoadFromSave(SaveFile file)
     {
         SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
-        GameData.DayNumber = data.DayNumber;
+        DayEvents = data.Events;
     }
 
     public void PopulateToSave(SaveFile file)
     {
-        file.SaveObject(SAVE_IDENTIFIER, new SaveData() { DayNumber = DayNumber });
+        file.SaveObject(SAVE_IDENTIFIER, new SaveData() { Events = DayEvents });
+    }
+
+    public static void AddEvent(DayEventType type)
+    {
+        DayEvent newEvent;
+        newEvent.EventType = type;
+        DayEvents.Add(newEvent);
     }
 
     private void OnEnable()

@@ -52,7 +52,12 @@ public class PatientManager : MonoBehaviour
 
         if (effectiveness < ActionEffectiveness.NEUTRAL)
         {
-            DayEventsManager.AddEvent(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
+            DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
+            {
+                EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
+                Patient = PatientsInDay[m_currentPatientIndex],
+                NewAppointmentDay = GameData.DayNumber + 1
+            });
         }
 
         if (effectiveness < ActionEffectiveness.BAD)
@@ -84,7 +89,27 @@ public class PatientManager : MonoBehaviour
     private void GeneratePatients()
     {
         PatientsInDay = new List<PatientData>();
-        for (int i = 0; i < m_numberPatientsInDay; i++)
+        int patientCount = m_numberPatientsInDay;
+
+        foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
+        {
+            if (patientCount == 0)
+            {
+                break;
+            }
+
+            if (dayEvent is NewAppointmentEvent appointmentEvent)
+            {
+                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay)
+                {
+                    PatientsInDay.Add(appointmentEvent.Patient);
+                    DayEventsManager.DayEvents.Remove(dayEvent);
+                    patientCount--;
+                }
+            }
+        }
+
+        for (int i = 0; i < patientCount; i++)
         {
             int index = UnityEngine.Random.Range(0, m_patientDatas.Length);
             PatientsInDay.Add(m_patientDatas[index]);

@@ -50,17 +50,17 @@ public class PatientManager : MonoBehaviour
     {
         ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
 
-        if ((int)effectiveness < 0)
+        if (effectiveness < ActionEffectiveness.NEUTRAL)
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
         }
 
-        if ((int)effectiveness < -1)
+        if (effectiveness < ActionEffectiveness.BAD)
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_COMPLAINS);
         }
 
-        if ((int)effectiveness > 1)
+        if (effectiveness > ActionEffectiveness.GOOD)
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_CURED);
         }

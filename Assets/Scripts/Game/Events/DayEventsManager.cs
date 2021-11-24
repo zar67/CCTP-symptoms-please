@@ -34,9 +34,7 @@ public class DayEventsManager : MonoBehaviour, IGameSaveCallback, IGameSaveCreat
 
     public static void AddEvent(DayEventType type)
     {
-        DayEvent newEvent;
-        newEvent.EventType = type;
-        DayEvents.Add(newEvent);
+        DayEvents.Add(new DayEvent() { EventType = type});
     }
 
     private void OnEnable()

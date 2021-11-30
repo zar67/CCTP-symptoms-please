@@ -91,6 +91,7 @@ public class PatientManager : MonoBehaviour
         PatientsInDay = new List<PatientData>();
         int patientCount = m_numberPatientsInDay;
 
+        var usedEvents = new List<DayEvent>();
         foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
         {
             if (patientCount == 0)
@@ -103,10 +104,15 @@ public class PatientManager : MonoBehaviour
                 if (GameData.DayNumber == appointmentEvent.NewAppointmentDay)
                 {
                     PatientsInDay.Add(appointmentEvent.Patient);
-                    DayEventsManager.DayEvents.Remove(dayEvent);
+                    usedEvents.Add(dayEvent);
                     patientCount--;
                 }
             }
+        }
+
+        foreach (DayEvent dayEvent in usedEvents)
+        {
+            DayEventsManager.DayEvents.Remove(dayEvent);
         }
 
         for (int i = 0; i < patientCount; i++)

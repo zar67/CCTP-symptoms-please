@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SymptomsPlease.UI.Popups
 {
     public class Popup : MonoBehaviour
     {
+        public event Action OnOpenEvent;
+        public event Action OnCloseEvent;
+
         [SerializeField] protected PopupData m_popupData = default;
         [SerializeField] protected string m_popupType = default;
         [SerializeField] protected bool m_canClose = true;
@@ -24,11 +28,13 @@ namespace SymptomsPlease.UI.Popups
         public virtual void OnOpen()
         {
             m_closeButton.interactable = true;
+            OnOpenEvent?.Invoke();
         }
 
         public virtual void OnClose()
         {
             gameObject.SetActive(false);
+            OnCloseEvent?.Invoke();
         }
 
         public void PlayOpenAnimation()

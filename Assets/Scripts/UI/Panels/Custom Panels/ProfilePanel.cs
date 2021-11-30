@@ -1,10 +1,15 @@
 using SymptomsPlease.UI.Panels;
+using SymptomsPlease.UI.Popups;
 using System;
 using TMPro;
 using UnityEngine;
 
 public class ProfilePanel : Panel
 {
+    [Header("Popup References")]
+    [SerializeField] private PopupData m_popupData = default;
+
+    [Header("Display References")]
     [SerializeField] private TextMeshProUGUI m_nameText = default;
 
     [SerializeField] private TextMeshProUGUI m_timePlayedText = default;
@@ -14,8 +19,9 @@ public class ProfilePanel : Panel
     public override void OnOpen()
     {
         base.OnOpen();
+        m_popupData.GetPopup("popup_name_change").OnCloseEvent += UpdateName;
 
-        m_nameText.text = GameData.PlayerName;
+        UpdateName();
 
         var totalTimePlayed = TimeSpan.FromSeconds(GameData.TotalTimePlayed);
         m_timePlayedText.text = totalTimePlayed.ToString(@"hh\:mm");
@@ -27,5 +33,16 @@ public class ProfilePanel : Panel
             successRate = (int)((float)GameData.TotalPatientsHelped / (float)GameData.TotalPatientsSeen * 100);
         }
         m_successRateText.text = successRate.ToString();
+    }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+        m_popupData.GetPopup("popup_name_change").OnCloseEvent -= UpdateName;
+    }
+
+    private void UpdateName()
+    {
+        m_nameText.text = GameData.PlayerName;
     }
 }

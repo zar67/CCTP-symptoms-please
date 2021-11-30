@@ -1,3 +1,4 @@
+using SymptomsPlease.SaveSystem;
 using SymptomsPlease.UI.Panels;
 using TMPro;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class DayEndPanel : Panel
     {
         base.OnEnable();
 
-        m_dayNumberText.text = PlayerPrefs.GetInt("DaysCompleted").ToString();
+        m_dayNumberText.text = GameData.DayNumber.ToString();
 
         m_patientsSeenText.text = PatientManager.PatientSeenInDay.ToString();
         m_patientsHelpedText.text = PatientManager.PatientsHelpedInDay.ToString();
@@ -43,6 +44,7 @@ public class DayEndPanel : Panel
 
     private void OnContinue()
     {
-        PlayerPrefs.SetInt("DaysCompleted", PlayerPrefs.GetInt("DaysCompleted") + 1);
+        GameData.DayNumber++;
+        SaveSystem.Save();
     }
 }

@@ -11,6 +11,6 @@ public class DayStartPanel : Panel
     {
         base.OnEnable();
 
-        m_dayNumberText.text = PlayerPrefs.GetInt("DaysCompleted").ToString();
+        m_dayNumberText.text = GameData.DayNumber.ToString();
     }
 }

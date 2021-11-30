@@ -1,10 +1,13 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SymptomsDisplayManager : MonoBehaviour
 {
     [SerializeField] private SymptomBubble[] m_symptomBubbles = { };
     [SerializeField] private float m_delayBetweenBubbles = 0.9f;
+
+    private List<Tween> m_fadeInTweens = new List<Tween>();
 
     private void Awake()
     {
@@ -28,6 +31,12 @@ public class SymptomsDisplayManager : MonoBehaviour
 
     private void OnPatientSeen(bool helped)
     {
+        foreach (var tween in m_fadeInTweens)
+        {
+            tween.Kill();
+        }
+        m_fadeInTweens = new List<Tween>();
+
         foreach (SymptomBubble bubble in m_symptomBubbles)
         {
             bubble.CanvasGroup.DOFade(0, 0.5f);
@@ -86,7 +95,9 @@ public class SymptomsDisplayManager : MonoBehaviour
                 m_symptomBubbles[i].gameObject.SetActive(true);
                 m_symptomBubbles[i].CanvasGroup.alpha = 0;
 
-                m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f).SetDelay((i * m_delayBetweenBubbles) + m_delayBetweenBubbles);
+                Tween newTween = m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f);
+                newTween.SetDelay((i * m_delayBetweenBubbles) + m_delayBetweenBubbles);
+                m_fadeInTweens.Add(newTween);
             }
             else
             {

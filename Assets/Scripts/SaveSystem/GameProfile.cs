@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 
 namespace SymptomsPlease.SaveSystem
 {
@@ -9,7 +8,7 @@ namespace SymptomsPlease.SaveSystem
     /// Save file to hold profile information about a user.
     /// </summary>
     [Serializable]
-    public class Profile : SaveFile
+    public class GameProfile : SaveFile
     {
         /// <summary>
         /// Directory where profile information is stored.
@@ -56,13 +55,13 @@ namespace SymptomsPlease.SaveSystem
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Profile"/> class.
+        /// Initializes a new instance of the <see cref="GameProfile"/> class.
         /// </summary>
         /// <param name="saveSystem">Save system data.</param>
         /// <param name="folderDirectory">Directory to save data to.</param>
         /// <param name="name">Profile name.</param>
         /// <param name="saveAsText">Bool to save as text or encrypt.</param>
-        public Profile(string folderDirectory, string name, bool saveAsText)
+        public GameProfile(string folderDirectory, string name, bool saveAsText)
             : base(folderDirectory + "/" + name + ".sav", saveAsText)
         {
             FolderDirectory = folderDirectory;

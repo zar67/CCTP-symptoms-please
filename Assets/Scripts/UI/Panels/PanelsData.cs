@@ -77,6 +77,7 @@ namespace SymptomsPlease.UI.Panels
 
             if (nextPanel.DisablePreviousPanel && !string.IsNullOrWhiteSpace(CurrentPanel))
             {
+                currentPanel.OnClose();
                 currentPanel.gameObject.SetActive(false);
             }
 
@@ -86,6 +87,7 @@ namespace SymptomsPlease.UI.Panels
             }
 
             m_currentPanel = panel;
+            nextPanel.OnOpen();
             nextPanel.gameObject.SetActive(true);
 
             return true;

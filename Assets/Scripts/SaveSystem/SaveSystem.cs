@@ -6,12 +6,14 @@ namespace SymptomsPlease.SaveSystem
 {
     public class SaveSystem : MonoBehaviour
     {
+        public static string PROFILES_DIRECTORY => Application.persistentDataPath + "/profiles";
+
         public static bool SaveFilesAsText = true;
         public static int MaxNumberOfSaves = 1;
 
-        public static List<Profile> Profiles = new List<Profile>();
+        public static List<GameProfile> Profiles = new List<GameProfile>();
 
-        public static Profile CurrentProfile
+        public static GameProfile CurrentProfile
         {
             get; private set;
         }
@@ -50,23 +52,22 @@ namespace SymptomsPlease.SaveSystem
 
         public static void CreateNewProfile(string name)
         {
-            string folderDirectory = Application.persistentDataPath + "/profiles";
-            if (!Directory.Exists(folderDirectory))
+            if (!Directory.Exists(PROFILES_DIRECTORY))
             {
-                Profiles = new List<Profile>();
-                Directory.CreateDirectory(folderDirectory);
+                Profiles = new List<GameProfile>();
+                Directory.CreateDirectory(PROFILES_DIRECTORY);
             }
 
-            Directory.CreateDirectory(folderDirectory + "/" + name);
-            Directory.CreateDirectory(folderDirectory + "/" + name + "/saves");
-            string folderPath = folderDirectory + "/" + name;
+            Directory.CreateDirectory(PROFILES_DIRECTORY + "/" + name);
+            Directory.CreateDirectory(PROFILES_DIRECTORY + "/" + name + "/saves");
+            string folderPath = PROFILES_DIRECTORY + "/" + name;
             string filePath = folderPath + "/" + name + ".sav";
 
             FileStream file = File.Create(filePath);
             file.Close();
             File.WriteAllText(filePath, "");
 
-            var newProfile = new Profile(folderPath, name, SaveFilesAsText);
+            var newProfile = new GameProfile(folderPath, name, SaveFilesAsText);
             Profiles.Add(newProfile);
         }
 
@@ -77,22 +78,20 @@ namespace SymptomsPlease.SaveSystem
 
         public static void LoadSaveDataFromFiles()
         {
-            string directoryPath = Application.persistentDataPath + "/profiles";
-
-            if (!Directory.Exists(directoryPath))
+            if (!Directory.Exists(PROFILES_DIRECTORY))
             {
-                Directory.CreateDirectory(directoryPath);
+                Directory.CreateDirectory(PROFILES_DIRECTORY);
                 CreateNewProfile("DefaultProfile");
             }
 
-            Profiles = new List<Profile>();
-            string[] profiles = Directory.GetDirectories(directoryPath);
+            Profiles = new List<GameProfile>();
+            string[] profiles = Directory.GetDirectories(PROFILES_DIRECTORY);
             foreach (string profileDir in profiles)
             {
                 string name = profileDir.Split('\\')[1];
                 string[] saves = Directory.GetFiles(profileDir + "/saves");
 
-                var profile = new Profile(profileDir, name, SaveFilesAsText);
+                var profile = new GameProfile(profileDir, name, SaveFilesAsText);
                 foreach (string saveDir in saves)
                 {
                     var saveGame = new GameSave(saveDir, profile.Saves.Count, profile.IsTextFile);
@@ -124,8 +123,8 @@ namespace SymptomsPlease.SaveSystem
 
         private void Awake()
         {
-            SaveSystem.LoadSaveDataFromFiles();
-            SaveSystem.Load();
+            LoadSaveDataFromFiles();
+            Load();
         }
     }
 }

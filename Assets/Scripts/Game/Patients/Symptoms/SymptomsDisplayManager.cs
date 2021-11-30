@@ -1,9 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class DisplaySymptomsManager : MonoBehaviour
+public class SymptomsDisplayManager : MonoBehaviour
 {
     [SerializeField] private SymptomBubble[] m_symptomBubbles = { };
+    [SerializeField] private float m_delayBetweenBubbles = 0.9f;
 
     private void Awake()
     {
@@ -85,8 +86,7 @@ public class DisplaySymptomsManager : MonoBehaviour
                 m_symptomBubbles[i].gameObject.SetActive(true);
                 m_symptomBubbles[i].CanvasGroup.alpha = 0;
 
-                // Animate In One After The Other
-                m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f);
+                m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f).SetDelay((i * m_delayBetweenBubbles) + m_delayBetweenBubbles);
             }
             else
             {

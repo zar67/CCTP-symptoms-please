@@ -20,6 +20,7 @@ public class ProfilePanel : Panel
     {
         base.OnOpen();
         m_popupData.GetPopup("popup_name_change").OnCloseEvent += UpdateName;
+        m_popupData.GetPopup("popup_customise_avatar").OnCloseEvent += UpdateAvatar;
 
         UpdateName();
 
@@ -39,10 +40,16 @@ public class ProfilePanel : Panel
     {
         base.OnClose();
         m_popupData.GetPopup("popup_name_change").OnCloseEvent -= UpdateName;
+        m_popupData.GetPopup("popup_customise_avatar").OnCloseEvent -= UpdateAvatar;
     }
 
     private void UpdateName()
     {
         m_nameText.text = GameData.PlayerName;
+    }
+
+    private void UpdateAvatar()
+    {
+        
     }
 }

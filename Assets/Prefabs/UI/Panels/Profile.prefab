@@ -1808,6 +1808,7 @@ GameObject:
   - component: {fileID: 4359381372386164990}
   - component: {fileID: 648182479772164644}
   - component: {fileID: 4134131672034527935}
+  - component: {fileID: 799880320910286289}
   m_Layer: 5
   m_Name: EditAvatarButton
   m_TagString: Untagged
@@ -1916,7 +1917,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 648182479772164644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 799880320910286289}
+        m_TargetAssemblyTypeName: SymptomsPlease.UI.Popups.PopupTriggerComponent,
+          Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &799880320910286289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533232452369703760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63c3c7a7aed98f429510bb196f5cc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_popupdata: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_popupType: popup_customise_avatar
+  m_open: 1
 --- !u!1 &6760759242055643553
 GameObject:
   m_ObjectHideFlags: 0

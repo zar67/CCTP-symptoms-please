@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280690214
+  m_fontColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -506,6 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8014344304071391139}
   - component: {fileID: 8014344304071391138}
+  - component: {fileID: 3208397385631089916}
   m_Layer: 5
   m_Name: Attribute
   m_TagString: Untagged
@@ -560,6 +561,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3208397385631089916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014344304071391136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479344b5eb10d5440b9d6a2ab5d474e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentValueText: {fileID: 8014344303107994871}
+  m_negativeButton: {fileID: 8014344304473377428}
+  m_positiveButton: {fileID: 8014344303673869281}
+  m_loopValues: 0
+  m_attributePrefix: 
+  m_attributeValues: []
 --- !u!1 &8014344304351208900
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,41 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AvatarAttribute : MonoBehaviour
 {
-    public string CurrentValue => m_attributePrefix + "_" + m_attributeValues[m_currentIndex];
+    public enum AttributeID
+    {
+        SKIN_COLOUR,
+        HAIR_TYPE,
+        HAIR_COLOUR,
+        EYE_TYPE,
+        EYE_COLOUR,
+        EYEBROW_TYPE,
+        EYEBROW_COLOUR,
+        NOSE_TYPE,
+        MOUTH_TYPE,
+        SHIRT_TYPE,
+        SHIRT_SLEEVE_TYPE,
+        SHIRT_COLOUR,
+        PANTS_TYPE,
+        PANT_LEG_TYPE,
+        PANTS_COLOUR,
+        SHOES_TYPE,
+        SHOES_COLOUR
+    }
+
+    public event Action<AttributeID, int> OnValueChanged;
+
+    public int CurrentValue => m_currentIndex;
 
     [SerializeField] private TextMeshProUGUI m_currentValueText = default;
     [SerializeField] private Button m_negativeButton = default;
     [SerializeField] private Button m_positiveButton = default;
 
     [SerializeField] private bool m_loopValues = false;
-    [SerializeField] private string m_attributePrefix;
+    [SerializeField] private AttributeID m_attributeID;
     [SerializeField] private string[] m_attributeValues = { };
 
     private int m_currentIndex = 0;
@@ -76,6 +100,7 @@ public class AvatarAttribute : MonoBehaviour
     private void UpdateDisplay()
     {
         m_currentValueText.text = m_attributeValues[m_currentIndex];
+        OnValueChanged?.Invoke(m_attributeID, m_currentIndex);
 
         m_positiveButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex < m_attributeValues.Length - 1);
         m_negativeButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex > 0);

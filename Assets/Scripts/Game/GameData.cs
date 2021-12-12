@@ -1,4 +1,5 @@
 using SymptomsPlease.SaveSystem;
+using System;
 using UnityEngine;
 
 public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallback
@@ -12,6 +13,29 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
         public int DayNumber;
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
+        public AvatarIndexData AvatarData;
+    }
+
+    [Serializable]
+    public struct AvatarIndexData
+    {
+        public int SkinColourIndex;
+        public int HairTypeIndex;
+        public int HairColourIndex;
+        public int EyeTypeIndex;
+        public int EyeColourIndex;
+        public int EyebrowTypeIndex;
+        public int EyebrowColourIndex;
+        public int NoseTypeIndex;
+        public int MouthTypeIndex;
+        public int ShirtTypeIndex;
+        public int ShirtSleeveTypeIndex;
+        public int ShirtColourIndex;
+        public int PantsTypeIndex;
+        public int PantLegTypeIndex;
+        public int PantsColourIndex;
+        public int ShoesTypeIndex;
+        public int ShoesColourIndex;
     }
 
     public static string PlayerName;
@@ -19,6 +43,7 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
     public static int DayNumber;
     public static int TotalPatientsHelped;
     public static int TotalPatientsSeen;
+    public static AvatarIndexData AvatarData;
 
     public void SaveCreation(SaveFile file)
     {
@@ -30,7 +55,8 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
                 TotalTimePlayed = 0,
                 DayNumber = 1,
                 TotalPatientsHelped = 0,
-                TotalPatientsSeen = 0
+                TotalPatientsSeen = 0,
+                AvatarData = new AvatarIndexData()
             });
         }
     }
@@ -43,6 +69,7 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
         DayNumber = data.DayNumber;
         TotalPatientsHelped = data.TotalPatientsHelped;
         TotalPatientsSeen = data.TotalPatientsSeen;
+        AvatarData = data.AvatarData;
     }
 
     public void PopulateToSave(SaveFile file)
@@ -53,7 +80,8 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
             TotalTimePlayed = TotalTimePlayed,
             DayNumber = DayNumber,
             TotalPatientsHelped = TotalPatientsHelped,
-            TotalPatientsSeen = TotalPatientsSeen
+            TotalPatientsSeen = TotalPatientsSeen,
+            AvatarData = AvatarData
         });
     }
 

@@ -37,7 +37,7 @@ public class NameChangePopup : Popup
     private void OnSaveName()
     {
         GameData.PlayerName = m_nameText.text;
-        m_popupData.ClosePopup(m_popupType);
         SaveSystem.Save();
+        m_popupData.ClosePopup(m_popupType);
     }
 }

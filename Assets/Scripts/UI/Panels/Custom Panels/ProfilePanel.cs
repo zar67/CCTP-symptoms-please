@@ -15,6 +15,7 @@ public class ProfilePanel : Panel
     [SerializeField] private TextMeshProUGUI m_timePlayedText = default;
     [SerializeField] private TextMeshProUGUI m_patientsHelpedText = default;
     [SerializeField] private TextMeshProUGUI m_successRateText = default;
+    [SerializeField] private AvatarDisplay m_avatarDisplay = default;
 
     public override void OnOpen()
     {
@@ -50,6 +51,6 @@ public class ProfilePanel : Panel
 
     private void UpdateAvatar()
     {
-        
+        m_avatarDisplay.UpdateSprites(GameData.AvatarData);
     }
 }

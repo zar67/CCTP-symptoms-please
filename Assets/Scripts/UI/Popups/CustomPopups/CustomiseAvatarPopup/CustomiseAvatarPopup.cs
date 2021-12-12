@@ -1,36 +1,7 @@
 using SymptomsPlease.SaveSystem;
 using SymptomsPlease.UI.Popups;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-[Serializable]
-public struct AvatarSections
-{
-    public Image Hair;
-    public Image Head;
-    public Image LeftEyebrow;
-    public Image RightEyebrow;
-    public Image LeftEye;
-    public Image RightEye;
-    public Image Nose;
-    public Image Mouth;
-    public Image Neck;
-    public Image Shirt;
-    public Image LeftArm;
-    public Image LeftShirtArm;
-    public Image RightArm;
-    public Image RightShirtArm;
-    public Image LeftHand;
-    public Image RightHand;
-    public Image Pants;
-    public Image LeftLeg;
-    public Image LeftPantLeg;
-    public Image RightLeg;
-    public Image RightPantLeg;
-    public Image LeftFoot;
-    public Image RightFoot;
-}
 
 public class CustomiseAvatarPopup : Popup
 {
@@ -38,8 +9,7 @@ public class CustomiseAvatarPopup : Popup
 
     [SerializeField] private AvatarAttribute[] m_attributes = default;
 
-    [SerializeField] private AvatarData m_avatarData = default;
-    [SerializeField] private AvatarSections m_avatarSections = default;
+    [SerializeField] private AvatarDisplay m_avatarDisplay = default;
 
     private void OnEnable()
     {
@@ -49,7 +19,7 @@ public class CustomiseAvatarPopup : Popup
             attribute.OnValueChanged += AttributeValueChanged;
         }
 
-        m_avatarData.UpdateSprites(m_avatarSections);
+        m_avatarDisplay.UpdateSprites(GameData.AvatarData);
     }
 
     private void OnDisable()
@@ -132,7 +102,7 @@ public class CustomiseAvatarPopup : Popup
             }
         }
 
-        m_avatarData.UpdateSprites(m_avatarSections);
+        m_avatarDisplay.UpdateSprites(GameData.AvatarData);
     }
 
     private void OnSaveAvatar()

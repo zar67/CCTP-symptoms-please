@@ -1,5 +1,4 @@
 using SymptomsPlease.SaveSystem;
-using System;
 using UnityEngine;
 
 public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallback
@@ -14,24 +13,6 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
         public AvatarIndexData AvatarData;
-    }
-
-    [Serializable]
-    public struct AvatarIndexData
-    {
-        public int SkinColourIndex;
-        public int HairTypeIndex;
-        public int HairColourIndex;
-        public int EyeColourIndex;
-        public int NoseTypeIndex;
-        public int MouthTypeIndex;
-        public int ShirtTypeIndex;
-        public int ShirtSleeveTypeIndex;
-        public int ShirtColourIndex;
-        public int PantLegTypeIndex;
-        public int PantsColourIndex;
-        public int ShoesTypeIndex;
-        public int ShoesColourIndex;
     }
 
     public static string PlayerName;

@@ -34,38 +34,38 @@ public class AvatarData : GameScriptableObject
     [SerializeField] private List<SpriteList> m_pantLegValues = new List<SpriteList>();
     [SerializeField] private List<SpriteList> m_shoesValues = new List<SpriteList>();
 
-    public void UpdateSprites(AvatarSections sections)
+    public void UpdateSprites(AvatarIndexData data, AvatarSections sections)
     {
-        sections.Head.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].HeadSprite;
-        sections.LeftHand.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].HandSprite;
-        sections.RightHand.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].HandSprite;
-        sections.Neck.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].NeckSprite;
-        sections.LeftArm.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].ArmSprite;
-        sections.RightArm.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].ArmSprite;
-        sections.LeftLeg.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].LegSprite;
-        sections.RightLeg.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].LegSprite;
+        sections.Head.sprite = m_skinColourData[data.SkinColourIndex].HeadSprite;
+        sections.LeftHand.sprite = m_skinColourData[data.SkinColourIndex].HandSprite;
+        sections.RightHand.sprite = m_skinColourData[data.SkinColourIndex].HandSprite;
+        sections.Neck.sprite = m_skinColourData[data.SkinColourIndex].NeckSprite;
+        sections.LeftArm.sprite = m_skinColourData[data.SkinColourIndex].ArmSprite;
+        sections.RightArm.sprite = m_skinColourData[data.SkinColourIndex].ArmSprite;
+        sections.LeftLeg.sprite = m_skinColourData[data.SkinColourIndex].LegSprite;
+        sections.RightLeg.sprite = m_skinColourData[data.SkinColourIndex].LegSprite;
 
-        sections.Hair.sprite = m_hairValues[GameData.AvatarData.HairTypeIndex].Sprites[GameData.AvatarData.HairColourIndex];
+        sections.Hair.sprite = m_hairValues[data.HairTypeIndex].Sprites[data.HairColourIndex];
 
-        sections.LeftEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
-        sections.RightEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
+        sections.LeftEye.sprite = m_eyeValues[data.EyeColourIndex];
+        sections.RightEye.sprite = m_eyeValues[data.EyeColourIndex];
 
-        sections.LeftEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.HairColourIndex];
-        sections.RightEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.HairColourIndex];
+        sections.LeftEyebrow.sprite = m_eyebrowValues[data.HairColourIndex];
+        sections.RightEyebrow.sprite = m_eyebrowValues[data.HairColourIndex];
 
-        sections.Nose.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].NoseTypes[GameData.AvatarData.NoseTypeIndex];
+        sections.Nose.sprite = m_skinColourData[data.SkinColourIndex].NoseTypes[data.NoseTypeIndex];
 
-        sections.Mouth.sprite = m_mouthValues[GameData.AvatarData.MouthTypeIndex];
+        sections.Mouth.sprite = m_mouthValues[data.MouthTypeIndex];
 
-        sections.Shirt.sprite = m_shirtValues[GameData.AvatarData.ShirtTypeIndex].Sprites[GameData.AvatarData.ShirtColourIndex];
-        sections.LeftShirtArm.sprite = m_shirtSleeveValues[GameData.AvatarData.ShirtSleeveTypeIndex].Sprites[GameData.AvatarData.ShirtColourIndex];
-        sections.RightShirtArm.sprite = m_shirtSleeveValues[GameData.AvatarData.ShirtSleeveTypeIndex].Sprites[GameData.AvatarData.ShirtColourIndex];
+        sections.Shirt.sprite = m_shirtValues[data.ShirtTypeIndex].Sprites[data.ShirtColourIndex];
+        sections.LeftShirtArm.sprite = m_shirtSleeveValues[data.ShirtSleeveTypeIndex].Sprites[data.ShirtColourIndex];
+        sections.RightShirtArm.sprite = m_shirtSleeveValues[data.ShirtSleeveTypeIndex].Sprites[data.ShirtColourIndex];
 
-        sections.Pants.sprite = m_pantsValues[GameData.AvatarData.PantsColourIndex];
-        sections.LeftPantLeg.sprite = m_pantLegValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
-        sections.RightPantLeg.sprite = m_pantLegValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
+        sections.Pants.sprite = m_pantsValues[data.PantsColourIndex];
+        sections.LeftPantLeg.sprite = m_pantLegValues[data.PantLegTypeIndex].Sprites[data.PantsColourIndex];
+        sections.RightPantLeg.sprite = m_pantLegValues[data.PantLegTypeIndex].Sprites[data.PantsColourIndex];
 
-        sections.LeftFoot.sprite = m_shoesValues[GameData.AvatarData.ShoesTypeIndex].Sprites[GameData.AvatarData.ShoesColourIndex];
-        sections.RightFoot.sprite = m_shoesValues[GameData.AvatarData.ShoesTypeIndex].Sprites[GameData.AvatarData.ShoesColourIndex];
+        sections.LeftFoot.sprite = m_shoesValues[data.ShoesTypeIndex].Sprites[data.ShoesColourIndex];
+        sections.RightFoot.sprite = m_shoesValues[data.ShoesTypeIndex].Sprites[data.ShoesColourIndex];
     }
 }

@@ -22,16 +22,12 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
         public int SkinColourIndex;
         public int HairTypeIndex;
         public int HairColourIndex;
-        public int EyeTypeIndex;
         public int EyeColourIndex;
-        public int EyebrowTypeIndex;
-        public int EyebrowColourIndex;
         public int NoseTypeIndex;
         public int MouthTypeIndex;
         public int ShirtTypeIndex;
         public int ShirtSleeveTypeIndex;
         public int ShirtColourIndex;
-        public int PantsTypeIndex;
         public int PantLegTypeIndex;
         public int PantsColourIndex;
         public int ShoesTypeIndex;

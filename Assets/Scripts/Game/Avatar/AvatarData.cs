@@ -50,8 +50,8 @@ public class AvatarData : GameScriptableObject
         sections.LeftEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
         sections.RightEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
 
-        sections.LeftEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowColourIndex];
-        sections.RightEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowColourIndex];
+        sections.LeftEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.HairColourIndex];
+        sections.RightEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.HairColourIndex];
 
         sections.Nose.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].NoseTypes[GameData.AvatarData.NoseTypeIndex];
 

@@ -85,11 +85,6 @@ public class CustomiseAvatarPopup : Popup
                 GameData.AvatarData.EyeColourIndex = currentIndex;
                 break;
             }
-            case AvatarAttribute.AttributeID.EYEBROW_COLOUR:
-            {
-                GameData.AvatarData.EyebrowColourIndex = currentIndex;
-                break;
-            }
             case AvatarAttribute.AttributeID.NOSE_TYPE:
             {
                 GameData.AvatarData.NoseTypeIndex = currentIndex;

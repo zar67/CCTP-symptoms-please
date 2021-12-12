@@ -11,7 +11,6 @@ public class AvatarAttribute : MonoBehaviour
         HAIR_TYPE,
         HAIR_COLOUR,
         EYE_COLOUR,
-        EYEBROW_COLOUR,
         NOSE_TYPE,
         MOUTH_TYPE,
         SHIRT_TYPE,

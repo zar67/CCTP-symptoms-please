@@ -2,16 +2,37 @@ using SymptomsPlease.SaveSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayEventsManager : MonoBehaviour, ISaveable
+public class ModificationsManager : MonoBehaviour, ISaveable
 {
+    public const string SAVE_IDENTIFIER = "Modifications";
+
     public struct SaveData
     {
-        public List<DayEvent> Events;
+        public List<Topic> ActiveTopics;
     }
 
-    public const string SAVE_IDENTIFIER = "DayEvents";
+    private static List<Topic> m_activeTopics = new List<Topic>();
 
-    public static List<DayEvent> DayEvents = new List<DayEvent>();
+    public static void ActivateTopic(Topic topic)
+    {
+        if (!m_activeTopics.Contains(topic))
+        {
+            m_activeTopics.Add(topic);
+        }
+    }
+
+    public static void DeactivateTopic(Topic topic)
+    {
+        if (m_activeTopics.Contains(topic))
+        {
+            m_activeTopics.Remove(topic);
+        }
+    }
+
+    public static bool IsTopicActive(Topic topic)
+    {
+        return m_activeTopics.Contains(topic);
+    }
 
     public void SaveFileCreation(SaveFile file)
     {
@@ -19,7 +40,10 @@ public class DayEventsManager : MonoBehaviour, ISaveable
         {
             if (!file.HasObject(SAVE_IDENTIFIER))
             {
-                file.SaveObject(SAVE_IDENTIFIER, new SaveData() { Events = new List<DayEvent>() });
+                file.SaveObject(SAVE_IDENTIFIER, new SaveData()
+                {
+                    ActiveTopics = new List<Topic>() { Topic.TEST1 }
+                });
             }
         }
     }
@@ -29,7 +53,7 @@ public class DayEventsManager : MonoBehaviour, ISaveable
         if (file is GameSave)
         {
             SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
-            DayEvents = data.Events;
+            m_activeTopics = data.ActiveTopics;
         }
     }
 
@@ -37,13 +61,11 @@ public class DayEventsManager : MonoBehaviour, ISaveable
     {
         if (file is GameSave)
         {
-            file.SaveObject(SAVE_IDENTIFIER, new SaveData() { Events = DayEvents });
+            file.SaveObject(SAVE_IDENTIFIER, new SaveData()
+            {
+                ActiveTopics = m_activeTopics
+            });
         }
-    }
-
-    public static void AddEvent(DayEventType type)
-    {
-        DayEvents.Add(new DayEvent() { EventType = type});
     }
 
     private void OnEnable()

@@ -1,7 +1,7 @@
 using SymptomsPlease.SaveSystem;
 using UnityEngine;
 
-public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallback
+public class GameData : MonoBehaviour, ISaveable
 {
     public const string SAVE_IDENTIFIER = "GameData";
 
@@ -22,58 +22,67 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
     public static int TotalPatientsSeen;
     public static AvatarIndexData AvatarData;
 
-    public void SaveCreation(SaveFile file)
+    public void SaveFileCreation(SaveFile file)
     {
-        if (!file.HasObject(SAVE_IDENTIFIER))
+        if (file is GameSave)
         {
-            file.SaveObject(SAVE_IDENTIFIER, new SaveData() 
-            { 
-                PlayerName = "",
-                TotalTimePlayed = 0,
-                DayNumber = 1,
-                TotalPatientsHelped = 0,
-                TotalPatientsSeen = 0,
-                AvatarData = new AvatarIndexData()
+            if (!file.HasObject(SAVE_IDENTIFIER))
+            {
+                file.SaveObject(SAVE_IDENTIFIER, new SaveData()
+                {
+                    PlayerName = "",
+                    TotalTimePlayed = 0,
+                    DayNumber = 1,
+                    TotalPatientsHelped = 0,
+                    TotalPatientsSeen = 0,
+                    AvatarData = new AvatarIndexData()
+                });
+            }
+        }
+    }
+
+    public void LoadFromSaveFile(SaveFile file)
+    {
+        if (file is GameSave)
+        {
+            SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
+            PlayerName = data.PlayerName;
+            TotalTimePlayed = data.TotalTimePlayed;
+            DayNumber = data.DayNumber;
+            TotalPatientsHelped = data.TotalPatientsHelped;
+            TotalPatientsSeen = data.TotalPatientsSeen;
+            AvatarData = data.AvatarData;
+        }
+    }
+
+    public void PopulateToSaveFile(SaveFile file)
+    {
+        if (file is GameSave)
+        {
+            file.SaveObject(SAVE_IDENTIFIER, new SaveData()
+            {
+                PlayerName = PlayerName,
+                TotalTimePlayed = TotalTimePlayed,
+                DayNumber = DayNumber,
+                TotalPatientsHelped = TotalPatientsHelped,
+                TotalPatientsSeen = TotalPatientsSeen,
+                AvatarData = AvatarData
             });
         }
     }
 
-    public void LoadFromSave(SaveFile file)
-    {
-        SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
-        PlayerName = data.PlayerName;
-        TotalTimePlayed = data.TotalTimePlayed;
-        DayNumber = data.DayNumber;
-        TotalPatientsHelped = data.TotalPatientsHelped;
-        TotalPatientsSeen = data.TotalPatientsSeen;
-        AvatarData = data.AvatarData;
-    }
-
-    public void PopulateToSave(SaveFile file)
-    {
-        file.SaveObject(SAVE_IDENTIFIER, new SaveData()
-        {
-            PlayerName = PlayerName,
-            TotalTimePlayed = TotalTimePlayed,
-            DayNumber = DayNumber,
-            TotalPatientsHelped = TotalPatientsHelped,
-            TotalPatientsSeen = TotalPatientsSeen,
-            AvatarData = AvatarData
-        });
-    }
-
     private void OnEnable()
     {
-        SaveFile.OnCreated.Subscribe(SaveCreation);
-        SaveFile.OnLoad.Subscribe(LoadFromSave);
-        SaveFile.OnSave.Subscribe(PopulateToSave);
+        SaveFile.OnCreated.Subscribe(SaveFileCreation);
+        SaveFile.OnLoad.Subscribe(LoadFromSaveFile);
+        SaveFile.OnSave.Subscribe(PopulateToSaveFile);
     }
 
     private void OnDisable()
     {
-        SaveFile.OnCreated.UnSubscribe(SaveCreation);
-        SaveFile.OnLoad.UnSubscribe(LoadFromSave);
-        SaveFile.OnSave.UnSubscribe(PopulateToSave);
+        SaveFile.OnCreated.UnSubscribe(SaveFileCreation);
+        SaveFile.OnLoad.UnSubscribe(LoadFromSaveFile);
+        SaveFile.OnSave.UnSubscribe(PopulateToSaveFile);
     }
 
     private void Update()

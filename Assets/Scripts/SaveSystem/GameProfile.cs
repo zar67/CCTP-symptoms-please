@@ -4,9 +4,6 @@ using System.IO;
 
 namespace SymptomsPlease.SaveSystem
 {
-    /// <summary>
-    /// Save file to hold profile information about a user.
-    /// </summary>
     [Serializable]
     public class GameProfile : SaveFile
     {

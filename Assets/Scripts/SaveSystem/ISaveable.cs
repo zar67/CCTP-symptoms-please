@@ -1,33 +1,9 @@
 ﻿namespace SymptomsPlease.SaveSystem
 {
-    public interface ISaveable : IGameSaveCreationCallback, IGameSaveCallback, IProfileSaveCreationCallback, IProfileSaveCallback
+    public interface ISaveable
     {
-
-    }
-
-    public interface IGameSaveCreationCallback
-    {
-        void SaveCreation(SaveFile file);
-    }
-
-    public interface IGameSaveCallback
-    {
-        void LoadFromSave(SaveFile file);
-
-        void PopulateToSave(SaveFile file);
-    }
-
-    public interface IProfileSaveCreationCallback
-    {
-        void ProfileCreation(SaveFile file);
-    }
-
-    public interface IProfileSaveCallback
-    {
-        void LoadFromProfile(SaveFile file);
-
-        void PopulateToProfile(SaveFile file);
+        void SaveFileCreation(SaveFile file);
+        void PopulateToSaveFile(SaveFile file);
+        void LoadFromSaveFile(SaveFile file);
     }
 }
-
-

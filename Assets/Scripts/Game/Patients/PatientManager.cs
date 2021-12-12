@@ -105,7 +105,8 @@ public class PatientManager : MonoBehaviour
 
             if (dayEvent is NewAppointmentEvent appointmentEvent)
             {
-                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay)
+                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay && 
+                    ModificationsManager.IsTopicActive(appointmentEvent.Patient.AfflictionData.Topic))
                 {
                     PatientsInDay.Add(appointmentEvent.Patient);
                     usedEvents.Add(dayEvent);
@@ -122,6 +123,12 @@ public class PatientManager : MonoBehaviour
         for (int i = 0; i < patientCount; i++)
         {
             int index = UnityEngine.Random.Range(0, m_patientDatas.Length);
+
+            while (!ModificationsManager.IsTopicActive(m_patientDatas[index].AfflictionData.Topic))
+            {
+                index = UnityEngine.Random.Range(0, m_patientDatas.Length);
+            }
+            
             PatientsInDay.Add(m_patientDatas[index]);
         }
     }

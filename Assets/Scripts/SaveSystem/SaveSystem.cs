@@ -121,7 +121,7 @@ namespace SymptomsPlease.SaveSystem
             }
         }
 
-        private void Awake()
+        private void Start()
         {
             LoadSaveDataFromFiles();
             Load();

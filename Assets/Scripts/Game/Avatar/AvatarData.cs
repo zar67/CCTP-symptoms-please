@@ -25,12 +25,12 @@ public class AvatarData : GameScriptableObject
 
     [SerializeField] private List<SkinColourData> m_skinColourData = default;
     [SerializeField] private List<SpriteList> m_hairValues = new List<SpriteList>();
-    [SerializeField] private List<SpriteList> m_eyebrowValues = new List<SpriteList>();
-    [SerializeField] private List<SpriteList> m_eyeValues = new List<SpriteList>();
+    [SerializeField] private List<Sprite> m_eyebrowValues = new List<Sprite>();
+    [SerializeField] private List<Sprite> m_eyeValues = new List<Sprite>();
     [SerializeField] private List<Sprite> m_mouthValues = new List<Sprite>();
     [SerializeField] private List<SpriteList> m_shirtValues = new List<SpriteList>();
     [SerializeField] private List<SpriteList> m_shirtSleeveValues = new List<SpriteList>();
-    [SerializeField] private List<SpriteList> m_pantsValues = new List<SpriteList>();
+    [SerializeField] private List<Sprite> m_pantsValues = new List<Sprite>();
     [SerializeField] private List<SpriteList> m_pantLegValues = new List<SpriteList>();
     [SerializeField] private List<SpriteList> m_shoesValues = new List<SpriteList>();
 
@@ -47,11 +47,11 @@ public class AvatarData : GameScriptableObject
 
         sections.Hair.sprite = m_hairValues[GameData.AvatarData.HairTypeIndex].Sprites[GameData.AvatarData.HairColourIndex];
 
-        sections.LeftEye.sprite = m_eyeValues[GameData.AvatarData.EyeTypeIndex].Sprites[GameData.AvatarData.EyeColourIndex];
-        sections.RightEye.sprite = m_eyeValues[GameData.AvatarData.EyeTypeIndex].Sprites[GameData.AvatarData.EyeColourIndex];
+        sections.LeftEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
+        sections.RightEye.sprite = m_eyeValues[GameData.AvatarData.EyeColourIndex];
 
-        sections.LeftEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowTypeIndex].Sprites[GameData.AvatarData.EyebrowColourIndex];
-        sections.RightEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowTypeIndex].Sprites[GameData.AvatarData.EyebrowColourIndex];
+        sections.LeftEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowColourIndex];
+        sections.RightEyebrow.sprite = m_eyebrowValues[GameData.AvatarData.EyebrowColourIndex];
 
         sections.Nose.sprite = m_skinColourData[GameData.AvatarData.SkinColourIndex].NoseTypes[GameData.AvatarData.NoseTypeIndex];
 
@@ -61,9 +61,9 @@ public class AvatarData : GameScriptableObject
         sections.LeftShirtArm.sprite = m_shirtSleeveValues[GameData.AvatarData.ShirtSleeveTypeIndex].Sprites[GameData.AvatarData.ShirtColourIndex];
         sections.RightShirtArm.sprite = m_shirtSleeveValues[GameData.AvatarData.ShirtSleeveTypeIndex].Sprites[GameData.AvatarData.ShirtColourIndex];
 
-        sections.Pants.sprite = m_shirtValues[GameData.AvatarData.PantsTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
-        sections.LeftPantLeg.sprite = m_shirtSleeveValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
-        sections.RightPantLeg.sprite = m_shirtSleeveValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
+        sections.Pants.sprite = m_pantsValues[GameData.AvatarData.PantsColourIndex];
+        sections.LeftPantLeg.sprite = m_pantLegValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
+        sections.RightPantLeg.sprite = m_pantLegValues[GameData.AvatarData.PantLegTypeIndex].Sprites[GameData.AvatarData.PantsColourIndex];
 
         sections.LeftFoot.sprite = m_shoesValues[GameData.AvatarData.ShoesTypeIndex].Sprites[GameData.AvatarData.ShoesColourIndex];
         sections.RightFoot.sprite = m_shoesValues[GameData.AvatarData.ShoesTypeIndex].Sprites[GameData.AvatarData.ShoesColourIndex];

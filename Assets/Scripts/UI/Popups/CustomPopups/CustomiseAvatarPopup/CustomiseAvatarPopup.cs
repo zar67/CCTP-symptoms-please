@@ -80,19 +80,9 @@ public class CustomiseAvatarPopup : Popup
                 GameData.AvatarData.HairColourIndex = currentIndex;
                 break;
             }
-            case AvatarAttribute.AttributeID.EYE_TYPE:
-            {
-                GameData.AvatarData.EyeTypeIndex = currentIndex;
-                break;
-            }
             case AvatarAttribute.AttributeID.EYE_COLOUR:
             {
                 GameData.AvatarData.EyeColourIndex = currentIndex;
-                break;
-            }
-            case AvatarAttribute.AttributeID.EYEBROW_TYPE:
-            {
-                GameData.AvatarData.EyebrowTypeIndex = currentIndex;
                 break;
             }
             case AvatarAttribute.AttributeID.EYEBROW_COLOUR:
@@ -122,12 +112,7 @@ public class CustomiseAvatarPopup : Popup
             }
             case AvatarAttribute.AttributeID.SHIRT_COLOUR:
             {
-                GameData.AvatarData.ShoesColourIndex = currentIndex;
-                break;
-            }
-            case AvatarAttribute.AttributeID.PANTS_TYPE:
-            {
-                GameData.AvatarData.PantsTypeIndex = currentIndex;
+                GameData.AvatarData.ShirtColourIndex = currentIndex;
                 break;
             }
             case AvatarAttribute.AttributeID.PANT_LEG_TYPE:

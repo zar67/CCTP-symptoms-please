@@ -20,12 +20,15 @@ public class PatientManager : MonoBehaviour
     [Header("Patients")]
     [SerializeField] private int m_numberPatientsInDay = 10;
     [SerializeField] private PatientData[] m_patientDatas = default;
+    
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
 
     private Vector3 m_tweenStartPosition = new Vector3(-3.0f, 0.0f, 0.0f);
     private Vector3 m_tweenCenteredPosition = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 m_tweenEndPosition = new Vector3(3.0f, 0.0f, 0.0f);
+
+    private Tween m_moveOutTween = null;
 
     private void Awake()
     {
@@ -80,10 +83,11 @@ public class PatientManager : MonoBehaviour
         DayCycle.IncreaseScore(((int)effectiveness - 2) * m_actionScoreMultiplier);
 
         m_currentPatientIndex++;
-        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count; 
+        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count;
+
         OnPatientSeen?.Invoke(m_isDayOver);
 
-        m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
+        m_moveOutTween = m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
     }
 
     private void GeneratePatients()
@@ -126,6 +130,12 @@ public class PatientManager : MonoBehaviour
     {
         if (!m_isDayOver)
         {
+            if (m_moveOutTween != null)
+            {
+                m_moveOutTween.Kill();
+                m_moveOutTween = null;
+            }
+
             m_patientHolder.transform.position = m_tweenStartPosition;
             m_patientHolder.transform.DOMove(m_tweenCenteredPosition, m_tweenAnimationDuration);
 

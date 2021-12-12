@@ -7,28 +7,59 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
 
     public struct SaveData
     {
+        public string PlayerName;
+        public float TotalTimePlayed;
         public int DayNumber;
+        public int TotalPatientsHelped;
+        public int TotalPatientsSeen;
+        public AvatarIndexData AvatarData;
     }
 
+    public static string PlayerName;
+    public static float TotalTimePlayed;
     public static int DayNumber;
+    public static int TotalPatientsHelped;
+    public static int TotalPatientsSeen;
+    public static AvatarIndexData AvatarData;
 
     public void SaveCreation(SaveFile file)
     {
         if (!file.HasObject(SAVE_IDENTIFIER))
         {
-            file.SaveObject(SAVE_IDENTIFIER, new SaveData() { DayNumber = 1 });
+            file.SaveObject(SAVE_IDENTIFIER, new SaveData() 
+            { 
+                PlayerName = "",
+                TotalTimePlayed = 0,
+                DayNumber = 1,
+                TotalPatientsHelped = 0,
+                TotalPatientsSeen = 0,
+                AvatarData = new AvatarIndexData()
+            });
         }
     }
 
     public void LoadFromSave(SaveFile file)
     {
         SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
-        GameData.DayNumber = data.DayNumber;
+        PlayerName = data.PlayerName;
+        TotalTimePlayed = data.TotalTimePlayed;
+        DayNumber = data.DayNumber;
+        TotalPatientsHelped = data.TotalPatientsHelped;
+        TotalPatientsSeen = data.TotalPatientsSeen;
+        AvatarData = data.AvatarData;
     }
 
     public void PopulateToSave(SaveFile file)
     {
-        file.SaveObject(SAVE_IDENTIFIER, new SaveData() { DayNumber = DayNumber });
+        file.SaveObject(SAVE_IDENTIFIER, new SaveData()
+        {
+            PlayerName = PlayerName,
+            TotalTimePlayed = TotalTimePlayed,
+            DayNumber = DayNumber,
+            TotalPatientsHelped = TotalPatientsHelped,
+            TotalPatientsSeen = TotalPatientsSeen,
+            AvatarData = AvatarData
+        });
     }
 
     private void OnEnable()
@@ -43,5 +74,10 @@ public class GameData : MonoBehaviour, IGameSaveCallback, IGameSaveCreationCallb
         SaveFile.OnCreated.UnSubscribe(SaveCreation);
         SaveFile.OnLoad.UnSubscribe(LoadFromSave);
         SaveFile.OnSave.UnSubscribe(PopulateToSave);
+    }
+
+    private void Update()
+    {
+        TotalTimePlayed += Time.deltaTime;
     }
 }

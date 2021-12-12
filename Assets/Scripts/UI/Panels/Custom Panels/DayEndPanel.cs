@@ -2,7 +2,6 @@ using SymptomsPlease.SaveSystem;
 using SymptomsPlease.UI.Panels;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DayEndPanel : Panel
 {
@@ -12,18 +11,10 @@ public class DayEndPanel : Panel
     [SerializeField] private TextMeshProUGUI m_patientsHelpedText = default;
     [SerializeField] private TextMeshProUGUI m_successRateText = default;
     [SerializeField] private TextMeshProUGUI m_scoreText = default;
-    [SerializeField] private Button m_continueButton = default;
 
-    protected override void Awake()
+    public override void OnOpen()
     {
-        base.Awake();
-
-        m_continueButton.onClick.AddListener(OnContinue);
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
+        base.OnOpen();
 
         m_dayNumberText.text = GameData.DayNumber.ToString();
 
@@ -32,7 +23,8 @@ public class DayEndPanel : Panel
 
         if (PatientManager.PatientSeenInDay > 0)
         {
-            m_successRateText.text = ((int)((float)PatientManager.PatientsHelpedInDay / (float)PatientManager.PatientSeenInDay * 100)).ToString() + "%";
+            int successRate = (int)((float)PatientManager.PatientsHelpedInDay / (float)PatientManager.PatientSeenInDay * 100);
+            m_successRateText.text = successRate.ToString() + "%";
         }
         else
         {
@@ -40,11 +32,11 @@ public class DayEndPanel : Panel
         }
 
         m_scoreText.text = DayCycle.Score.ToString();
-    }
 
-    private void OnContinue()
-    {
         GameData.DayNumber++;
+        GameData.TotalPatientsHelped += PatientManager.PatientsHelpedInDay;
+        GameData.TotalPatientsSeen += PatientManager.PatientSeenInDay;
+
         SaveSystem.Save();
     }
 }

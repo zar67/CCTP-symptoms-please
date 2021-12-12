@@ -20,6 +20,7 @@ MonoBehaviour:
       Transitions:
       - panel_settings
       - panel_day_start
+      - panel_day_end
       - panel_profile
       - panel_online
     - PanelID: panel_profile
@@ -40,3 +41,4 @@ MonoBehaviour:
     - PanelID: panel_day_end
       Transitions:
       - panel_day_start
+      - panel_main_menu

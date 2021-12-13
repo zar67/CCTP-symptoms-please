@@ -2,6 +2,7 @@ using SymptomsPlease.ScriptableObjects;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "SymptomsPlease/AvatarData")]
 public class AvatarData : GameScriptableObject
@@ -67,5 +68,27 @@ public class AvatarData : GameScriptableObject
 
         sections.LeftFoot.sprite = m_shoesValues[data.ShoesTypeIndex].Sprites[data.ShoesColourIndex];
         sections.RightFoot.sprite = m_shoesValues[data.ShoesTypeIndex].Sprites[data.ShoesColourIndex];
+    }
+
+    public AvatarIndexData GenerateRandomData()
+    {
+        var data = new AvatarIndexData
+        {
+            SkinColourIndex = Random.Range(0, m_skinColourData.Count),
+            HairTypeIndex = Random.Range(0, m_hairValues.Count),
+            HairColourIndex = Random.Range(0, m_hairValues[0].Sprites.Count),
+            EyeColourIndex = Random.Range(0, m_eyeValues.Count),
+            NoseTypeIndex = Random.Range(0, m_skinColourData[0].NoseTypes.Count),
+            MouthTypeIndex = Random.Range(0, m_mouthValues.Count),
+            ShirtTypeIndex = Random.Range(0, m_shirtValues.Count),
+            ShirtSleeveTypeIndex = Random.Range(0, m_shirtSleeveValues.Count),
+            ShirtColourIndex = Random.Range(0, m_shirtValues[0].Sprites.Count),
+            PantLegTypeIndex = Random.Range(0, m_pantLegValues.Count),
+            PantsColourIndex = Random.Range(0, m_pantsValues.Count),
+            ShoesTypeIndex = Random.Range(0, m_shoesValues.Count),
+            ShoesColourIndex = Random.Range(0, m_shoesValues[0].Sprites.Count)
+        };
+
+        return data;
     }
 }

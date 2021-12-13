@@ -12,10 +12,16 @@ public class PatientManager : MonoBehaviour
     public static int PatientSeenInDay { get; private set; } = 0;
     public static int PatientsHelpedInDay { get; private set; } = 0;
 
-    [SerializeField] private GameObject m_patientHolder = default;
-    [SerializeField] private float m_tweenAnimationDuration = 1.5f;
+    [SerializeField] private RectTransform m_patientHolder = default;
+    [SerializeField] private AvatarDisplay m_patientDisplay = default;
 
     [SerializeField] private float m_actionScoreMultiplier = 10.0f;
+
+    [Header("Tween Values")]
+    [SerializeField] private float m_tweenAnimationDuration = 1.5f;
+    [SerializeField] private Vector3 m_tweenStartPosition = new Vector3(-3.0f, 0.0f, 0.0f);
+    [SerializeField] private Vector3 m_tweenCenteredPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField] private Vector3 m_tweenEndPosition = new Vector3(3.0f, 0.0f, 0.0f);
 
     [Header("Patients")]
     [SerializeField] private int m_numberPatientsInDay = 10;
@@ -24,9 +30,6 @@ public class PatientManager : MonoBehaviour
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
 
-    private Vector3 m_tweenStartPosition = new Vector3(-3.0f, 0.0f, 0.0f);
-    private Vector3 m_tweenCenteredPosition = new Vector3(0.0f, 0.0f, 0.0f);
-    private Vector3 m_tweenEndPosition = new Vector3(3.0f, 0.0f, 0.0f);
 
     private Tween m_moveOutTween = null;
 
@@ -87,7 +90,7 @@ public class PatientManager : MonoBehaviour
 
         OnPatientSeen?.Invoke(m_isDayOver);
 
-        m_moveOutTween = m_patientHolder.transform.DOMove(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
+        m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
     }
 
     private void GeneratePatients()
@@ -143,8 +146,9 @@ public class PatientManager : MonoBehaviour
                 m_moveOutTween = null;
             }
 
-            m_patientHolder.transform.position = m_tweenStartPosition;
-            m_patientHolder.transform.DOMove(m_tweenCenteredPosition, m_tweenAnimationDuration);
+            m_patientHolder.anchoredPosition = m_tweenStartPosition;
+            m_patientDisplay.GenerateRandomAvatar();
+            m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
             OnNextPatient?.Invoke(PatientsInDay[m_currentPatientIndex]);
         }

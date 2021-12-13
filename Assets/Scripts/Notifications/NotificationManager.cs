@@ -2,6 +2,8 @@ using UnityEngine;
 
 #if UNITY_ANDROID
 using Unity.Notifications.Android;
+#elif UNITY_IOS
+using Unity.Notifications.iOS;
 #endif
 
 public enum NotificationType
@@ -22,7 +24,7 @@ public class NotificationManager : MonoBehaviour
         public string PatientName;
     }
 
-    public static int SendNotification(NotificationType type, NotificationData data = new NotificationData())
+    public static string SendNotification(NotificationType type, NotificationData data = new NotificationData())
     {
         string channelID = "";
         string title = "";
@@ -70,9 +72,9 @@ public class NotificationManager : MonoBehaviour
         }
 
 #if UNITY_ANDROID
-        return AndroidNotifications.SendNotification(channelID, title, text, intent, scheduleInHours);
+        return AndroidNotifications.SendNotification(channelID, title, text, intent, scheduleInHours).ToString();
 #elif UNITY_IOS
-        return IOSNotifications.SendNotification();
+        return IOSNotifications.SendNotification(channelID, title, text, intent, scheduleInHours);
 #else
         return -1;
 #endif
@@ -89,27 +91,18 @@ public class NotificationManager : MonoBehaviour
         AndroidNotificationIntentData notificationIntentData = AndroidNotificationCenter.GetLastNotificationIntent();
         if (notificationIntentData != null)
         {
-            int id = notificationIntentData.Id;
-            string channel = notificationIntentData.Channel;
             AndroidNotification notification = notificationIntentData.Notification;
+            HandleIntentData(notification.IntentData);
+        }
+#elif UNITY_IOS
+        iOSNotificationCenter.RemoveAllScheduledNotifications();
 
-            switch (notification.IntentData)
-            {
-                case "open_training":
-                {
-                    Debug.Log("OPEN TRAINING");
-                    break;
-                }
-                case "open_chat":
-                {
-                    Debug.Log("OPEN CHAT");
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
-            }
+        IOSNotifications.RequestAuthorization(this);
+
+        var notification = iOSNotificationCenter.GetLastRespondedNotification();
+        if (notification != null)
+        {
+            HandleIntentData(notification.Data);
         }
 #endif
     }
@@ -118,5 +111,26 @@ public class NotificationManager : MonoBehaviour
     {
         SendNotification(NotificationType.GONE_TOO_LONG);
         SendNotification(NotificationType.PATIENT_NEEDS_YOU);
+    }
+
+    private void HandleIntentData(string data)
+    {
+        switch (data)
+        {
+            case "open_training":
+            {
+                Debug.Log("OPEN TRAINING");
+                break;
+            }
+            case "open_chat":
+            {
+                Debug.Log("OPEN CHAT");
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ public class AndroidNotifications
         {
             Title = title,
             Text = text,
-            FireTime = System.DateTime.Now.AddHours(scheduleInHours),
+            FireTime = System.DateTime.Now.AddSeconds(scheduleInHours),
             IntentData = intent
             //SmallIcon = "my_custom_icon_id",
             //LargeIcon = "my_custom_large_icon_id"

@@ -17,6 +17,7 @@ public class CustomiseAvatarPopup : Popup
         foreach (var attribute in m_attributes)
         {
             attribute.OnValueChanged += AttributeValueChanged;
+            attribute.InitialiseAttributeValue();
         }
 
         m_avatarDisplay.UpdateSprites(GameData.AvatarData);

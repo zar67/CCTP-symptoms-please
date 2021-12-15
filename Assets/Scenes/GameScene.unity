@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b43b5b8b7137b9d44a80dffe893d4318, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7f35720b022a49044bc4aef39aca60a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1700,7 +1700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3117022367176850055, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3117022367176850055, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1749,6 +1749,14 @@ PrefabInstance:
     - target: {fileID: 3117022367176850055, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117022368999007838, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 00ebf9206aa64f44d9f698516087b294, type: 3}
+    - target: {fileID: 3117022368999007839, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 389bd55847c50ad499127a42cc931e7e, type: 3}
@@ -1841,11 +1849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3204820665399835993, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 83
+      value: 173
       objectReference: {fileID: 0}
     - target: {fileID: 3204820665399835993, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 103
+      value: 82
       objectReference: {fileID: 0}
     - target: {fileID: 3204820665399835993, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1859,6 +1867,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3204820665556531779, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fa7611cab824be842bbf63c3dbe472b0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
 --- !u!1001 &5940743841705803496
@@ -1990,7 +2002,7 @@ PrefabInstance:
       objectReference: {fileID: 27033162}
     - target: {fileID: 8090065507603845389, guid: c98b1a66b407b8240afd0eb9a5722b98, type: 3}
       propertyPath: m_Name
-      value: iPad
+      value: Pill
       objectReference: {fileID: 0}
     - target: {fileID: 8090065507603845390, guid: c98b1a66b407b8240afd0eb9a5722b98, type: 3}
       propertyPath: m_Pivot.x
@@ -2076,5 +2088,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8090065508230155024, guid: c98b1a66b407b8240afd0eb9a5722b98, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc841fd34a966ad4899cecf5624d4d61, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c98b1a66b407b8240afd0eb9a5722b98, type: 3}

@@ -76,7 +76,7 @@ public class NotificationManager : MonoBehaviour
 #elif UNITY_IOS
         return IOSNotifications.SendNotification(channelID, title, text, intent, scheduleInHours);
 #else
-        return -1;
+        return "";
 #endif
     }
 
@@ -94,6 +94,7 @@ public class NotificationManager : MonoBehaviour
             AndroidNotification notification = notificationIntentData.Notification;
             HandleIntentData(notification.IntentData);
         }
+
 #elif UNITY_IOS
         iOSNotificationCenter.RemoveAllScheduledNotifications();
 
@@ -105,10 +106,7 @@ public class NotificationManager : MonoBehaviour
             HandleIntentData(notification.Data);
         }
 #endif
-    }
 
-    private void OnApplicationQuit()
-    {
         SendNotification(NotificationType.GONE_TOO_LONG);
         SendNotification(NotificationType.PATIENT_NEEDS_YOU);
     }

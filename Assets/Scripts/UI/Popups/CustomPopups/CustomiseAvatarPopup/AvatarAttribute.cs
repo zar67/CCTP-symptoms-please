@@ -36,6 +36,80 @@ public class AvatarAttribute : MonoBehaviour
 
     private int m_currentIndex = 0;
 
+    public void InitialiseAttributeValue()
+    {
+        switch (m_attributeID)
+        {
+            case AttributeID.SKIN_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.SkinColourIndex;
+                break;
+            }
+            case AttributeID.HAIR_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.HairTypeIndex;
+                break;
+            }
+            case AttributeID.HAIR_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.HairColourIndex;
+                break;
+            }
+            case AttributeID.EYE_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.EyeColourIndex;
+                break;
+            }
+            case AttributeID.NOSE_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.NoseTypeIndex;
+                break;
+            }
+            case AttributeID.MOUTH_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.MouthTypeIndex;
+                break;
+            }
+            case AttributeID.SHIRT_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.ShirtTypeIndex;
+                break;
+            }
+            case AttributeID.SHIRT_SLEEVE_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.ShirtSleeveTypeIndex;
+                break;
+            }
+            case AttributeID.SHIRT_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.ShirtColourIndex;
+                break;
+            }
+            case AttributeID.PANT_LEG_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.PantLegTypeIndex;
+                break;
+            }
+            case AttributeID.PANTS_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.PantsColourIndex;
+                break;
+            }
+            case AttributeID.SHOES_TYPE:
+            {
+                m_currentIndex = GameData.AvatarData.ShoesTypeIndex;
+                break;
+            }
+            case AttributeID.SHOES_COLOUR:
+            {
+                m_currentIndex = GameData.AvatarData.ShoesColourIndex;
+                break;
+            }
+        }
+
+        UpdateDisplay();
+    }
+
     private void Awake()
     {
         UpdateDisplay();
@@ -91,13 +165,13 @@ public class AvatarAttribute : MonoBehaviour
         m_currentIndex %= m_attributeValues.Length;
 
         UpdateDisplay();
+        OnValueChanged?.Invoke(m_attributeID, m_currentIndex);
     }
 
     private void UpdateDisplay()
     {
         m_currentValueText.text = m_attributeValues[m_currentIndex];
-        OnValueChanged?.Invoke(m_attributeID, m_currentIndex);
-
+        
         m_positiveButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex < m_attributeValues.Length - 1);
         m_negativeButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex > 0);
     }

@@ -11,6 +11,8 @@ public class ModificationsManager : MonoBehaviour, ISaveable
         public List<Topic> ActiveTopics;
     }
 
+    public static IEnumerable<Topic> ActiveTopics => m_activeTopics;
+
     private static List<Topic> m_activeTopics = new List<Topic>();
 
     public static void ActivateTopic(Topic topic)

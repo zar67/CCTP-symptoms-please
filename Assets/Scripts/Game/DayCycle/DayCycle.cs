@@ -34,9 +34,9 @@ public class DayCycle : MonoBehaviour
         PatientManager.OnPatientSeen -= OnPatientSeen;
     }
 
-    private void OnPatientSeen(bool lastPatient)
+    private void OnPatientSeen(PatientManager.PatientSeenData data)
     {
-        if (lastPatient)
+        if (data.IsEndOfDay)
         {
             DOTween.Clear(true);
             m_panelsData.SetupInitialPanel(m_dayEndPanel);

@@ -1,11 +1,21 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PatientManager : MonoBehaviour
 {
-    public static event Action<bool> OnPatientSeen;
+    public struct PatientSeenData
+    {
+        public bool IsEndOfDay;
+        public bool HasHelpedPatient;
+        public ActionEffectiveness ActionEffectiveness;
+        public List<DayEventType> TriggeredEvents;
+        public float ScoreGained;
+    }
+
+    public static event Action<PatientSeenData> OnPatientSeen;
     public static event Action<PatientData> OnNextPatient;
 
     public static List<PatientData> PatientsInDay { get; private set; } = new List<PatientData>();
@@ -25,6 +35,7 @@ public class PatientManager : MonoBehaviour
 
     [Header("Patients")]
     [SerializeField] private int m_numberPatientsInDay = 10;
+    [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private PatientData[] m_patientDatas = default;
     
     private bool m_isDayOver = false;
@@ -56,6 +67,7 @@ public class PatientManager : MonoBehaviour
     {
         ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
 
+        var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.NEUTRAL)
         {
             DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
@@ -64,33 +76,47 @@ public class PatientManager : MonoBehaviour
                 Patient = PatientsInDay[m_currentPatientIndex],
                 NewAppointmentDay = GameData.DayNumber + 1
             });
+            triggeredEvents.Add(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
         }
 
         if (effectiveness < ActionEffectiveness.BAD)
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_COMPLAINS);
+            triggeredEvents.Add(DayEventType.PATIENT_COMPLAINS);
         }
 
         if (effectiveness > ActionEffectiveness.GOOD)
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_CURED);
+            triggeredEvents.Add(DayEventType.PATIENT_CURED);
         }
 
         PatientSeenInDay++;
 
+        bool helped = (int)effectiveness > 2;
         if ((int)effectiveness > 2)
         {
             PatientsHelpedInDay++;
         }
 
-        DayCycle.IncreaseScore(((int)effectiveness - 2) * m_actionScoreMultiplier);
+        float scoreGained = ((int)effectiveness - 2) * m_actionScoreMultiplier;
+        DayCycle.IncreaseScore(scoreGained);
 
         m_currentPatientIndex++;
         m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count;
 
-        OnPatientSeen?.Invoke(m_isDayOver);
+        var patientSeenData = new PatientSeenData()
+        {
+            IsEndOfDay = m_isDayOver,
+            HasHelpedPatient = helped,
+            ActionEffectiveness = effectiveness,
+            TriggeredEvents = triggeredEvents,
+            ScoreGained = scoreGained
+        };
 
-        m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(ShowNextPatient);
+        OnPatientSeen?.Invoke(patientSeenData);
+
+        m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
     }
 
     private void GeneratePatients()
@@ -152,5 +178,16 @@ public class PatientManager : MonoBehaviour
 
             OnNextPatient?.Invoke(PatientsInDay[m_currentPatientIndex]);
         }
+    }
+
+    private void DelayNextPatient()
+    {
+        StartCoroutine(DelayPatient());
+    }
+
+    private IEnumerator DelayPatient()
+    {
+        yield return new WaitForSeconds(m_delayBetweenPatients);
+        ShowNextPatient();
     }
 }

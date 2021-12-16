@@ -29,7 +29,7 @@ public class SymptomsDisplayManager : MonoBehaviour
         PatientManager.OnNextPatient -= OnNextPatient;
     }
 
-    private void OnPatientSeen(bool helped)
+    private void OnPatientSeen(PatientManager.PatientSeenData data)
     {
         foreach (var tween in m_fadeInTweens)
         {

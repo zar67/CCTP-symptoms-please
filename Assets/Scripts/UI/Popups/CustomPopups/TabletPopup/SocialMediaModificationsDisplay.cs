@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TabletModificationsDisplay : MonoBehaviour
+public class SocialMediaModificationsDisplay : MonoBehaviour
 {
     [SerializeField] private ModificationsData m_modificationsData = default;
 
@@ -14,12 +15,15 @@ public class TabletModificationsDisplay : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (Topic topic in ModificationsManager.ActiveTopics)
+        if (ModificationsManager.NumActiveTopics == 0)
         {
-            string data = m_modificationsData.GetRandomDescription(topic);
+            ModificationsManager.ActivateTopic(Topic.TEST1, m_modificationsData.GetRandomActivateDescription(Topic.TEST1));
+        }
 
+        foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.ActiveTopics)
+        {
             ModificationDisplay display = Instantiate(m_displayPrefab, m_scrollViewContent);
-            display.SetText(data);
+            display.SetText(topic.Value.Description);
         }
     }
 }

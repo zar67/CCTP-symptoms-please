@@ -15,11 +15,16 @@ MonoBehaviour:
   m_developerDescription: 
   m_topicDatas:
   - Topic: 0
-    NewsDescriptions:
-    - New outbreak
-    - test
-    - this has happened
-  - Topic: 1
-    NewsDescriptions:
+    ActivateDescriptions:
+    - testing
     - something has happened
+    DeactivateDescriptions:
+    - something has not happened
+    - everything is okay again
+  - Topic: 1
+    ActivateDescriptions:
     - the world is ending
+    DeactivateDescriptions:
+    - the world has been fixed
+    - no need to panic
+    - just stay calm

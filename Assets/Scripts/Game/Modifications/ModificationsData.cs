@@ -11,18 +11,26 @@ public class ModificationsData : GameScriptableObject
     public struct TopicData
     {
         public Topic Topic;
-        public List<string> NewsDescriptions;
+        public List<string> ActivateDescriptions;
+        public List<string> DeactivateDescriptions;
     }
 
     [SerializeField] private List<TopicData> m_topicDatas = new List<TopicData>();
 
     private Dictionary<Topic, TopicData> m_topicDataDictionary = new Dictionary<Topic, TopicData>();
 
-    public string GetRandomDescription(Topic topic)
+    public string GetRandomActivateDescription(Topic topic)
     {
         TopicData topicData = m_topicDataDictionary[topic];
-        int randomIndex = Random.Range(0, topicData.NewsDescriptions.Count);
-        return topicData.NewsDescriptions[randomIndex];
+        int randomIndex = Random.Range(0, topicData.ActivateDescriptions.Count);
+        return topicData.ActivateDescriptions[randomIndex];
+    }
+
+    public string GetRandomDeactivateDescription(Topic topic)
+    {
+        TopicData topicData = m_topicDataDictionary[topic];
+        int randomIndex = Random.Range(0, topicData.DeactivateDescriptions.Count);
+        return topicData.DeactivateDescriptions[randomIndex];
     }
 
     private void Awake()

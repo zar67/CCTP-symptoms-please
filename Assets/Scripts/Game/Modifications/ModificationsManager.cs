@@ -1,39 +1,68 @@
 using SymptomsPlease.SaveSystem;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ModificationsManager : MonoBehaviour, ISaveable
 {
+    [Serializable]
+    public struct ModificationInstanceData
+    {
+        public Topic Topic;
+        public string Description;
+    }
+
     public const string SAVE_IDENTIFIER = "Modifications";
 
     public struct SaveData
     {
-        public List<Topic> ActiveTopics;
+        public Dictionary<Topic, ModificationInstanceData> ActiveTopics;
+        public Dictionary<Topic, ModificationInstanceData> UnhandledTopics; // New Topics that haven't been added to a day yet.
     }
 
-    public static IEnumerable<Topic> ActiveTopics => m_activeTopics;
+    public static IEnumerable<KeyValuePair<Topic, ModificationInstanceData>> ActiveTopics => m_activeTopics;
 
-    private static List<Topic> m_activeTopics = new List<Topic>();
+    public static IEnumerable<KeyValuePair<Topic, ModificationInstanceData>> UnhandledTopics => m_unhandledTopics;
 
-    public static void ActivateTopic(Topic topic)
+    public static int NumActiveTopics => m_activeTopics.Count;
+
+    public static int NumNewTopics => m_unhandledTopics.Count;
+
+    private static Dictionary<Topic, ModificationInstanceData> m_activeTopics = new Dictionary<Topic, ModificationInstanceData>();
+    private static Dictionary<Topic, ModificationInstanceData> m_unhandledTopics = new Dictionary<Topic, ModificationInstanceData>();
+
+    public static void ActivateTopic(Topic topic, string description)
     {
-        if (!m_activeTopics.Contains(topic))
+        var data = new ModificationInstanceData()
         {
-            m_activeTopics.Add(topic);
+            Topic = topic,
+            Description = description
+        };
+
+        if (!m_activeTopics.ContainsKey(topic))
+        {
+            m_activeTopics.Add(topic, data);
+            m_unhandledTopics.Add(topic, data);
         }
     }
 
     public static void DeactivateTopic(Topic topic)
     {
-        if (m_activeTopics.Contains(topic))
+        if (m_activeTopics.ContainsKey(topic))
         {
+            m_activeTopics.Remove(topic);
             m_activeTopics.Remove(topic);
         }
     }
 
     public static bool IsTopicActive(Topic topic)
     {
-        return m_activeTopics.Contains(topic);
+        return m_activeTopics.ContainsKey(topic);
+    }
+
+    public static void ClearNewTopics()
+    {
+        m_unhandledTopics = new Dictionary<Topic, ModificationInstanceData>();
     }
 
     public void SaveFileCreation(SaveFile file)
@@ -44,7 +73,8 @@ public class ModificationsManager : MonoBehaviour, ISaveable
             {
                 file.SaveObject(SAVE_IDENTIFIER, new SaveData()
                 {
-                    ActiveTopics = new List<Topic>() { Topic.TEST1 }
+                    ActiveTopics = new Dictionary<Topic, ModificationInstanceData> { },
+                    UnhandledTopics = new Dictionary<Topic, ModificationInstanceData> { }
                 });
             }
         }
@@ -56,6 +86,7 @@ public class ModificationsManager : MonoBehaviour, ISaveable
         {
             SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
             m_activeTopics = data.ActiveTopics;
+            m_unhandledTopics = data.UnhandledTopics;
         }
     }
 
@@ -65,7 +96,8 @@ public class ModificationsManager : MonoBehaviour, ISaveable
         {
             file.SaveObject(SAVE_IDENTIFIER, new SaveData()
             {
-                ActiveTopics = m_activeTopics
+                ActiveTopics = m_activeTopics,
+                UnhandledTopics = m_unhandledTopics
             });
         }
     }

@@ -13,4 +13,11 @@ public class DayStartPanel : Panel
 
         m_dayNumberText.text = GameData.DayNumber.ToString();
     }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+
+        ModificationsManager.ClearNewTopics();
+    }
 }

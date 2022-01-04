@@ -1,3 +1,4 @@
+using SymptomsPlease.SaveSystem;
 using SymptomsPlease.UI.Popups;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ public class TrainingQuizPopup : Popup
 
     private Dictionary<TrainingQuestionTypes, QuestionTypeBehaviour> m_answerHolderDictionary = new Dictionary<TrainingQuestionTypes, QuestionTypeBehaviour>();
 
-    private QuestionTypeData m_currentQuestionData;
+    private QuizQuestionData m_currentQuestionData;
 
     private int m_questionsCorrect = 0;
     private int m_totalQuestions = 0;
@@ -55,7 +56,17 @@ public class TrainingQuizPopup : Popup
     {
         base.OnOpen();
 
+        m_questionsCorrect = 0;
+        m_totalQuestions = 0;
+
         OnNextQuestion();
+    }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+
+        SaveSystem.Save();
     }
 
     private void OnEnable()
@@ -81,7 +92,11 @@ public class TrainingQuizPopup : Popup
 
     private void OnQuestionAnswered()
     {
-        if (m_currentQuestionData.IsCorrect(m_currentAnswer))
+        bool answerCorrect = m_currentQuestionData.QuestionData.IsCorrect(m_currentAnswer);
+
+        TrainingManager.RegisterQuestion(m_currentQuestionData.Topic, answerCorrect);
+
+        if (answerCorrect)
         {
             m_questionsCorrect++;
         }
@@ -97,18 +112,17 @@ public class TrainingQuizPopup : Popup
 
     private void OnNextQuestion()
     {
-        TrainingQuizQuestions.QuestionsStruct data = m_trainingQuizQuestions.GetRandomQuestion();
+        m_currentQuestionData = m_trainingQuizQuestions.GetRandomQuestion();
 
-        m_questionText.text = data.MultipleChoiceData.Question;
-        m_currentQuestionData = data.MultipleChoiceData;
+        m_questionText.text = m_currentQuestionData.QuestionData.Question;
 
         foreach (KeyValuePair<TrainingQuestionTypes, QuestionTypeBehaviour> questionBehaviour in m_answerHolderDictionary)
         {
-            questionBehaviour.Value.gameObject.SetActive(questionBehaviour.Key == data.Type);
+            questionBehaviour.Value.gameObject.SetActive(questionBehaviour.Key == m_currentQuestionData.QuestionType);
 
-            if (questionBehaviour.Key == data.Type)
+            if (questionBehaviour.Key == m_currentQuestionData.QuestionType)
             {
-                questionBehaviour.Value.Initialise(data.MultipleChoiceData);
+                questionBehaviour.Value.Initialise(m_currentQuestionData.QuestionData);
             }
         }
 

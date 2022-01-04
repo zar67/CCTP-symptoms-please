@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public struct QuizQuestionData
+{
+    public Topic Topic;
+    public TrainingQuestionTypes QuestionType;
+    public QuestionTypeData QuestionData;
+}
+
 [CreateAssetMenu(menuName = "SymptomsPlease/Training/Quiz Questions Data")]
 public class TrainingQuizQuestions : GameScriptableObject
 {
     [Serializable]
-    public class QuestionsStruct
+    public struct QuestionsStruct
     {
         public TrainingQuestionTypes Type;
 
@@ -18,7 +25,7 @@ public class TrainingQuizQuestions : GameScriptableObject
     }
 
     [Serializable]
-    public class TopicsStruct
+    public struct TopicsStruct
     {
         public Topic Topic;
         public List<QuestionsStruct> Questions;
@@ -26,7 +33,7 @@ public class TrainingQuizQuestions : GameScriptableObject
 
     [SerializeField] private List<TopicsStruct> m_questions;
 
-    public QuestionsStruct GetRandomQuestion()
+    public QuizQuestionData GetRandomQuestion()
     {
         TopicsStruct topic = m_questions[Random.Range(0, m_questions.Count)];
         while (!ModificationsManager.IsTopicActive(topic.Topic))
@@ -34,6 +41,13 @@ public class TrainingQuizQuestions : GameScriptableObject
             topic = m_questions[Random.Range(0, m_questions.Count)];
         }
 
-        return topic.Questions[Random.Range(0, topic.Questions.Count)];
+        QuestionsStruct question = topic.Questions[Random.Range(0, topic.Questions.Count)];
+
+        return new QuizQuestionData()
+        {
+            Topic = topic.Topic,
+            QuestionType = question.Type,
+            QuestionData = question.MultipleChoiceData
+        };
     }
 }

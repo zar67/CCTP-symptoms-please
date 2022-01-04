@@ -1151,6 +1151,9 @@ MonoBehaviour:
   m_interactables:
   - {fileID: 1100335087777831493}
   - {fileID: 9152788056896565391}
+  m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_bestTopicText: {fileID: 130196587122650358}
+  m_worstTopicText: {fileID: 2716735927970827098}
 --- !u!1 &6723379107218019090
 GameObject:
   m_ObjectHideFlags: 0

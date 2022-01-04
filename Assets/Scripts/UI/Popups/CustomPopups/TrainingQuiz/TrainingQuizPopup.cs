@@ -59,6 +59,9 @@ public class TrainingQuizPopup : Popup
         m_questionsCorrect = 0;
         m_totalQuestions = 0;
 
+        m_questionsCorrectText.text = m_questionsCorrect.ToString();
+        m_totalQuestionsText.text = m_totalQuestions.ToString();
+
         OnNextQuestion();
     }
 

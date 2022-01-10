@@ -7,19 +7,23 @@ public class GameData : MonoBehaviour, ISaveable
 
     public struct SaveData
     {
+        public bool EnabledOnline;
         public string PlayerName;
         public float TotalTimePlayed;
         public int DayNumber;
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
+        public int TotalScore;
         public AvatarIndexData AvatarData;
     }
 
+    public static bool EnabledOnline;
     public static string PlayerName;
     public static float TotalTimePlayed;
     public static int DayNumber;
     public static int TotalPatientsHelped;
     public static int TotalPatientsSeen;
+    public static int TotalScore;
     public static AvatarIndexData AvatarData;
 
     public void SaveFileCreation(SaveFile file)
@@ -30,11 +34,13 @@ public class GameData : MonoBehaviour, ISaveable
             {
                 file.SaveObject(SAVE_IDENTIFIER, new SaveData()
                 {
+                    EnabledOnline = false,
                     PlayerName = "",
                     TotalTimePlayed = 0,
                     DayNumber = 1,
                     TotalPatientsHelped = 0,
                     TotalPatientsSeen = 0,
+                    TotalScore = 0,
                     AvatarData = new AvatarIndexData()
                 });
             }
@@ -46,11 +52,13 @@ public class GameData : MonoBehaviour, ISaveable
         if (file is GameSave)
         {
             SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
+            EnabledOnline = data.EnabledOnline;
             PlayerName = data.PlayerName;
             TotalTimePlayed = data.TotalTimePlayed;
             DayNumber = data.DayNumber;
             TotalPatientsHelped = data.TotalPatientsHelped;
             TotalPatientsSeen = data.TotalPatientsSeen;
+            TotalScore = data.TotalScore;
             AvatarData = data.AvatarData;
         }
     }
@@ -61,11 +69,13 @@ public class GameData : MonoBehaviour, ISaveable
         {
             file.SaveObject(SAVE_IDENTIFIER, new SaveData()
             {
+                EnabledOnline = EnabledOnline,
                 PlayerName = PlayerName,
                 TotalTimePlayed = TotalTimePlayed,
                 DayNumber = DayNumber,
                 TotalPatientsHelped = TotalPatientsHelped,
                 TotalPatientsSeen = TotalPatientsSeen,
+                TotalScore = TotalScore,
                 AvatarData = AvatarData
             });
         }

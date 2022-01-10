@@ -8,6 +8,7 @@ namespace SymptomsPlease.Debugger
         [SerializeField] private GameObject m_expandedViewGameObject = default;
 
         [SerializeField] private OptionsPanel m_optionsPanel = default;
+        [SerializeField] private ConsolePanel m_consolePanel = default;
 
         private static Debugger m_instance;
 
@@ -22,7 +23,10 @@ namespace SymptomsPlease.Debugger
             else
             {
                 Debug.LogError("More than one instance of RowbotDebugger...");
+                return;
             }
+
+            m_consolePanel.Initialise();
         }
 
         private void Start()

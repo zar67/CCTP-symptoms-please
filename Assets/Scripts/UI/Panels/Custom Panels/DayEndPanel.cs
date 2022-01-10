@@ -36,6 +36,7 @@ public class DayEndPanel : Panel
         GameData.DayNumber++;
         GameData.TotalPatientsHelped += PatientManager.PatientsHelpedInDay;
         GameData.TotalPatientsSeen += PatientManager.PatientSeenInDay;
+        GameData.TotalScore += DayCycle.Score;
 
         SaveSystem.Save();
     }

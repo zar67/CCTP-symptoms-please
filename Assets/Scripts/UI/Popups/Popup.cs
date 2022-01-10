@@ -25,6 +25,11 @@ namespace SymptomsPlease.UI.Popups
         public string Type => m_popupType;
         public bool PauseGameWhenOpen => m_pauseGameWhileOpen;
 
+        public virtual void Initialise()
+        {
+        
+        }
+
         public virtual void OnOpen()
         {
             m_closeButton.interactable = true;
@@ -71,6 +76,8 @@ namespace SymptomsPlease.UI.Popups
                 m_closeButton.onClick.RemoveAllListeners();
                 m_closeButton.gameObject.SetActive(false);
             }
+
+            Initialise();
         }
     }
 }

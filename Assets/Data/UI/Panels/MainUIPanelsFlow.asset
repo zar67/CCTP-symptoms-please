@@ -22,7 +22,11 @@ MonoBehaviour:
       - panel_day_start
       - panel_day_end
       - panel_profile
+      - panel_training
       - panel_online
+    - PanelID: panel_training
+      Transitions:
+      - panel_main_menu
     - PanelID: panel_profile
       Transitions:
       - panel_main_menu

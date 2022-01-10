@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DayCycle : MonoBehaviour
 {
-    public static float Score { get; private set; } = 0;
+    public static int Score { get; private set; } = 0;
 
     [Header("Day End Transition Values")]
     [SerializeField] private SceneData m_sceneData = default;
@@ -14,7 +14,7 @@ public class DayCycle : MonoBehaviour
     [SerializeField] private string m_dayEndPanel = "panel_day_end";
     [SerializeField] private SceneTransitionData m_sceneTransitionData = default;
 
-    public static void IncreaseScore(float value)
+    public static void IncreaseScore(int value)
     {
         Score += value;
     }

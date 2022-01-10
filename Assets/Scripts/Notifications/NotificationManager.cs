@@ -1,3 +1,4 @@
+using SymptomsPlease.UI.Panels;
 using UnityEngine;
 
 #if UNITY_ANDROID
@@ -23,6 +24,10 @@ public class NotificationManager : MonoBehaviour
         public string LeaderboardOtherPlayerName;
         public string PatientName;
     }
+
+    [SerializeField] private PanelsData m_mainMenuPanelData = default;
+    [SerializeField] private string m_trainingPanelString = "panel_training";
+    [SerializeField] private string m_chatPanelString = "panel_chat";
 
     public static string SendNotification(NotificationType type, NotificationData data = new NotificationData())
     {
@@ -56,7 +61,7 @@ public class NotificationManager : MonoBehaviour
             {
                 channelID = "reminders";
                 title = "You've Been Gone So Long!";
-                text = "You’ve been gone so long! Refresh your memory with some training!";
+                text = "Youï¿½ve been gone so long! Refresh your memory with some training!";
                 intent = "open_training";
                 scheduleInHours = 144;
                 break;
@@ -117,12 +122,12 @@ public class NotificationManager : MonoBehaviour
         {
             case "open_training":
             {
-                Debug.Log("OPEN TRAINING");
+                m_mainMenuPanelData.SetupInitialPanel(m_trainingPanelString);
                 break;
             }
             case "open_chat":
             {
-                Debug.Log("OPEN CHAT");
+                m_mainMenuPanelData.SetupInitialPanel(m_chatPanelString);
                 break;
             }
             default:

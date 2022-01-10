@@ -42,6 +42,7 @@ namespace SymptomsPlease.Debugger
                 log.gameObject.SetActive(value);
             }
         }
+
         public void ToggleMessagesLogs(bool value)
         {
             foreach (ConsoleLog log in m_messageLogsList)
@@ -64,10 +65,14 @@ namespace SymptomsPlease.Debugger
             m_messageLogsList = new List<ConsoleLog>();
         }
 
+        public void Initialise()
+        {
+            Application.logMessageReceived -= HandleLog;
+            Application.logMessageReceived += HandleLog;
+        }
+
         private void Awake()
         {
-            Application.logMessageReceived += HandleLog;
-
             m_messagesToggle.isOn = true;
             m_warningToggle.isOn = true;
             m_errorToggle.isOn = true;

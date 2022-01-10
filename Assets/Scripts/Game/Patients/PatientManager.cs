@@ -41,7 +41,6 @@ public class PatientManager : MonoBehaviour
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
 
-
     private Tween m_moveOutTween = null;
 
     private void Awake()
@@ -66,6 +65,7 @@ public class PatientManager : MonoBehaviour
     private void OnPlayerAction(ActionObject action)
     {
         ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
+        int effectivenessIntValue = (int)effectiveness;
 
         var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.NEUTRAL)
@@ -93,13 +93,13 @@ public class PatientManager : MonoBehaviour
 
         PatientSeenInDay++;
 
-        bool helped = (int)effectiveness > 2;
-        if ((int)effectiveness > 2)
+        bool helped = effectivenessIntValue > 2;
+        if (effectivenessIntValue > 2)
         {
             PatientsHelpedInDay++;
         }
 
-        float scoreGained = ((int)effectiveness - 2) * m_actionScoreMultiplier;
+        int scoreGained = (int)((effectivenessIntValue - 2) * m_actionScoreMultiplier);
         DayCycle.IncreaseScore(scoreGained);
 
         m_currentPatientIndex++;

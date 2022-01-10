@@ -40,7 +40,7 @@ namespace SymptomsPlease.UI.Panels
             }
         }
 
-       private void OnDisable()
+        private void OnDisable()
         {
             TransitionManager.OnTransitionBegin.UnSubscribe(OnTransitionBegin);
             TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);

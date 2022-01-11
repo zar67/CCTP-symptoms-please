@@ -10,7 +10,7 @@ public class PatientData : GameScriptableObject
 
     public AfflictionData AfflictionData => m_afflictionData;
 
-    [SerializeField] private string m_patientName;
-    [SerializeField] private string m_mainAppointmentInfo;
-    [SerializeField] private AfflictionData m_afflictionData;
+    [SerializeField] private string m_patientName = "";
+    [SerializeField] private string m_mainAppointmentInfo = "";
+    [SerializeField] private AfflictionData m_afflictionData = default;
 }

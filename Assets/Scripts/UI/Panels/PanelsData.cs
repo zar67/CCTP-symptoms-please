@@ -1,7 +1,7 @@
-﻿using SymptomsPlease.ScriptableObjects;
+﻿using SymptomsPlease.Debugging.Logging;
+using SymptomsPlease.ScriptableObjects;
 using SymptomsPlease.Transitions;
 using SymptomsPlease.Utilities.Attributes;
-using SymptomsPlease.Debugging.Logging;
 using System.Collections.Generic;
 using UnityEngine;
 

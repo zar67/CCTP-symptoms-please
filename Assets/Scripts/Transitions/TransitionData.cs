@@ -1,5 +1,4 @@
 ﻿using SymptomsPlease.SceneManagement;
-using SymptomsPlease.UI.Panels;
 using System;
 using UnityEngine;
 

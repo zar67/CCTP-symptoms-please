@@ -25,9 +25,9 @@ public class TrainingManager : MonoBehaviour, ISaveable
 
     public static Topic GetBestTopic()
     {
-        var bestTopic = Topic.TEST1;
+        Topic bestTopic = Topic.TEST1;
 
-        foreach (var data in m_numCorrectQuestions)
+        foreach (KeyValuePair<Topic, int> data in m_numCorrectQuestions)
         {
             if (m_numCorrectQuestions[bestTopic] < data.Value)
             {
@@ -40,9 +40,9 @@ public class TrainingManager : MonoBehaviour, ISaveable
 
     public static Topic GetWorstTopic()
     {
-        var bestTopic = Topic.TEST1;
+        Topic bestTopic = Topic.TEST1;
 
-        foreach (var data in m_numCorrectQuestions)
+        foreach (KeyValuePair<Topic, int> data in m_numCorrectQuestions)
         {
             if (m_numCorrectQuestions[bestTopic] > data.Value)
             {

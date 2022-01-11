@@ -16,12 +16,12 @@ namespace SymptomsPlease.UI.Panels
 
         public virtual void OnOpen()
         {
-        
+
         }
 
         public virtual void OnClose()
         {
-        
+
         }
 
         protected virtual void Awake()
@@ -34,7 +34,7 @@ namespace SymptomsPlease.UI.Panels
             TransitionManager.OnTransitionBegin.Subscribe(OnTransitionBegin);
             TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
 
-            foreach (var interactable in m_interactables)
+            foreach (Selectable interactable in m_interactables)
             {
                 interactable.interactable = true;
             }
@@ -48,7 +48,7 @@ namespace SymptomsPlease.UI.Panels
 
         private void OnTransitionBegin(TransitionData data)
         {
-            foreach (var interactable in m_interactables)
+            foreach (Selectable interactable in m_interactables)
             {
                 interactable.interactable = false;
             }
@@ -56,7 +56,7 @@ namespace SymptomsPlease.UI.Panels
 
         private void OnTransitionComplete(TransitionData data)
         {
-            foreach (var interactable in m_interactables)
+            foreach (Selectable interactable in m_interactables)
             {
                 interactable.interactable = true;
             }

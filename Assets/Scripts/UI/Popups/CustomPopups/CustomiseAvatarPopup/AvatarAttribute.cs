@@ -31,7 +31,7 @@ public class AvatarAttribute : MonoBehaviour
     [SerializeField] private Button m_positiveButton = default;
 
     [SerializeField] private bool m_loopValues = false;
-    [SerializeField] private AttributeID m_attributeID;
+    [SerializeField] private AttributeID m_attributeID = default;
     [SerializeField] private string[] m_attributeValues = { };
 
     private int m_currentIndex = 0;
@@ -171,7 +171,7 @@ public class AvatarAttribute : MonoBehaviour
     private void UpdateDisplay()
     {
         m_currentValueText.text = m_attributeValues[m_currentIndex];
-        
+
         m_positiveButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex < m_attributeValues.Length - 1);
         m_negativeButton.interactable = m_loopValues || (!m_loopValues && m_currentIndex > 0);
     }

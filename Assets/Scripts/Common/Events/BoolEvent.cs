@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SymptomsPlease.Events
+﻿namespace SymptomsPlease.Events
 {
     public class BoolEvent : GameEvent<bool>
     {

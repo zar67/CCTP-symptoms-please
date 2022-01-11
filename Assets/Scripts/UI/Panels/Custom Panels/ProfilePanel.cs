@@ -32,7 +32,7 @@ public class ProfilePanel : Panel
         int successRate = 0;
         if (GameData.TotalPatientsSeen != 0)
         {
-            successRate = (int)((float)GameData.TotalPatientsHelped / (float)GameData.TotalPatientsSeen * 100);
+            successRate = (int)(GameData.TotalPatientsHelped / (float)GameData.TotalPatientsSeen * 100);
         }
         m_successRateText.text = successRate.ToString();
     }

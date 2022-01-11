@@ -1,5 +1,6 @@
 using SymptomsPlease.SaveSystem;
 using SymptomsPlease.UI.Popups;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,7 @@ public class NameChangePopup : Popup
     [SerializeField] private Button m_generateNameButton = default;
     [SerializeField] private Button m_saveNameButton = default;
 
-    [Header("Valid Names")]
-    [SerializeField] private string[] m_validNamesList = { };
+    private string m_previouslyGeneratedName = "";
 
     private void OnEnable()
     {
@@ -20,6 +20,7 @@ public class NameChangePopup : Popup
         m_saveNameButton.onClick.AddListener(OnSaveName);
 
         m_nameText.text = GameData.PlayerName;
+        m_previouslyGeneratedName = "";
     }
 
     private void OnDisable()
@@ -30,14 +31,30 @@ public class NameChangePopup : Popup
 
     private void OnGenerateName()
     {
-        int randomIndex = Random.Range(0, m_validNamesList.Length);
-        m_nameText.text = m_validNamesList[randomIndex];
+        List<string> availableNames = GameData.AvailablePlayerNames;
+        int randomIndex = Random.Range(0, availableNames.Count);
+        string newName = availableNames[randomIndex];
+
+        if (m_previouslyGeneratedName != "")
+        {
+            FirebaseDatabaseManager.UnresevePlayerName(m_previouslyGeneratedName);
+        }
+
+        FirebaseDatabaseManager.ReservePlayerName(newName);
+        m_previouslyGeneratedName = newName;
+
+        m_nameText.text = newName;
     }
 
     private void OnSaveName()
     {
-        GameData.PlayerName = m_nameText.text;
-        SaveSystem.Save();
+        if (m_previouslyGeneratedName != "")
+        {
+            FirebaseDatabaseManager.UnresevePlayerName(GameData.PlayerName);
+            GameData.PlayerName = m_previouslyGeneratedName;
+            SaveSystem.Save();
+        }
+
         m_popupData.ClosePopup(m_popupType);
     }
 }

@@ -16,11 +16,11 @@ namespace SymptomsPlease.Utilities
             Both = Horizontal | Vertical
         }
 
-        [SerializeField] private TMP_Text m_textMeshProComponent;
+        [SerializeField] private TMP_Text m_textMeshProComponent = default;
         [SerializeField] private bool m_resizeTextObject = true;
-        [SerializeField] private Vector2 m_padding;
+        [SerializeField] private Vector2 m_padding = Vector2.zero;
         [SerializeField] private Vector2 m_maxSize = new Vector2(1000, float.PositiveInfinity);
-        [SerializeField] private Vector2 m_minSize;
+        [SerializeField] private Vector2 m_minSize = Vector2.zero;
         [SerializeField] private Mode m_controlAxes = Mode.Both;
 
         private DrivenRectTransformTracker m_textRectTransformTracker;

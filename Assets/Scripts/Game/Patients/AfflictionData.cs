@@ -7,7 +7,7 @@ using UnityEngine;
 public class AfflictionData : GameScriptableObject
 {
     [Serializable]
-    struct ActionEffectivenessMap
+    private struct ActionEffectivenessMap
     {
         public ActionEffectiveness Effectiveness;
         public ActionType Type;
@@ -19,7 +19,7 @@ public class AfflictionData : GameScriptableObject
 
     public Topic Topic => m_topic;
 
-    [SerializeField] private Topic m_topic;
+    [SerializeField] private Topic m_topic = default;
     [SerializeField] private string[] m_writtenSymptoms = { };
     [SerializeField] private Sprite[] m_iconSymptoms = { };
 

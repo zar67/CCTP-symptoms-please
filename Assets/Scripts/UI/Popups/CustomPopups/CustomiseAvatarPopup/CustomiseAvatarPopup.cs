@@ -14,7 +14,7 @@ public class CustomiseAvatarPopup : Popup
     private void OnEnable()
     {
         m_saveAvatarButton.onClick.AddListener(OnSaveAvatar);
-        foreach (var attribute in m_attributes)
+        foreach (AvatarAttribute attribute in m_attributes)
         {
             attribute.OnValueChanged += AttributeValueChanged;
             attribute.InitialiseAttributeValue();
@@ -26,7 +26,7 @@ public class CustomiseAvatarPopup : Popup
     private void OnDisable()
     {
         m_saveAvatarButton.onClick.RemoveListener(OnSaveAvatar);
-        foreach (var attribute in m_attributes)
+        foreach (AvatarAttribute attribute in m_attributes)
         {
             attribute.OnValueChanged -= AttributeValueChanged;
         }

@@ -61,7 +61,7 @@ namespace SymptomsPlease.UI.Popups
             {
                 InstantiatedPopups[type].PlayCloseAnimation();
                 m_openedPopups.Remove(type);
-                
+
                 m_gamePaused.Value = false;
             }
         }
@@ -81,7 +81,7 @@ namespace SymptomsPlease.UI.Popups
             {
                 ClosePopup(popup);
             }
-        }   
+        }
 
         public bool IsPopupOpen(string type)
         {

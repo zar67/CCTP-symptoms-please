@@ -1,5 +1,4 @@
 using SymptomsPlease.ScriptableObjects;
-using SymptomsPlease.Utilities.Attributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +30,7 @@ public class TrainingQuizQuestions : GameScriptableObject
         public List<QuestionsStruct> Questions;
     }
 
-    [SerializeField] private List<TopicsStruct> m_questions;
+    [SerializeField] private List<TopicsStruct> m_questions = new List<TopicsStruct>();
 
     public QuizQuestionData GetRandomQuestion()
     {

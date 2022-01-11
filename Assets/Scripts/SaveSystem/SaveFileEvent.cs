@@ -1,5 +1,4 @@
 ﻿using SymptomsPlease.Events;
-using UnityEngine;
 
 namespace SymptomsPlease.SaveSystem
 {

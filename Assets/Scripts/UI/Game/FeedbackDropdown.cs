@@ -47,6 +47,6 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void TweenOut()
     {
-        m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenInDuration);
+        m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenOutDuration);
     }
 }

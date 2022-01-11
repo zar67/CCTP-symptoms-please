@@ -90,7 +90,7 @@ namespace SymptomsPlease.Debugger
 
         private void HandleLog(string condition, string stackTrace, LogType type)
         {
-            var newLog = Instantiate(m_consoleLogPrefab, m_scrollViewContent);
+            ConsoleLog newLog = Instantiate(m_consoleLogPrefab, m_scrollViewContent);
             newLog.SetText(condition, stackTrace);
             newLog.OnClicked += SetStackTraceText;
 

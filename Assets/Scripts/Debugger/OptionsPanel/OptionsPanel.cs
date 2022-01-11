@@ -13,7 +13,7 @@ namespace SymptomsPlease.Debugger
 
             public OptionsCategoryData(OptionsCategory category)
             {
-                OptionsCategory = category; 
+                OptionsCategory = category;
                 Options = new List<Option>();
             }
         }

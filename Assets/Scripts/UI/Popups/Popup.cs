@@ -27,7 +27,7 @@ namespace SymptomsPlease.UI.Popups
 
         public virtual void Initialise()
         {
-        
+
         }
 
         public virtual void OnOpen()

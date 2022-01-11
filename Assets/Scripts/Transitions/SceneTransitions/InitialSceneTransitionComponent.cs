@@ -1,6 +1,5 @@
 ﻿using SymptomsPlease.Events;
 using SymptomsPlease.SceneManagement;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ namespace SymptomsPlease.Transitions.Scenes
         private IEnumerator InitialGameLoad()
         {
             yield return new WaitUntil(() => GameInitialiser.OnGameLoaded.DependanciesComplete() == true);
-            GameInitialiser.OnGameLoaded.Invoke();
+            GameInitialiser.OnGameLoaded?.Invoke();
             TransitionManager.OnLoadComplete.CompleteDependancy(DEPENDANCY_GAME_LOADED);
         }
 

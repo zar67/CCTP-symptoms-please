@@ -31,7 +31,7 @@ public class SymptomsDisplayManager : MonoBehaviour
 
     private void OnPatientSeen(PatientManager.PatientSeenData data)
     {
-        foreach (var tween in m_fadeInTweens)
+        foreach (Tween tween in m_fadeInTweens)
         {
             tween.Kill();
         }

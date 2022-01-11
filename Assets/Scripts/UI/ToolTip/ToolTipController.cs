@@ -1,10 +1,8 @@
-﻿using SymptomsPlease.Events;
-using SymptomsPlease.Utilities.ExtensionMethods;
-using System;
+﻿using SymptomsPlease.Utilities.ExtensionMethods;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace SymptomsPlease.UI.ToolTip
 {

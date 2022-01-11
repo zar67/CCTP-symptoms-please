@@ -37,7 +37,7 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private int m_numberPatientsInDay = 10;
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private PatientData[] m_patientDatas = default;
-    
+
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
 
@@ -134,7 +134,7 @@ public class PatientManager : MonoBehaviour
 
             if (dayEvent is NewAppointmentEvent appointmentEvent)
             {
-                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay && 
+                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay &&
                     ModificationsManager.IsTopicActive(appointmentEvent.Patient.AfflictionData.Topic))
                 {
                     PatientsInDay.Add(appointmentEvent.Patient);
@@ -157,7 +157,7 @@ public class PatientManager : MonoBehaviour
             {
                 index = UnityEngine.Random.Range(0, m_patientDatas.Length);
             }
-            
+
             PatientsInDay.Add(m_patientDatas[index]);
         }
     }

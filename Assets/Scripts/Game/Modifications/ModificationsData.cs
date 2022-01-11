@@ -41,7 +41,7 @@ public class ModificationsData : GameScriptableObject
     private void OnValidate()
     {
         m_topicDataDictionary = new Dictionary<Topic, TopicData>();
-        foreach (var topicData in m_topicDatas)
+        foreach (TopicData topicData in m_topicDatas)
         {
             m_topicDataDictionary.Add(topicData.Topic, topicData);
         }

@@ -1,5 +1,4 @@
 ﻿using SymptomsPlease.Events;
-using System;
 using System.Collections;
 using UnityEngine;
 

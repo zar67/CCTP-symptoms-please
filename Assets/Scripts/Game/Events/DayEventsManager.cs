@@ -43,7 +43,7 @@ public class DayEventsManager : MonoBehaviour, ISaveable
 
     public static void AddEvent(DayEventType type)
     {
-        DayEvents.Add(new DayEvent() { EventType = type});
+        DayEvents.Add(new DayEvent() { EventType = type });
     }
 
     private void OnEnable()

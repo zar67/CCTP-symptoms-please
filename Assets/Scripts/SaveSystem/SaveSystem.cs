@@ -121,10 +121,14 @@ namespace SymptomsPlease.SaveSystem
             }
         }
 
-        private void Start()
+        private void Awake()
         {
-            LoadSaveDataFromFiles();
-            Load();
+            //LoadSaveDataFromFiles();
+            //Load();
+
+            //Debug.Log(GameData.AvailablePlayerNames.Count);
+
+            //FirebaseAuthManager.LoginUser(GameData.PlayerName);
         }
     }
 }

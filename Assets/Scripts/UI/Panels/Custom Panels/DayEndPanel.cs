@@ -23,7 +23,7 @@ public class DayEndPanel : Panel
 
         if (PatientManager.PatientSeenInDay > 0)
         {
-            int successRate = (int)((float)PatientManager.PatientsHelpedInDay / (float)PatientManager.PatientSeenInDay * 100);
+            int successRate = (int)(PatientManager.PatientsHelpedInDay / (float)PatientManager.PatientSeenInDay * 100);
             m_successRateText.text = successRate.ToString() + "%";
         }
         else

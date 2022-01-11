@@ -1,8 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardItem : MonoBehaviour
 {
+    [Header("Colours")]
+    [SerializeField] private Color m_defaultColour = Color.white;
+    [SerializeField] private Color m_highlightedColour = Color.red;
+
+    [Header("References")]
+    [SerializeField] private Image m_backgroundImage = default;
     [SerializeField] private TextMeshProUGUI m_positionText = default;
     [SerializeField] private TextMeshProUGUI m_nameText = default;
     [SerializeField] private TextMeshProUGUI m_scoreText = default;
@@ -15,6 +22,8 @@ public class LeaderboardItem : MonoBehaviour
     public void SetNameText(string name)
     {
         m_nameText.text = name;
+
+        m_backgroundImage.color = FirebaseAuthManager.CurrentUser.DisplayName == name ? m_highlightedColour : m_defaultColour;
     }
 
     public void SetScoreText(int score)

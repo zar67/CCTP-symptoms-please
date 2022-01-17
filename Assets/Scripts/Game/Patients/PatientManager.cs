@@ -20,6 +20,8 @@ public class PatientManager : MonoBehaviour
     public static event Action<PatientSeenData> OnPatientSeen;
     public static event Action<PatientData> OnNextPatient;
 
+    public static PatientData CurrentPatient => GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+
     public static List<int> PatientsInDay { get; private set; } = new List<int>();
     public static int PatientSeenInDay { get; private set; } = 0;
     public static int PatientsHelpedInDay { get; private set; } = 0;
@@ -42,8 +44,8 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private AfflictionData[] m_afflictionDatas = default;
     [SerializeField] private List<string> m_validPatientNames = new List<string>();
 
-    private bool m_isDayOver = false;
-    private int m_currentPatientIndex = default;
+    private static bool m_isDayOver = false;
+    private static int m_currentPatientIndex = default;
 
     private Tween m_moveOutTween = null;
 

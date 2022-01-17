@@ -26,7 +26,7 @@ public class TrainingManager : MonoBehaviour, ISaveable
 
     public static List<KeyValuePair<Topic, int>> GetRankedTopics()
     {
-        return m_numCorrectQuestions.OrderBy(x => x.Value).ToList();
+        return m_numCorrectQuestions.OrderBy(x => x.Value).Reverse().ToList();
     }
 
     public static Topic GetBestTopic()

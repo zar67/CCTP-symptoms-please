@@ -2,12 +2,13 @@ using Firebase.Database;
 using System;
 using System.Collections;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardTabContent : MonoBehaviour
 {
-    [SerializeField] private Transform m_scrollViewContent = default;
+    [SerializeField] private ScrollRect m_scrollView = default;
+    [SerializeField] private RectTransform m_scrollViewContent = default;
     [SerializeField] private LeaderboardItem m_leaderboardItemPrefab = default;
 
     private void OnEnable()
@@ -20,18 +21,45 @@ public class LeaderboardTabContent : MonoBehaviour
         StartCoroutine(RefreshData());
     }
 
+    private void SnapTo(RectTransform child)
+    {
+        if (child == null)
+        {
+            return;
+        }
+
+        Canvas.ForceUpdateCanvases();
+
+        var contentPos = (Vector2)m_scrollView.transform.InverseTransformPoint(m_scrollViewContent.position);
+        var childPos = (Vector2)m_scrollView.transform.InverseTransformPoint(child.position);
+        var endPos = contentPos - childPos;
+
+        if (!m_scrollView.horizontal)
+        {
+            endPos.x = contentPos.x + (m_scrollViewContent.rect.width / 2);
+        }
+
+        if (!m_scrollView.vertical)
+        {
+            endPos.y = contentPos.y + (m_scrollViewContent.rect.height / 2);
+        }
+
+        m_scrollViewContent.anchoredPosition = endPos;
+    }
+
     private IEnumerator RefreshData()
     {
         var task = FirebaseDatabase.DefaultInstance.RootReference.Child(FirebaseDatabaseManager.USERS_REFERENCE).OrderByChild(FirebaseDatabaseManager.SCORE_REFERENCE).GetValueAsync();
-
+        
         yield return new WaitUntil(predicate: () => task.IsCompleted);
 
         if (task.Exception == null)
         {
             DataSnapshot dataSnapshot = task.Result;
+            RectTransform playerTransform = null;
 
             int count = 1;
-            foreach (DataSnapshot childSnapshot in dataSnapshot.Children.Reverse<DataSnapshot>())
+            foreach (DataSnapshot childSnapshot in dataSnapshot.Children.Reverse())
             {
                 bool onlineEnabled = (bool)childSnapshot.Child(FirebaseDatabaseManager.ONLINE_PERMISSION_REFERENCE).Value;
 
@@ -45,9 +73,16 @@ public class LeaderboardTabContent : MonoBehaviour
                     newItem.SetNameText(username);
                     newItem.SetScoreText(score);
 
+                    if (username == GameData.PlayerName)
+                    {
+                        playerTransform = newItem.GetComponent<RectTransform>();
+                    }
+
                     count++;
                 }
             }
+
+            SnapTo(playerTransform);
         }
         else
         {

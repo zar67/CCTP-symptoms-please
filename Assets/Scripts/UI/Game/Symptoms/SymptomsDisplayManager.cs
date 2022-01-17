@@ -45,44 +45,17 @@ public class SymptomsDisplayManager : MonoBehaviour
 
     private void OnNextPatient(PatientData patient)
     {
-        int numWrittenSymptoms = patient.AfflictionData.WrittenSymptomsCount;
-        int numIconSymptoms = patient.AfflictionData.IconSymptomsCount;
-
-        if (patient.AfflictionData.WrittenSymptomsCount + patient.AfflictionData.IconSymptomsCount > m_symptomBubbles.Length)
-        {
-            int writtenSymptomsMax = Mathf.Min(patient.AfflictionData.WrittenSymptomsCount, m_symptomBubbles.Length);
-
-            numWrittenSymptoms = Random.Range(0, writtenSymptomsMax + 1);
-            numIconSymptoms = Mathf.Min(m_symptomBubbles.Length - numWrittenSymptoms, patient.AfflictionData.IconSymptomsCount);
-
-            for (int i = 0; i < m_symptomBubbles.Length - (numWrittenSymptoms + numIconSymptoms); i++)
-            {
-                if (numWrittenSymptoms == patient.AfflictionData.WrittenSymptomsCount &&
-                    numIconSymptoms == patient.AfflictionData.IconSymptomsCount)
-                {
-                    break;
-                }
-
-                if (numWrittenSymptoms < patient.AfflictionData.WrittenSymptomsCount)
-                {
-                    numWrittenSymptoms++;
-                }
-
-                if (numIconSymptoms < patient.AfflictionData.IconSymptomsCount)
-                {
-                    numIconSymptoms++;
-                }
-            }
-        }
-
         int count = 0;
-        foreach (string writtenSymptom in patient.AfflictionData.GetRandomStringSymptom(numWrittenSymptoms))
+
+        patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length), out List<string> writtenSymptoms, out List<Sprite> iconSymptoms);
+
+        foreach (string writtenSymptom in writtenSymptoms)
         {
             m_symptomBubbles[count].SetWrittenSymptomText(writtenSymptom);
             count++;
         }
 
-        foreach (Sprite iconSymptom in patient.AfflictionData.GetRandomIconSymptom(numIconSymptoms))
+        foreach (Sprite iconSymptom in iconSymptoms)
         {
             m_symptomBubbles[count].SetIconSymptomSprite(iconSymptom);
             count++;

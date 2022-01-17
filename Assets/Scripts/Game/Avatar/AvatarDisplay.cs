@@ -58,9 +58,8 @@ public class AvatarDisplay : MonoBehaviour
         m_avatarData.UpdateSprites(data, m_avatarSections);
     }
 
-    public void GenerateRandomAvatar()
+    public void ShowAvatar(AvatarIndexData data)
     {
-        AvatarIndexData data = m_avatarData.GenerateRandomData();
         m_avatarData.UpdateSprites(data, m_avatarSections);
     }
 }

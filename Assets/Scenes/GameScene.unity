@@ -1251,9 +1251,10 @@ MonoBehaviour:
   m_tweenEndPosition: {x: 910, y: -95, z: 0}
   m_numberPatientsInDay: 10
   m_delayBetweenPatients: 1.5
-  m_patientDatas:
-  - {fileID: 11400000, guid: 6caff1efc539cc4479f28d7f18dd432b, type: 2}
-  - {fileID: 11400000, guid: 30f27279230063741aa29d7fd51f1869, type: 2}
+  m_avatarData: {fileID: 11400000, guid: 64d384eef6bf8fb4ab5de0b4cbc6bbef, type: 2}
+  m_afflictionDatas:
+  - {fileID: 11400000, guid: 0e7da38f0155a2343b24c8062935aabd, type: 2}
+  - {fileID: 11400000, guid: 65f9f67ca07a13e488c0da89ef309a7a, type: 2}
 --- !u!1 &1381473376
 GameObject:
   m_ObjectHideFlags: 0

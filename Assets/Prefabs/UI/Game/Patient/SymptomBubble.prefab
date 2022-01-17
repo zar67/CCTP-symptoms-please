@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8737812963770465087}
   - component: {fileID: 8322540297776022436}
   m_Layer: 5
-  m_Name: SpeechBubble
+  m_Name: SymptomBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

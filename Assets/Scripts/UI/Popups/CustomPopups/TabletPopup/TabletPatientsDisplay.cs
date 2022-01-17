@@ -12,8 +12,9 @@ public class TabletPatientsDisplay : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (PatientData data in PatientManager.PatientsInDay)
+        foreach (int ID in PatientManager.PatientsInDay)
         {
+            PatientData data = GameData.Patients[ID];
             PatientDisplay display = Instantiate(m_displayPrefab, m_scrollViewContent);
             display.SetData(data);
         }

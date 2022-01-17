@@ -18,7 +18,7 @@ public class PatientManager : MonoBehaviour
     public static event Action<PatientSeenData> OnPatientSeen;
     public static event Action<PatientData> OnNextPatient;
 
-    public static List<PatientData> PatientsInDay { get; private set; } = new List<PatientData>();
+    public static List<int> PatientsInDay { get; private set; } = new List<int>();
     public static int PatientSeenInDay { get; private set; } = 0;
     public static int PatientsHelpedInDay { get; private set; } = 0;
 
@@ -36,7 +36,8 @@ public class PatientManager : MonoBehaviour
     [Header("Patients")]
     [SerializeField] private int m_numberPatientsInDay = 10;
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
-    [SerializeField] private PatientData[] m_patientDatas = default;
+    [SerializeField] private AvatarData m_avatarData = default;
+    [SerializeField] private AfflictionData[] m_afflictionDatas = default;
 
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
@@ -64,19 +65,29 @@ public class PatientManager : MonoBehaviour
 
     private void OnPlayerAction(ActionObject action)
     {
-        ActionEffectiveness effectiveness = PatientsInDay[m_currentPatientIndex].AfflictionData.GetActionEffectiveness(action.ActionType);
+        PatientData currentPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+        ActionEffectiveness effectiveness = currentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
         int effectivenessIntValue = (int)effectiveness;
 
         var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.NEUTRAL)
         {
-            DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
+            currentPatient.PlayerStrikes++;
+
+            if (currentPatient.PlayerStrikes < 3)
             {
-                EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
-                Patient = PatientsInDay[m_currentPatientIndex],
-                NewAppointmentDay = GameData.DayNumber + 1
-            });
-            triggeredEvents.Add(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
+                DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
+                {
+                    EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
+                    PatientID = currentPatient.ID,
+                    NewAppointmentDay = GameData.DayNumber + 1
+                });
+                triggeredEvents.Add(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
+            }
+            else
+            {
+                GameData.TotalScore -= 50;
+            }
         }
 
         if (effectiveness < ActionEffectiveness.BAD)
@@ -121,7 +132,7 @@ public class PatientManager : MonoBehaviour
 
     private void GeneratePatients()
     {
-        PatientsInDay = new List<PatientData>();
+        PatientsInDay = new List<int>();
         int patientCount = m_numberPatientsInDay;
 
         var usedEvents = new List<DayEvent>();
@@ -134,10 +145,11 @@ public class PatientManager : MonoBehaviour
 
             if (dayEvent is NewAppointmentEvent appointmentEvent)
             {
+                PatientData eventPatient = GameData.Patients[appointmentEvent.PatientID];
                 if (GameData.DayNumber == appointmentEvent.NewAppointmentDay &&
-                    ModificationsManager.IsTopicActive(appointmentEvent.Patient.AfflictionData.Topic))
+                    ModificationsManager.IsTopicActive(eventPatient.AfflictionData.Topic))
                 {
-                    PatientsInDay.Add(appointmentEvent.Patient);
+                    PatientsInDay.Add(eventPatient.ID);
                     usedEvents.Add(dayEvent);
                     patientCount--;
                 }
@@ -151,14 +163,25 @@ public class PatientManager : MonoBehaviour
 
         for (int i = 0; i < patientCount; i++)
         {
-            int index = UnityEngine.Random.Range(0, m_patientDatas.Length);
+            int index = UnityEngine.Random.Range(0, m_afflictionDatas.Length);
 
-            while (!ModificationsManager.IsTopicActive(m_patientDatas[index].AfflictionData.Topic))
+            while (!ModificationsManager.IsTopicActive(m_afflictionDatas[index].Topic))
             {
-                index = UnityEngine.Random.Range(0, m_patientDatas.Length);
+                index = UnityEngine.Random.Range(0, m_afflictionDatas.Length);
             }
 
-            PatientsInDay.Add(m_patientDatas[index]);
+            var newPatient = new PatientData()
+            {
+                ID = GameData.Patients.Count,
+                Name = "Test",
+                PlayerStrikes = 0,
+                AppointmentSummary = m_afflictionDatas[index].GetAfflictionSummary(),
+                AfflictionData = m_afflictionDatas[index],
+                AvatarData = m_avatarData.GenerateRandomData()
+            };
+
+            GameData.Patients.Add(newPatient.ID, newPatient);
+            PatientsInDay.Add(newPatient.ID);
         }
     }
 
@@ -172,11 +195,13 @@ public class PatientManager : MonoBehaviour
                 m_moveOutTween = null;
             }
 
+            PatientData nextPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+
             m_patientHolder.anchoredPosition = m_tweenStartPosition;
-            m_patientDisplay.GenerateRandomAvatar();
+            m_patientDisplay.ShowAvatar(nextPatient.AvatarData);
             m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
-            OnNextPatient?.Invoke(PatientsInDay[m_currentPatientIndex]);
+            OnNextPatient?.Invoke(nextPatient);
         }
     }
 

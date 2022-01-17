@@ -1,16 +1,15 @@
-using SymptomsPlease.ScriptableObjects;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "SymptomsPlease/Game/PatientData")]
-public class PatientData : GameScriptableObject
+[Serializable]
+public class PatientData
 {
-    public string PatientName => m_patientName;
-
-    public string MainAppointmentInfo => m_mainAppointmentInfo;
-
-    public AfflictionData AfflictionData => m_afflictionData;
-
-    [SerializeField] private string m_patientName = "";
-    [SerializeField] private string m_mainAppointmentInfo = "";
-    [SerializeField] private AfflictionData m_afflictionData = default;
+    public int ID;
+    public string Name;
+    public int PlayerStrikes;
+    public string AppointmentSummary;
+    public AfflictionData AfflictionData;
+    public AvatarIndexData AvatarData;
+    public List<int> WrittenSymptomsShown = new List<int>();
+    public List<int> IconSymptomsShown = new List<int>();
 }

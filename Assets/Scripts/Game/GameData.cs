@@ -23,6 +23,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
         public AvatarIndexData AvatarData;
+        public PatientData[] PatientsData;
     }
 
     public static bool EnabledOnline
@@ -56,6 +57,8 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
     }
 
     public static List<string> AvailablePlayerNames { get; private set; } = new List<string>();
+
+    public static Dictionary<int, PatientData> Patients { get; private set; } = new Dictionary<int, PatientData>();
 
     public static float TotalTimePlayed;
     public static int DayNumber;
@@ -101,7 +104,8 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                     DayNumber = 1,
                     TotalPatientsHelped = 0,
                     TotalPatientsSeen = 0,
-                    AvatarData = new AvatarIndexData()
+                    AvatarData = new AvatarIndexData(),
+                    PatientsData = new PatientData[] { }
                 });
             }
         }
@@ -118,6 +122,12 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
             TotalPatientsHelped = data.TotalPatientsHelped;
             TotalPatientsSeen = data.TotalPatientsSeen;
             AvatarData = data.AvatarData;
+
+            Patients = new Dictionary<int, PatientData>();
+            foreach (var patient in data.PatientsData)
+            {
+                Patients.Add(patient.ID, patient);
+            }
         }
     }
 
@@ -132,7 +142,8 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                 DayNumber = DayNumber,
                 TotalPatientsHelped = TotalPatientsHelped,
                 TotalPatientsSeen = TotalPatientsSeen,
-                AvatarData = AvatarData
+                AvatarData = AvatarData,
+                PatientsData = Patients.Values.ToArray()
             });
         }
     }

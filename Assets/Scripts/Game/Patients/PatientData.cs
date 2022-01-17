@@ -12,4 +12,5 @@ public class PatientData
     public AvatarIndexData AvatarData;
     public List<int> WrittenSymptomsShown = new List<int>();
     public List<int> IconSymptomsShown = new List<int>();
+    public List<ActionType> PreviousActions = new List<ActionType>();
 }

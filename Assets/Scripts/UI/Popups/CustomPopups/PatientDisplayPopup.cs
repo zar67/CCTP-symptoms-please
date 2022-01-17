@@ -11,6 +11,7 @@ public class PatientDisplayPopup : Popup
     [Header("Data References")]
     [SerializeField] private TextMeshProUGUI m_nameText = default;
     [SerializeField] private TextMeshProUGUI m_appointmentsText = default;
+    [SerializeField] private TextMeshProUGUI m_previousActionsText = default;
     [SerializeField] private SymptomBubble m_symptomsBubblePrefab = default;
     [SerializeField] private Transform m_symptomsParent = default;
 
@@ -26,6 +27,12 @@ public class PatientDisplayPopup : Popup
         m_avatarDisplay.UpdateSprites(data.AvatarData);
         m_nameText.text = data.Name;
         m_appointmentsText.text = data.PlayerStrikes.ToString();
+
+        m_previousActionsText.text = "";
+        foreach (ActionType action in data.PreviousActions)
+        {
+            m_previousActionsText.text += action.ToString() + ", ";
+        }
 
         DisplayKnownSymptoms(data);
     }

@@ -74,6 +74,8 @@ public class PatientManager : MonoBehaviour
         ActionEffectiveness effectiveness = currentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
         int effectivenessIntValue = (int)effectiveness;
 
+        currentPatient.PreviousActions.Add(action.ActionType);
+
         var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.NEUTRAL)
         {

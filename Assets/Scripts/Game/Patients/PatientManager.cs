@@ -2,7 +2,9 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PatientManager : MonoBehaviour
 {
@@ -38,6 +40,7 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private AvatarData m_avatarData = default;
     [SerializeField] private AfflictionData[] m_afflictionDatas = default;
+    [SerializeField] private List<string> m_validPatientNames = new List<string>();
 
     private bool m_isDayOver = false;
     private int m_currentPatientIndex = default;
@@ -163,17 +166,17 @@ public class PatientManager : MonoBehaviour
 
         for (int i = 0; i < patientCount; i++)
         {
-            int index = UnityEngine.Random.Range(0, m_afflictionDatas.Length);
+            int index = Random.Range(0, m_afflictionDatas.Length);
 
             while (!ModificationsManager.IsTopicActive(m_afflictionDatas[index].Topic))
             {
-                index = UnityEngine.Random.Range(0, m_afflictionDatas.Length);
+                index = Random.Range(0, m_afflictionDatas.Length);
             }
 
             var newPatient = new PatientData()
             {
                 ID = GameData.Patients.Count,
-                Name = "Test",
+                Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
                 PlayerStrikes = 0,
                 AppointmentSummary = m_afflictionDatas[index].GetAfflictionSummary(),
                 AfflictionData = m_afflictionDatas[index],

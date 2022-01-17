@@ -51,18 +51,20 @@ public class PatientDisplayPopup : Popup
             else if (workingWrittenSymptomsShown.Count == 0)
             {
                 int randomIndex = Random.Range(0, workingIconSymptomsShown.Count);
+                int actualIndex = workingIconSymptomsShown[randomIndex];
                 workingIconSymptomsShown.RemoveAt(randomIndex);
 
                 SymptomBubble newBubble = Instantiate(m_symptomsBubblePrefab, m_symptomsParent);
-                newBubble.SetIconSymptomSprite(data.AfflictionData.GetIconSymptomAtIndex(randomIndex));
+                newBubble.SetIconSymptomSprite(data.AfflictionData.GetIconSymptomAtIndex(actualIndex));
             }
             else if (workingIconSymptomsShown.Count == 0)
             {
                 int randomIndex = Random.Range(0, workingWrittenSymptomsShown.Count);
+                int actualIndex = workingWrittenSymptomsShown[randomIndex];
                 workingWrittenSymptomsShown.RemoveAt(randomIndex);
 
                 SymptomBubble newBubble = Instantiate(m_symptomsBubblePrefab, m_symptomsParent);
-                newBubble.SetWrittenSymptomText(data.AfflictionData.GetWrittenSymptomAtIndex(randomIndex));
+                newBubble.SetWrittenSymptomText(data.AfflictionData.GetWrittenSymptomAtIndex(actualIndex));
             }
             else
             {
@@ -70,18 +72,20 @@ public class PatientDisplayPopup : Popup
                 if (randomChance < 50)
                 {
                     int randomIndex = Random.Range(0, workingWrittenSymptomsShown.Count);
+                    int actualIndex = workingWrittenSymptomsShown[randomIndex];
                     workingWrittenSymptomsShown.RemoveAt(randomIndex);
 
                     SymptomBubble newBubble = Instantiate(m_symptomsBubblePrefab, m_symptomsParent);
-                    newBubble.SetWrittenSymptomText(data.AfflictionData.GetWrittenSymptomAtIndex(randomIndex));
+                    newBubble.SetWrittenSymptomText(data.AfflictionData.GetWrittenSymptomAtIndex(actualIndex));
                 }
                 else
                 {
                     int randomIndex = Random.Range(0, workingIconSymptomsShown.Count);
+                    int actualIndex = workingIconSymptomsShown[randomIndex];
                     workingIconSymptomsShown.RemoveAt(randomIndex);
 
                     SymptomBubble newBubble = Instantiate(m_symptomsBubblePrefab, m_symptomsParent);
-                    newBubble.SetIconSymptomSprite(data.AfflictionData.GetIconSymptomAtIndex(randomIndex));
+                    newBubble.SetIconSymptomSprite(data.AfflictionData.GetIconSymptomAtIndex(actualIndex));
                 }
             }
         }

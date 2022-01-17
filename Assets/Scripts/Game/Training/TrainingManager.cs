@@ -1,6 +1,7 @@
 using SymptomsPlease.SaveSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TrainingManager : MonoBehaviour, ISaveable
@@ -22,6 +23,11 @@ public class TrainingManager : MonoBehaviour, ISaveable
 
     private static Dictionary<Topic, int> m_numCorrectQuestions = new Dictionary<Topic, int>();
     private static Dictionary<Topic, int> m_totalQuestions = new Dictionary<Topic, int>();
+
+    public static List<KeyValuePair<Topic, int>> GetRankedTopics()
+    {
+        return m_numCorrectQuestions.OrderBy(x => x.Value).ToList();
+    }
 
     public static Topic GetBestTopic()
     {

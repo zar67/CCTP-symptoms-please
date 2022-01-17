@@ -1,5 +1,6 @@
 using SymptomsPlease.UI.Panels;
 using SymptomsPlease.UI.Popups;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,9 +9,9 @@ public class TrainingPanel : Panel
     [Header("Popup References")]
     [SerializeField] private PopupData m_popupData = default;
 
-    [Header("Training Topics")]
-    [SerializeField] private TextMeshProUGUI m_bestTopicText = default;
-    [SerializeField] private TextMeshProUGUI m_worstTopicText = default;
+    [Header("Ranking References")]
+    [SerializeField] private Transform m_rankingsParent = default;
+    [SerializeField] private TopicRanking m_topicRankingPrefab = default;
 
     public override void OnOpen()
     {
@@ -21,13 +22,25 @@ public class TrainingPanel : Panel
 
     private void OnQuizClosed()
     {
-        m_bestTopicText.text = TrainingManager.GetBestTopic().ToString();
-        m_worstTopicText.text = TrainingManager.GetWorstTopic().ToString();
+        UpdateDisplay();
     }
 
     private void OnEnable()
     {
-        m_bestTopicText.text = TrainingManager.GetBestTopic().ToString();
-        m_worstTopicText.text = TrainingManager.GetWorstTopic().ToString();
+        UpdateDisplay();
+    }
+
+    private void UpdateDisplay()
+    {
+        foreach (Transform child in m_rankingsParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (KeyValuePair<Topic, int> topic in TrainingManager.GetRankedTopics())
+        {
+            TopicRanking newRanking = Instantiate(m_topicRankingPrefab, m_rankingsParent);
+            newRanking.SetData(topic.Key.ToString(), topic.Value);
+        }
     }
 }

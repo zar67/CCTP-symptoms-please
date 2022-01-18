@@ -11,8 +11,8 @@ public class AfflictionData : GameScriptableObject
     [Serializable]
     private struct ActionEffectivenessMap
     {
-        public ActionEffectiveness Effectiveness;
         public ActionType Type;
+        public ActionEffectiveness Effectiveness;
     }
 
     public int WrittenSymptomsCount => m_writtenSymptoms.Length;

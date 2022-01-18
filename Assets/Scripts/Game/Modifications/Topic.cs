@@ -1,5 +1,11 @@
 public enum Topic
 {
-    TEST1,
-    TEST2
+    CHLAMYDIA,
+    GONORRHEA,
+    HERPES,
+    HIV,
+    AIDS,
+    HPV,
+    PUBLIC_LICE,
+    SYPHILIS
 }

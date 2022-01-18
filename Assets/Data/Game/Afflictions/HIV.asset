@@ -14,6 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_topic: 3
-  m_writtenSymptoms: []
+  m_writtenSymptoms:
+  - Fever
+  - Headache
+  - Fatigue
+  - Swollen Lymph Nodes
+  - Sore Throat
+  - Rash
+  - Diarrhea
+  - Shortness of Breath
+  - Unintended Weight Loss
   m_iconSymptoms: []
-  m_actionEffectivenessMap: []
+  m_actionEffectivenessMap:
+  - Type: 0
+    Effectiveness: 0
+  - Type: 1
+    Effectiveness: 0
+  - Type: 2
+    Effectiveness: 4
+  - Type: 3
+    Effectiveness: 3
+  - Type: 4
+    Effectiveness: 2
+  - Type: 5
+    Effectiveness: 2
+  - Type: 6
+    Effectiveness: 3

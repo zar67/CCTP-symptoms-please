@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pubic Lice
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: Pubic Lice
   m_topic: 6
   m_writtenSymptoms:
   - Genital Redness

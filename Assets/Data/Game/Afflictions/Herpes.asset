@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Herpes
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: Herpes
   m_topic: 2
   m_writtenSymptoms:
   - Genital Tingling

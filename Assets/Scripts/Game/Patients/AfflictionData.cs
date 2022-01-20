@@ -19,8 +19,11 @@ public class AfflictionData : GameScriptableObject
 
     public int IconSymptomsCount => m_iconSymptoms.Length;
 
+    public string DisplayName => m_displayName;
+
     public Topic Topic => m_topic;
 
+    [SerializeField] private string m_displayName = "";
     [SerializeField] private Topic m_topic = default;
     [SerializeField] private string[] m_writtenSymptoms = { };
     [SerializeField] private Sprite[] m_iconSymptoms = { };

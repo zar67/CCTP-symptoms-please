@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Chlamydia
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: Chlamydia
   m_topic: 0
   m_writtenSymptoms:
   - Painful Urination

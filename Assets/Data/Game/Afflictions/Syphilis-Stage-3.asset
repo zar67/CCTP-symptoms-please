@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Syphilis-Stage-3
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: Syphilis
   m_topic: 7
   m_writtenSymptoms: []
   m_iconSymptoms: []

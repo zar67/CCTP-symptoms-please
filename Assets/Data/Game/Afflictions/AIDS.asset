@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AIDS
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: HIV
   m_topic: 4
   m_writtenSymptoms:
   - Fever

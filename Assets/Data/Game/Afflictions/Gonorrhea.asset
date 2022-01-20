@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gonorrhea
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: Gonorrhea
   m_topic: 1
   m_writtenSymptoms:
   - White Vaginal Discharge

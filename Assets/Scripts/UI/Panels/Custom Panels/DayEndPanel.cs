@@ -9,6 +9,7 @@ public class DayEndPanel : Panel
     [SerializeField] private TextMeshProUGUI m_dayNumberText = default;
     [SerializeField] private TextMeshProUGUI m_patientsSeenText = default;
     [SerializeField] private TextMeshProUGUI m_patientsHelpedText = default;
+    [SerializeField] private TextMeshProUGUI m_patientsStrikedOutText = default;
     [SerializeField] private TextMeshProUGUI m_successRateText = default;
     [SerializeField] private TextMeshProUGUI m_scoreText = default;
 
@@ -20,6 +21,7 @@ public class DayEndPanel : Panel
 
         m_patientsSeenText.text = PatientManager.PatientSeenInDay.ToString();
         m_patientsHelpedText.text = PatientManager.PatientsHelpedInDay.ToString();
+        m_patientsStrikedOutText.text = PatientManager.PatientsStrikedOutInDay.ToString();
 
         if (PatientManager.PatientSeenInDay > 0)
         {

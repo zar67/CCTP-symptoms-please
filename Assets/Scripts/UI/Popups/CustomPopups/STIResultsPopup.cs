@@ -28,8 +28,10 @@ public class STIResultsPopup : Popup
     [SerializeField] private Sprite m_positiveSprite = default;
     [SerializeField] private Sprite m_negativeSprite = default;
 
-    private void OnEnable()
+    public override void OnOpenBegin()
     {
+        base.OnOpenBegin();
+
         m_bloodTestHolder.SetActive(PatientManager.CurrentAction == ActionType.GIVE_BLOOD_TEST_KIT);
         m_urineTestHolder.SetActive(PatientManager.CurrentAction == ActionType.GIVE_URINE_TEST_KIT);
         m_swabTestHolder.SetActive(PatientManager.CurrentAction == ActionType.GIVE_SWAB_TEST_KIT);

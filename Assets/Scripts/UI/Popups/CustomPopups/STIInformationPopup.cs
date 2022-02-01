@@ -11,18 +11,7 @@ public class STIInformationPopup : Popup
     [SerializeField] private Transform m_treatmentsHolder = default;
     [SerializeField] private SymptomBubble m_symptomBubblePrefab = default;
 
-
-    private void OnEnable()
-    {
-        DayStartPanel.OnAfflictionSelected += OnAfflictionSelected;
-    }
-
-    private void OnDisable()
-    {
-        DayStartPanel.OnAfflictionSelected -= OnAfflictionSelected;
-    }
-
-    private void OnAfflictionSelected(AfflictionData affliction)
+    public void UpdateDisplay(AfflictionData affliction)
     {
         m_nameText.text = affliction.DisplayName;
         m_descriptionText.text = affliction.Description;

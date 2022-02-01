@@ -1,20 +1,13 @@
-using SymptomsPlease.UI.Panels;
 using SymptomsPlease.UI.Popups;
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class DayStartPanel : Panel
+public class TabletInformationContent : MonoBehaviour
 {
-    [Header("Day Start Panel References")]
-    [SerializeField] private TextMeshProUGUI m_dayNumberText = default;
-
     [Header("Popup References")]
-    [SerializeField] private PopupData m_popupsData = default;
     [SerializeField] private string m_stiInformationPopupName = "";
+    [SerializeField] private PopupData m_popupsData = default;
 
-    [Header("STI Information References")]
     [SerializeField] private AllAfflictionDatas m_afflictionDatas = default;
     [SerializeField] private STIInfoButton m_infoButtonPrefab = default;
     [SerializeField] private Transform m_stiInformationHolder = default;
@@ -26,12 +19,8 @@ public class DayStartPanel : Panel
         m_stiInformationPopup = (STIInformationPopup)m_popupsData.GetPopup(m_stiInformationPopupName);
     }
 
-    public override void OnOpen()
+    private void OnEnable()
     {
-        base.OnOpen();
-
-        m_dayNumberText.text = GameData.DayNumber.ToString();
-
         foreach (Transform child in m_stiInformationHolder)
         {
             Destroy(child.gameObject);
@@ -46,12 +35,5 @@ public class DayStartPanel : Panel
                 display.SetNameText(affliction.DisplayName);
             }
         }
-    }
-
-    public override void OnClose()
-    {
-        base.OnClose();
-
-        ModificationsManager.ClearNewTopics();
     }
 }

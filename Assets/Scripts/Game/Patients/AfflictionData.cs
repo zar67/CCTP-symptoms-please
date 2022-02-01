@@ -59,15 +59,20 @@ public class AfflictionData : GameScriptableObject
     {
         var workingSymptoms = m_symptoms.ToList();
 
+        if (numberSymptoms > m_symptoms.Length)
+        {
+            numberSymptoms = m_symptoms.Length;
+        }
+
         for (int i = 0; i < numberSymptoms; i++)
         {
             int randomIndex = Random.Range(0, workingSymptoms.Count);
             int actualIndex = Array.IndexOf(m_symptoms, workingSymptoms[randomIndex]);
 
-            workingSymptoms.RemoveAt(randomIndex);
-
-            patientData.SymptomsShown.Add(actualIndex);
             yield return workingSymptoms[randomIndex];
+
+            workingSymptoms.RemoveAt(randomIndex);
+            patientData.SymptomsShown.Add(actualIndex);
         }
     }
 

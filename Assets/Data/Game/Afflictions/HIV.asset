@@ -10,25 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ced2a40ef1bb9734dbeed2ba5496f2a0, type: 3}
-  m_Name: Affliction1
+  m_Name: HIV
   m_EditorClassIdentifier: 
   m_developerDescription: 
+  m_displayName: HIV
+  m_topic: 3
   m_writtenSymptoms:
+  - Fever
+  - Headache
+  - Fatigue
+  - Swollen Lymph Nodes
+  - Sore Throat
   - Rash
-  - Itchy
-  - Feeling Ill
-  m_iconSymptoms:
-  - {fileID: 21300000, guid: 5d52b725d89065b4f9e1a77e4d3b7cd3, type: 3}
-  - {fileID: 21300000, guid: 0fd6df0142830ea47bfe6bf826344a7c, type: 3}
-  - {fileID: 21300000, guid: b43b5b8b7137b9d44a80dffe893d4318, type: 3}
+  - Diarrhea
+  - Shortness of Breath
+  - Unintended Weight Loss
+  m_iconSymptoms: []
   m_actionEffectivenessMap:
-  - Effectiveness: 0
-    Type: 0
-  - Effectiveness: 1
-    Type: 1
-  - Effectiveness: 2
-    Type: 2
-  - Effectiveness: 3
-    Type: 3
-  - Effectiveness: 4
-    Type: 4
+  - Type: 0
+    Effectiveness: 0
+  - Type: 1
+    Effectiveness: 0
+  - Type: 2
+    Effectiveness: 4
+  - Type: 3
+    Effectiveness: 3
+  - Type: 4
+    Effectiveness: 2
+  - Type: 5
+    Effectiveness: 2
+  - Type: 6
+    Effectiveness: 3

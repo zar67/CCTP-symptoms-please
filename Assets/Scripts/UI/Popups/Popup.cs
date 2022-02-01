@@ -30,13 +30,23 @@ namespace SymptomsPlease.UI.Popups
 
         }
 
-        public virtual void OnOpen()
+        public virtual void OnOpenBegin()
+        {
+
+        }
+
+        public virtual void OnOpenComplete()
         {
             m_closeButton.interactable = true;
             OnOpenEvent?.Invoke();
         }
 
-        public virtual void OnClose()
+        public virtual void OnCloseBegin()
+        {
+
+        }
+
+        public virtual void OnCloseComplete()
         {
             gameObject.SetActive(false);
             OnCloseEvent?.Invoke();

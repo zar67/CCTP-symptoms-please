@@ -29,36 +29,6 @@ public class TrainingManager : MonoBehaviour, ISaveable
         return m_numCorrectQuestions.OrderBy(x => x.Value).Reverse().ToList();
     }
 
-    public static Topic GetBestTopic()
-    {
-        Topic bestTopic = Topic.TEST1;
-
-        foreach (KeyValuePair<Topic, int> data in m_numCorrectQuestions)
-        {
-            if (m_numCorrectQuestions[bestTopic] < data.Value)
-            {
-                bestTopic = data.Key;
-            }
-        }
-
-        return bestTopic;
-    }
-
-    public static Topic GetWorstTopic()
-    {
-        Topic bestTopic = Topic.TEST1;
-
-        foreach (KeyValuePair<Topic, int> data in m_numCorrectQuestions)
-        {
-            if (m_numCorrectQuestions[bestTopic] > data.Value)
-            {
-                bestTopic = data.Key;
-            }
-        }
-
-        return bestTopic;
-    }
-
     public static void RegisterQuestion(Topic topic, bool answerCorrect)
     {
         m_totalQuestions[topic]++;

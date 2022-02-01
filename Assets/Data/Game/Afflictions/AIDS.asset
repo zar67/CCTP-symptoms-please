@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced2a40ef1bb9734dbeed2ba5496f2a0, type: 3}
+  m_Name: AIDS
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  m_displayName: HIV
+  m_topic: 4
+  m_writtenSymptoms:
+  - Fever
+  - Headache
+  - Fatigue
+  - Swollen Lymph Nodes
+  - Sore Throat
+  - Rash
+  - Diarrhea
+  - Shortness of Breath
+  - Unintended Weight Loss
+  m_iconSymptoms: []
+  m_actionEffectivenessMap:
+  - Type: 0
+    Effectiveness: 0
+  - Type: 1
+    Effectiveness: 0
+  - Type: 2
+    Effectiveness: 4
+  - Type: 3
+    Effectiveness: 3
+  - Type: 4
+    Effectiveness: 2
+  - Type: 5
+    Effectiveness: 2
+  - Type: 6
+    Effectiveness: 3

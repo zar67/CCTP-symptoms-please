@@ -26,6 +26,10 @@ public class PatientManager : MonoBehaviour
     public static int PatientSeenInDay { get; private set; } = 0;
     public static int PatientsHelpedInDay { get; private set; } = 0;
 
+    public static int PatientsStrikedOutInDay { get; private set; } = 0;
+
+    public static ActionType CurrentAction { get; private set; }
+
     [SerializeField] private RectTransform m_patientHolder = default;
     [SerializeField] private AvatarDisplay m_patientDisplay = default;
 
@@ -44,18 +48,24 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private AfflictionData[] m_afflictionDatas = default;
     [SerializeField] private List<string> m_validPatientNames = new List<string>();
 
+    [Header("STI Testing")]
+    [SerializeField] private STITestResults m_stiResultsDisplay = default;
+
     private static bool m_isDayOver = false;
     private static int m_currentPatientIndex = default;
 
     private Tween m_moveOutTween = null;
+    private Tween m_moveInTween = null;
 
     private void Awake()
     {
-        GeneratePatients();
-        ShowNextPatient();
-
+        m_isDayOver = false;
         PatientSeenInDay = 0;
         PatientsHelpedInDay = 0;
+        PatientsStrikedOutInDay = 0;
+
+        GeneratePatients();
+        ShowNextPatient();
     }
 
     private void OnEnable()
@@ -70,14 +80,28 @@ public class PatientManager : MonoBehaviour
 
     private void OnPlayerAction(ActionObject action)
     {
+        CurrentAction = action.ActionType;
+
         PatientData currentPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
         ActionEffectiveness effectiveness = currentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
         int effectivenessIntValue = (int)effectiveness;
 
         currentPatient.PreviousActions.Add(action.ActionType);
 
+        int scoreGained = (int)((effectivenessIntValue - 2) * m_actionScoreMultiplier);
+        DayCycle.IncreaseScore(scoreGained);
+
+        if (action.ActionType == ActionType.GIVE_BLOOD_TEST_KIT ||
+            action.ActionType == ActionType.GIVE_SWAB_TEST_KIT ||
+            action.ActionType == ActionType.GIVE_URINE_TEST_KIT)
+        {
+            CancelTweens(false);
+            m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenStartPosition, m_tweenAnimationDuration).OnComplete(DelayPatientSTITest);
+            return;
+        }
+
         var triggeredEvents = new List<DayEventType>();
-        if (effectiveness < ActionEffectiveness.NEUTRAL)
+        if (effectiveness < ActionEffectiveness.BEST)
         {
             currentPatient.PlayerStrikes++;
 
@@ -93,7 +117,8 @@ public class PatientManager : MonoBehaviour
             }
             else
             {
-                GameData.TotalScore -= 50;
+                PatientsStrikedOutInDay++;
+                DayCycle.IncreaseScore(-30);
             }
         }
 
@@ -117,9 +142,6 @@ public class PatientManager : MonoBehaviour
             PatientsHelpedInDay++;
         }
 
-        int scoreGained = (int)((effectivenessIntValue - 2) * m_actionScoreMultiplier);
-        DayCycle.IncreaseScore(scoreGained);
-
         m_currentPatientIndex++;
         m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count;
 
@@ -134,11 +156,19 @@ public class PatientManager : MonoBehaviour
 
         OnPatientSeen?.Invoke(patientSeenData);
 
-        m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
+        if (m_isDayOver)
+        {
+            CancelTweens();
+        }
+        else
+        {
+            m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
+        }
     }
 
     private void GeneratePatients()
     {
+        m_currentPatientIndex = 0;
         PatientsInDay = new List<int>();
         int patientCount = m_numberPatientsInDay;
 
@@ -196,19 +226,39 @@ public class PatientManager : MonoBehaviour
     {
         if (!m_isDayOver)
         {
-            if (m_moveOutTween != null)
-            {
-                m_moveOutTween.Kill();
-                m_moveOutTween = null;
-            }
-
+            CancelTweens();
             PatientData nextPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
 
             m_patientHolder.anchoredPosition = m_tweenStartPosition;
             m_patientDisplay.ShowAvatar(nextPatient.AvatarData);
-            m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
+            m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
             OnNextPatient?.Invoke(nextPatient);
+        }
+    }
+
+    private void CancelTweens(bool setPosition = true)
+    {
+        if (m_moveOutTween != null)
+        {
+            m_moveOutTween.Kill();
+            m_moveOutTween = null;
+
+            if (setPosition)
+            {
+                m_patientHolder.anchoredPosition = m_tweenStartPosition;
+            }
+        }
+
+        if (m_moveInTween != null)
+        {
+            m_moveInTween.Kill();
+            m_moveInTween = null;
+
+            if (setPosition)
+            {
+                m_patientHolder.anchoredPosition = m_tweenEndPosition;
+            }
         }
     }
 
@@ -221,5 +271,18 @@ public class PatientManager : MonoBehaviour
     {
         yield return new WaitForSeconds(m_delayBetweenPatients);
         ShowNextPatient();
+    }
+
+    private void DelayPatientSTITest()
+    {
+        StartCoroutine(PatientSTITest());
+    }
+
+    private IEnumerator PatientSTITest()
+    {
+        yield return new WaitForSeconds(m_delayBetweenPatients);
+
+        m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
+        m_stiResultsDisplay.ShowResults(CurrentPatient);
     }
 }

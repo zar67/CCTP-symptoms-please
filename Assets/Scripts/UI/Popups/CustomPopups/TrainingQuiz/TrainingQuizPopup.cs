@@ -28,6 +28,7 @@ public class TrainingQuizPopup : Popup
     [Header("Result References")]
     [SerializeField] private GameObject m_resultsHolder = default;
     [SerializeField] private Button m_nextQuestionButton = default;
+    [SerializeField] private TextMeshProUGUI m_resultsText = default;
 
     [Header("Questions Data")]
     [SerializeField] private TrainingQuizQuestions m_trainingQuizQuestions = default;
@@ -52,9 +53,9 @@ public class TrainingQuizPopup : Popup
         }
     }
 
-    public override void OnOpen()
+    public override void OnOpenBegin()
     {
-        base.OnOpen();
+        base.OnOpenBegin();
 
         m_questionsCorrect = 0;
         m_totalQuestions = 0;
@@ -65,9 +66,9 @@ public class TrainingQuizPopup : Popup
         OnNextQuestion();
     }
 
-    public override void OnClose()
+    public override void OnCloseBegin()
     {
-        base.OnClose();
+        base.OnCloseBegin();
 
         SaveSystem.Save();
     }
@@ -96,6 +97,8 @@ public class TrainingQuizPopup : Popup
     private void OnQuestionAnswered()
     {
         bool answerCorrect = m_currentQuestionData.QuestionData.IsCorrect(m_currentAnswer);
+
+        m_resultsText.text = answerCorrect ? "Correct!" : "Oops! That's not right.";
 
         TrainingManager.RegisterQuestion(m_currentQuestionData.Topic, answerCorrect);
 

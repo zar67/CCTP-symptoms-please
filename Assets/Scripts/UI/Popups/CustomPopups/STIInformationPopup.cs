@@ -37,5 +37,11 @@ public class STIInformationPopup : Popup
             SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
             newbubble.SetSymptomData(type.ToString());
         }
+
+        foreach (string advice in affliction.GetAdviceTreatment())
+        {
+            SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
+            newbubble.SetSymptomData("Advice: " + advice.ToString());
+        }
     }
 }

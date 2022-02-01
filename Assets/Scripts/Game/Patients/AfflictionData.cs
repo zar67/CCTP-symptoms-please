@@ -65,6 +65,17 @@ public class AfflictionData : GameScriptableObject
         }
     }
 
+    public IEnumerable<string> GetAdviceTreatment()
+    {
+        foreach (AdviceEffectivnessMap adviceEffectivness in m_adviceEffectivenessMap)
+        {
+            if (adviceEffectivness.Effectiveness == ActionEffectiveness.BEST)
+            {
+                yield return adviceEffectivness.Advice;
+            }
+        }
+    }
+
     public IEnumerable<string> GetRandomSymptoms(PatientData patientData, int numberSymptoms)
     {
         var workingSymptoms = m_symptoms.ToList();

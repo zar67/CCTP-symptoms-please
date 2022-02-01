@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_displayName: Pubic Lice
+  m_description: 
   m_topic: 6
-  m_writtenSymptoms:
+  m_symptoms:
   - Genital Redness
   - Genital Itching
   - Lice In Pubic Hair
   - Eggs In Pubic Hair
-  m_iconSymptoms: []
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 0
@@ -36,3 +36,6 @@ MonoBehaviour:
     Effectiveness: 2
   - Type: 6
     Effectiveness: 3
+  m_adviceEffectivenessMap:
+  - Advice: Get some special shampoo
+    Effectiveness: 4

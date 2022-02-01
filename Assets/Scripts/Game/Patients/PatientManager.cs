@@ -57,15 +57,6 @@ public class PatientManager : MonoBehaviour
     private Tween m_moveOutTween = null;
     private Tween m_moveInTween = null;
 
-    public static void HandleAdvice(string advice)
-    {
-        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetAdviceEffectiveness(advice);
-        int effectivenessIntValue = (int)effectiveness;
-
-        int scoreGained = (int)((effectivenessIntValue - 2) * m_scoreMultiplier);
-        DayCycle.IncreaseScore(scoreGained);
-    }
-
     private void Awake()
     {
         m_isDayOver = false;
@@ -80,11 +71,27 @@ public class PatientManager : MonoBehaviour
     private void OnEnable()
     {
         ActionObject.OnDraggableOnPatient += OnPlayerAction;
+        AdviceBookPopup.OnAdviceGiven += OnAdviceGiven;
     }
 
     private void OnDisable()
     {
         ActionObject.OnDraggableOnPatient -= OnPlayerAction;
+        AdviceBookPopup.OnAdviceGiven -= OnAdviceGiven;
+    }
+
+    private void OnAdviceGiven(string advice)
+    {
+        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetAdviceEffectiveness(advice);
+        int effectivenessIntValue = (int)effectiveness;
+
+        int scoreGained = (int)((effectivenessIntValue - 2) * m_scoreMultiplier);
+        DayCycle.IncreaseScore(scoreGained);
+
+        if (effectiveness == ActionEffectiveness.BEST)
+        {
+            HandleCompletePatient(effectiveness, scoreGained);
+        }
     }
 
     private void OnPlayerAction(ActionObject action)
@@ -108,6 +115,11 @@ public class PatientManager : MonoBehaviour
             return;
         }
 
+        HandleCompletePatient(effectiveness, scoreGained);
+    }
+
+    private void HandleCompletePatient(ActionEffectiveness effectiveness, int scoreGained)
+    {
         var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.BEST)
         {
@@ -144,8 +156,8 @@ public class PatientManager : MonoBehaviour
 
         PatientSeenInDay++;
 
-        bool helped = effectivenessIntValue > 2;
-        if (effectivenessIntValue > 2)
+        bool helped = (int)effectiveness > 2;
+        if ((int)effectiveness > 2)
         {
             PatientsHelpedInDay++;
         }

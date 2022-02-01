@@ -17,7 +17,8 @@ public class SocialMediaModificationsDisplay : MonoBehaviour
 
         if (ModificationsManager.NumActiveTopics == 0)
         {
-            ModificationsManager.ActivateTopic(Topic.CHLAMYDIA, m_modificationsData.GetRandomActivateDescription(Topic.CHLAMYDIA));
+            ModificationsManager.ActivateTopic(Topic.CHLAMYDIA, m_modificationsData.GetDefaultDescriptionForTopic(Topic.CHLAMYDIA));
+            ModificationsManager.ActivateTopic(Topic.PUBLIC_LICE, m_modificationsData.GetDefaultDescriptionForTopic(Topic.PUBLIC_LICE));
         }
 
         foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.ActiveTopics)

@@ -13,6 +13,9 @@ public class DayEndPanel : Panel
     [SerializeField] private TextMeshProUGUI m_successRateText = default;
     [SerializeField] private TextMeshProUGUI m_scoreText = default;
 
+    [Header("Modifications References")]
+    [SerializeField] private ModificationsData m_modificationData = default;
+
     public override void OnOpen()
     {
         base.OnOpen();
@@ -39,6 +42,16 @@ public class DayEndPanel : Panel
         GameData.TotalPatientsHelped += PatientManager.PatientsHelpedInDay;
         GameData.TotalPatientsSeen += PatientManager.PatientSeenInDay;
         GameData.TotalScore += DayCycle.Score;
+
+        foreach (ModificationsData.DayActivationData mod in m_modificationData.GetActivationsForDay(GameData.DayNumber))
+        {
+            ModificationsManager.ActivateTopic(mod.Topic, mod.Description);
+        }
+
+        foreach (Topic mod in m_modificationData.GetDeactivationsForDay(GameData.DayNumber))
+        {
+            ModificationsManager.DeactivateTopic(mod);
+        }
 
         SaveSystem.Save();
     }

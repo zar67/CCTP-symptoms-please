@@ -15,16 +15,56 @@ MonoBehaviour:
   m_developerDescription: 
   m_topicDatas:
   - Topic: 0
-    ActivateDescriptions:
-    - testing
-    - something has happened
-    DeactivateDescriptions:
-    - something has not happened
-    - everything is okay again
+    DefaultDescription: When I am away from home, I sometimes get love sick... Well
+      they call it chlamydia
+    ActivationDays: []
+    DeactivationDays: []
+  - Topic: 6
+    DefaultDescription: 'Me: I got a very nasty reaction to the pubic lice lotion
+      you prescribed me Dr: Where exactly did you apply it? Me: On the train... Dr:
+      ...'
+    ActivationDays: []
+    DeactivationDays: []
   - Topic: 1
-    ActivateDescriptions:
-    - the world is ending
-    DeactivateDescriptions:
-    - the world has been fixed
-    - no need to panic
-    - just stay calm
+    DefaultDescription: When I first heard of gonorrhea... I thought it was an anti-diarrhea
+      medicine.
+    ActivationDays:
+    - DayNumber: 3
+      Description: When I first heard of gonorrhea... I thought it was an anti-diarrhea
+        medicine.
+    DeactivationDays: []
+  - Topic: 2
+    DefaultDescription: What does a Pokemon call a herpes outbreak? Bulbasores
+    ActivationDays:
+    - DayNumber: 6
+      Description: There's a fine line between heroes and herpes.
+    DeactivationDays: []
+  - Topic: 3
+    DefaultDescription: 'The other day my doctor told me I have hiv Me: are you positive?
+      Doctor: no you are'
+    ActivationDays:
+    - DayNumber: 10
+      Description: 'The other day my doctor told me I have hiv Me: are you positive?
+        Doctor: no you are'
+    DeactivationDays: []
+  - Topic: 4
+    DefaultDescription: Did anyone see the news story about the HIV virus mutating
+      to affect citrus plants? It can cause lemon AIDS.
+    ActivationDays:
+    - DayNumber: 15
+      Description: Did anyone see the news story about the HIV virus mutating to
+        affect citrus plants? It can cause lemon AIDS.
+    DeactivationDays: []
+  - Topic: 5
+    DefaultDescription: I thought getting the vaccine meant I wouldn't get HPV...
+    ActivationDays:
+    - DayNumber: 20
+      Description: I thought getting the vaccine meant I wouldn't get HPV...
+    DeactivationDays: []
+  - Topic: 7
+    DefaultDescription: "There\u2019s no I in Team..... .....but there\u2019s two
+      in syphilis"
+    ActivationDays:
+    - DayNumber: 30
+      Description: "There\u2019s no I in Team..... .....but there\u2019s two in syphilis"
+    DeactivationDays: []

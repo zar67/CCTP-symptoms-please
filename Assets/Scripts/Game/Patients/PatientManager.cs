@@ -30,10 +30,10 @@ public class PatientManager : MonoBehaviour
 
     public static ActionType CurrentAction { get; private set; }
 
+    private static float m_scoreMultiplier = 10;
+
     [SerializeField] private RectTransform m_patientHolder = default;
     [SerializeField] private AvatarDisplay m_patientDisplay = default;
-
-    [SerializeField] private float m_actionScoreMultiplier = 10.0f;
 
     [Header("Tween Values")]
     [SerializeField] private float m_tweenAnimationDuration = 1.5f;
@@ -56,6 +56,15 @@ public class PatientManager : MonoBehaviour
 
     private Tween m_moveOutTween = null;
     private Tween m_moveInTween = null;
+
+    public static void HandleAdvice(string advice)
+    {
+        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetAdviceEffectiveness(advice);
+        int effectivenessIntValue = (int)effectiveness;
+
+        int scoreGained = (int)((effectivenessIntValue - 2) * m_scoreMultiplier);
+        DayCycle.IncreaseScore(scoreGained);
+    }
 
     private void Awake()
     {
@@ -82,13 +91,12 @@ public class PatientManager : MonoBehaviour
     {
         CurrentAction = action.ActionType;
 
-        PatientData currentPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
-        ActionEffectiveness effectiveness = currentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
+        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
         int effectivenessIntValue = (int)effectiveness;
 
-        currentPatient.PreviousActions.Add(action.ActionType);
+        CurrentPatient.PreviousActions.Add(action.ActionType);
 
-        int scoreGained = (int)((effectivenessIntValue - 2) * m_actionScoreMultiplier);
+        int scoreGained = (int)((effectivenessIntValue - 2) * m_scoreMultiplier);
         DayCycle.IncreaseScore(scoreGained);
 
         if (action.ActionType == ActionType.GIVE_BLOOD_TEST_KIT ||
@@ -103,14 +111,14 @@ public class PatientManager : MonoBehaviour
         var triggeredEvents = new List<DayEventType>();
         if (effectiveness < ActionEffectiveness.BEST)
         {
-            currentPatient.PlayerStrikes++;
+            CurrentPatient.PlayerStrikes++;
 
-            if (currentPatient.PlayerStrikes < 3)
+            if (CurrentPatient.PlayerStrikes < 3)
             {
                 DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
                 {
                     EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
-                    PatientID = currentPatient.ID,
+                    PatientID = CurrentPatient.ID,
                     NewAppointmentDay = GameData.DayNumber + 1
                 });
                 triggeredEvents.Add(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);

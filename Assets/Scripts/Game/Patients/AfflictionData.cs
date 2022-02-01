@@ -16,23 +16,33 @@ public class AfflictionData : GameScriptableObject
         public ActionEffectiveness Effectiveness;
     }
 
+    [Serializable]
+    public struct AdviceEffectivnessMap
+    {
+        public string Advice;
+        public ActionEffectiveness Effectiveness;
+    }
+
     public int SymptomsCount => m_symptoms.Length;
 
     public string DisplayName => m_displayName;
 
     public string Description => m_description;
 
+    public IEnumerable<AdviceEffectivnessMap> Advice => m_adviceEffectivenessMap;
+
     public Topic Topic => m_topic;
 
     [SerializeField] private string m_displayName = "";
     [SerializeField] private string m_description = "";
     [SerializeField] private Topic m_topic = default;
-    [FormerlySerializedAs("m_writtenSymptoms")]
     [SerializeField] private string[] m_symptoms = { };
 
     [SerializeField] private ActionEffectivenessMap[] m_actionEffectivenessMap = { };
+    [SerializeField] private AdviceEffectivnessMap[] m_adviceEffectivenessMap = { };
 
     private Dictionary<ActionType, ActionEffectiveness> m_actionEffectivenessDictionary;
+    private Dictionary<string, ActionEffectiveness> m_adviceEffectivenessDictionary;
 
     public string GetAfflictionSummary()
     {
@@ -81,6 +91,11 @@ public class AfflictionData : GameScriptableObject
         return m_actionEffectivenessDictionary[action];
     }
 
+    public ActionEffectiveness GetAdviceEffectiveness(string advice)
+    {
+        return m_adviceEffectivenessDictionary[advice];
+    }
+
     private void Awake()
     {
         OnValidate();
@@ -92,6 +107,12 @@ public class AfflictionData : GameScriptableObject
         foreach (ActionEffectivenessMap map in m_actionEffectivenessMap)
         {
             m_actionEffectivenessDictionary[map.Type] = map.Effectiveness;
+        }
+
+        m_adviceEffectivenessDictionary = new Dictionary<string, ActionEffectiveness>();
+        foreach (AdviceEffectivnessMap map in m_adviceEffectivenessMap)
+        {
+            m_adviceEffectivenessDictionary[map.Advice] = map.Effectiveness;
         }
     }
 }

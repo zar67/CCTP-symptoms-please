@@ -47,17 +47,9 @@ public class SymptomsDisplayManager : MonoBehaviour
     {
         int count = 0;
 
-        patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length), out List<string> writtenSymptoms, out List<Sprite> iconSymptoms);
-
-        foreach (string writtenSymptom in writtenSymptoms)
+        foreach (string writtenSymptom in patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length)))
         {
-            m_symptomBubbles[count].SetWrittenSymptomText(writtenSymptom);
-            count++;
-        }
-
-        foreach (Sprite iconSymptom in iconSymptoms)
-        {
-            m_symptomBubbles[count].SetIconSymptomSprite(iconSymptom);
+            m_symptomBubbles[count].SetSymptomData(writtenSymptom);
             count++;
         }
 

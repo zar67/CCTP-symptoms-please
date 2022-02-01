@@ -239,7 +239,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_canvasGroup: {fileID: 8737812963770465087}
   m_writtenSymptomText: {fileID: 8201071207120718626}
-  m_iconSymptomImage: {fileID: 4568895445813173417}
 --- !u!1 &6554366593294246453
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4699314455603338293
 RectTransform:
   m_ObjectHideFlags: 0

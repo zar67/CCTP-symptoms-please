@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "SymptomsPlease/Game/AfflictionData")]
@@ -15,18 +16,19 @@ public class AfflictionData : GameScriptableObject
         public ActionEffectiveness Effectiveness;
     }
 
-    public int WrittenSymptomsCount => m_writtenSymptoms.Length;
-
-    public int IconSymptomsCount => m_iconSymptoms.Length;
+    public int SymptomsCount => m_symptoms.Length;
 
     public string DisplayName => m_displayName;
+
+    public string Description => m_description;
 
     public Topic Topic => m_topic;
 
     [SerializeField] private string m_displayName = "";
+    [SerializeField] private string m_description = "";
     [SerializeField] private Topic m_topic = default;
-    [SerializeField] private string[] m_writtenSymptoms = { };
-    [SerializeField] private Sprite[] m_iconSymptoms = { };
+    [FormerlySerializedAs("m_writtenSymptoms")]
+    [SerializeField] private string[] m_symptoms = { };
 
     [SerializeField] private ActionEffectivenessMap[] m_actionEffectivenessMap = { };
 
@@ -34,84 +36,38 @@ public class AfflictionData : GameScriptableObject
 
     public string GetAfflictionSummary()
     {
-        return m_writtenSymptoms[Random.Range(0, m_writtenSymptoms.Length)];
+        return m_symptoms[Random.Range(0, m_symptoms.Length)];
     }
 
-    public string GetWrittenSymptomAtIndex(int index)
+    public string GetSymptomAtIndex(int index)
     {
-        return m_writtenSymptoms[index];
+        return m_symptoms[index];
     }
 
-    public Sprite GetIconSymptomAtIndex(int index)
+    public IEnumerable<ActionType> GetTreatments()
     {
-        return m_iconSymptoms[index];
+        foreach (ActionEffectivenessMap actionEffectivness in m_actionEffectivenessMap)
+        {
+            if (actionEffectivness.Effectiveness == ActionEffectiveness.BEST)
+            {
+                yield return actionEffectivness.Type;
+            }
+        }
     }
 
-    public void GetRandomSymptoms(PatientData patientData, int numberSymptoms, out List<string> writtenSymptoms, out List<Sprite> iconSymptoms)
+    public IEnumerable<string> GetRandomSymptoms(PatientData patientData, int numberSymptoms)
     {
-        var workingWrittenSymptoms = m_writtenSymptoms.ToList();
-        var workingIconSymptoms = m_iconSymptoms.ToList();
-
-        int writtenSymptomsCount = 0;
-        int iconSymptomsCount = 0;
-
-        writtenSymptoms = new List<string>();
-        iconSymptoms = new List<Sprite>();
+        var workingSymptoms = m_symptoms.ToList();
 
         for (int i = 0; i < numberSymptoms; i++)
         {
-            if (writtenSymptomsCount >= m_writtenSymptoms.Length && iconSymptomsCount >= m_iconSymptoms.Length)
-            {
-                return;
-            }
-            else if (writtenSymptomsCount >= m_writtenSymptoms.Length)
-            {
-                int randomIndex = Random.Range(0, workingIconSymptoms.Count);
-                int actualIndex = Array.IndexOf(m_iconSymptoms, workingIconSymptoms[randomIndex]);
+            int randomIndex = Random.Range(0, workingSymptoms.Count);
+            int actualIndex = Array.IndexOf(m_symptoms, workingSymptoms[randomIndex]);
 
-                iconSymptomsCount++;
-                iconSymptoms.Add(workingIconSymptoms[randomIndex]);
-                workingIconSymptoms.RemoveAt(randomIndex);
+            workingSymptoms.RemoveAt(randomIndex);
 
-                patientData.IconSymptomsShown.Add(actualIndex);
-            }
-            else if (iconSymptomsCount >= m_iconSymptoms.Length)
-            {
-                int randomIndex = Random.Range(0, workingWrittenSymptoms.Count);
-                int actualIndex = Array.IndexOf(m_writtenSymptoms, workingWrittenSymptoms[randomIndex]);
-
-                writtenSymptomsCount++;
-                writtenSymptoms.Add(workingWrittenSymptoms[randomIndex]);
-                workingWrittenSymptoms.RemoveAt(randomIndex);
-
-                patientData.WrittenSymptomsShown.Add(actualIndex);
-            }
-            else
-            {
-                int randomChance = Random.Range(0, 101);
-                if (randomChance < 50)
-                {
-                    int randomIndex = Random.Range(0, workingWrittenSymptoms.Count);
-                    int actualIndex = Array.IndexOf(m_writtenSymptoms, workingWrittenSymptoms[randomIndex]);
-
-                    writtenSymptomsCount++;
-                    writtenSymptoms.Add(workingWrittenSymptoms[randomIndex]);
-                    workingWrittenSymptoms.RemoveAt(randomIndex);
-
-                    patientData.WrittenSymptomsShown.Add(actualIndex);
-                }
-                else
-                {
-                    int randomIndex = Random.Range(0, workingIconSymptoms.Count);
-                    int actualIndex = Array.IndexOf(m_iconSymptoms, workingIconSymptoms[randomIndex]);
-
-                    iconSymptomsCount++;
-                    iconSymptoms.Add(workingIconSymptoms[randomIndex]);
-                    workingIconSymptoms.RemoveAt(randomIndex);
-
-                    patientData.IconSymptomsShown.Add(actualIndex);
-                }
-            }
+            patientData.SymptomsShown.Add(actualIndex);
+            yield return workingSymptoms[randomIndex];
         }
     }
 

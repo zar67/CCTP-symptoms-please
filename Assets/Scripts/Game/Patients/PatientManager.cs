@@ -45,7 +45,7 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private int m_numberPatientsInDay = 10;
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private AvatarData m_avatarData = default;
-    [SerializeField] private AfflictionData[] m_afflictionDatas = default;
+    [SerializeField] private AllAfflictionDatas m_afflictionDatas = default;
     [SerializeField] private List<string> m_validPatientNames = new List<string>();
 
     [Header("STI Testing")]
@@ -200,11 +200,11 @@ public class PatientManager : MonoBehaviour
 
         for (int i = 0; i < patientCount; i++)
         {
-            int index = Random.Range(0, m_afflictionDatas.Length);
+            int index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
 
-            while (!ModificationsManager.IsTopicActive(m_afflictionDatas[index].Topic))
+            while (!ModificationsManager.IsTopicActive(m_afflictionDatas.GetAfflictionAtIndex(index).Topic))
             {
-                index = Random.Range(0, m_afflictionDatas.Length);
+                index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
             }
 
             var newPatient = new PatientData()
@@ -212,8 +212,8 @@ public class PatientManager : MonoBehaviour
                 ID = GameData.Patients.Count,
                 Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
                 PlayerStrikes = 0,
-                AppointmentSummary = m_afflictionDatas[index].GetAfflictionSummary(),
-                AfflictionData = m_afflictionDatas[index],
+                AppointmentSummary = m_afflictionDatas.GetAfflictionAtIndex(index).GetAfflictionSummary(),
+                AfflictionData = m_afflictionDatas.GetAfflictionAtIndex(index),
                 AvatarData = m_avatarData.GenerateRandomData()
             };
 

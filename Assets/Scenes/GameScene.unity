@@ -2113,18 +2113,7 @@ MonoBehaviour:
   m_numberPatientsInDay: 10
   m_delayBetweenPatients: 1.5
   m_avatarData: {fileID: 11400000, guid: 64d384eef6bf8fb4ab5de0b4cbc6bbef, type: 2}
-  m_afflictionDatas:
-  - {fileID: 11400000, guid: 0e7da38f0155a2343b24c8062935aabd, type: 2}
-  - {fileID: 11400000, guid: 65f9f67ca07a13e488c0da89ef309a7a, type: 2}
-  - {fileID: 11400000, guid: 4bb39365fa05aff4e87914c08705795f, type: 2}
-  - {fileID: 11400000, guid: 33f3bad7c2cc905419ebdf1d5186c0a7, type: 2}
-  - {fileID: 11400000, guid: 5d8fe09b5a9d14647a39a2ad53ad52b1, type: 2}
-  - {fileID: 11400000, guid: d8888be7906452649afa63f514fb480a, type: 2}
-  - {fileID: 11400000, guid: 68650074cda0b5446a275082d39bdaf8, type: 2}
-  - {fileID: 11400000, guid: edd58840027187848b56e61ba94c2366, type: 2}
-  - {fileID: 11400000, guid: 756d2c5c5162cd942a29f5867c4fc38e, type: 2}
-  - {fileID: 11400000, guid: 5aa9c0defde0f5a418e9714e66346e9d, type: 2}
-  - {fileID: 11400000, guid: f714d315c3b2ac940be962fa2e26b087, type: 2}
+  m_afflictionDatas: {fileID: 11400000, guid: 7d0351a36ade4174481b3c4de8b912fc, type: 2}
   m_validPatientNames:
   - First Dreaming Giggler
   - First Dreaming Star

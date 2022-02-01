@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e676541d9096f364fa0ef5fc006c29f5, type: 3}
+  m_Name: Afflictions
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  m_afflictionDatas:
+  - {fileID: 11400000, guid: 5d8fe09b5a9d14647a39a2ad53ad52b1, type: 2}
+  - {fileID: 11400000, guid: 0e7da38f0155a2343b24c8062935aabd, type: 2}
+  - {fileID: 11400000, guid: 65f9f67ca07a13e488c0da89ef309a7a, type: 2}
+  - {fileID: 11400000, guid: 4bb39365fa05aff4e87914c08705795f, type: 2}
+  - {fileID: 11400000, guid: 33f3bad7c2cc905419ebdf1d5186c0a7, type: 2}
+  - {fileID: 11400000, guid: d8888be7906452649afa63f514fb480a, type: 2}
+  - {fileID: 11400000, guid: 68650074cda0b5446a275082d39bdaf8, type: 2}
+  - {fileID: 11400000, guid: edd58840027187848b56e61ba94c2366, type: 2}
+  - {fileID: 11400000, guid: 756d2c5c5162cd942a29f5867c4fc38e, type: 2}
+  - {fileID: 11400000, guid: 5aa9c0defde0f5a418e9714e66346e9d, type: 2}
+  - {fileID: 11400000, guid: f714d315c3b2ac940be962fa2e26b087, type: 2}

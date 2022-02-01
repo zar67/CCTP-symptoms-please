@@ -10,7 +10,6 @@ public class PatientData
     public string AppointmentSummary;
     public AfflictionData AfflictionData;
     public AvatarIndexData AvatarData;
-    public List<int> WrittenSymptomsShown = new List<int>();
-    public List<int> IconSymptomsShown = new List<int>();
+    public List<int> SymptomsShown = new List<int>();
     public List<ActionType> PreviousActions = new List<ActionType>();
 }

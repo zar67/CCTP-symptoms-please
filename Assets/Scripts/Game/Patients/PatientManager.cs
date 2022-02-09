@@ -40,7 +40,7 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private Vector3 m_tweenEndPosition = new Vector3(3.0f, 0.0f, 0.0f);
 
     [Header("Patients")]
-    [SerializeField] private int m_numberPatientsInDay = 10;
+    [SerializeField] private int m_basePatientsInDay = 10;
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private AvatarData m_avatarData = default;
     [SerializeField] private AllAfflictionDatas m_afflictionDatas = default;
@@ -68,12 +68,14 @@ public class PatientManager : MonoBehaviour
     {
         ActionObject.OnDraggableOnPatient += OnPlayerAction;
         AdviceBookPopup.OnAdviceGiven += OnAdviceGiven;
+        DayTimer.OnDayTimeComplete += OnDayTimerComplete;
     }
 
     private void OnDisable()
     {
         ActionObject.OnDraggableOnPatient -= OnPlayerAction;
         AdviceBookPopup.OnAdviceGiven -= OnAdviceGiven;
+        DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
     }
 
     private void OnAdviceGiven(string advice)
@@ -112,6 +114,19 @@ public class PatientManager : MonoBehaviour
         }
 
         HandleCompletePatient(effectiveness, scoreGained);
+    }
+
+    private void OnDayTimerComplete()
+    {
+        for (int i = m_currentPatientIndex; i < PatientsInDay.Count; i++)
+        {
+            DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
+            {
+                EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
+                PatientID = PatientsInDay[i],
+                NewAppointmentDay = GameData.DayNumber + 1
+            });
+        }
     }
 
     private void HandleCompletePatient(ActionEffectiveness effectiveness, int scoreGained)
@@ -177,7 +192,7 @@ public class PatientManager : MonoBehaviour
     {
         m_currentPatientIndex = 0;
         PatientsInDay = new List<int>();
-        int patientCount = m_numberPatientsInDay;
+        int patientCount = m_basePatientsInDay;
 
         var usedEvents = new List<DayEvent>();
         foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
@@ -280,7 +295,7 @@ public class PatientManager : MonoBehaviour
 
     private IEnumerator DelayPatient()
     {
-        if (m_currentPatientIndex >= m_numberPatientsInDay)
+        if (m_currentPatientIndex >= m_basePatientsInDay)
         {
             GenerateNewPatient();
         }

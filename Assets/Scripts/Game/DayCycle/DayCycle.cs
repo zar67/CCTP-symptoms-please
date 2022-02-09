@@ -26,22 +26,19 @@ public class DayCycle : MonoBehaviour
 
     private void OnEnable()
     {
-        PatientManager.OnPatientSeen += OnPatientSeen;
+        DayTimer.OnDayTimeComplete += OnDayTimerComplete;
     }
 
     private void OnDisable()
     {
-        PatientManager.OnPatientSeen -= OnPatientSeen;
+        DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
     }
 
-    private void OnPatientSeen(PatientManager.PatientSeenData data)
+    private void OnDayTimerComplete()
     {
-        if (data.IsEndOfDay)
-        {
-            DOTween.Clear(true);
-            m_panelsData.SetupInitialPanel(m_dayEndPanel);
-            m_sceneTransitionData.State = TransitionData.TransitionState.OUT;
-            m_sceneData.TransitionToScene(m_sceneTransitionData);
-        }
+        DOTween.Clear(true);
+        m_panelsData.SetupInitialPanel(m_dayEndPanel);
+        m_sceneTransitionData.State = TransitionData.TransitionState.OUT;
+        m_sceneData.TransitionToScene(m_sceneTransitionData);
     }
 }

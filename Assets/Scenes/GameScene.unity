@@ -1462,6 +1462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_realtimeSecondsPerInGameDay: 5
+  m_totalHouseInGameDay: 8
   m_minuteHand: {fileID: 1824377406}
   m_hourHand: {fileID: 1931939692}
 --- !u!1001 &877659512

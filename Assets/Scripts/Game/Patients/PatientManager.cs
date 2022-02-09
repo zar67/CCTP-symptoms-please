@@ -2,7 +2,6 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +9,6 @@ public class PatientManager : MonoBehaviour
 {
     public struct PatientSeenData
     {
-        public bool IsEndOfDay;
         public bool HasHelpedPatient;
         public ActionEffectiveness ActionEffectiveness;
         public List<DayEventType> TriggeredEvents;
@@ -51,7 +49,6 @@ public class PatientManager : MonoBehaviour
     [Header("STI Testing")]
     [SerializeField] private STITestResults m_stiResultsDisplay = default;
 
-    private static bool m_isDayOver = false;
     private static int m_currentPatientIndex = default;
 
     private Tween m_moveOutTween = null;
@@ -59,7 +56,6 @@ public class PatientManager : MonoBehaviour
 
     private void Awake()
     {
-        m_isDayOver = false;
         PatientSeenInDay = 0;
         PatientsHelpedInDay = 0;
         PatientsStrikedOutInDay = 0;
@@ -163,11 +159,9 @@ public class PatientManager : MonoBehaviour
         }
 
         m_currentPatientIndex++;
-        m_isDayOver = m_currentPatientIndex >= PatientsInDay.Count;
 
         var patientSeenData = new PatientSeenData()
         {
-            IsEndOfDay = m_isDayOver,
             HasHelpedPatient = helped,
             ActionEffectiveness = effectiveness,
             TriggeredEvents = triggeredEvents,
@@ -176,14 +170,7 @@ public class PatientManager : MonoBehaviour
 
         OnPatientSeen?.Invoke(patientSeenData);
 
-        if (m_isDayOver)
-        {
-            CancelTweens();
-        }
-        else
-        {
-            m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
-        }
+        m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
     }
 
     private void GeneratePatients()
@@ -244,17 +231,14 @@ public class PatientManager : MonoBehaviour
 
     private void ShowNextPatient()
     {
-        if (!m_isDayOver)
-        {
-            CancelTweens();
-            PatientData nextPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+        CancelTweens();
+        PatientData nextPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
 
-            m_patientHolder.anchoredPosition = m_tweenStartPosition;
-            m_patientDisplay.ShowAvatar(nextPatient.AvatarData);
-            m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
+        m_patientHolder.anchoredPosition = m_tweenStartPosition;
+        m_patientDisplay.ShowAvatar(nextPatient.AvatarData);
+        m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
-            OnNextPatient?.Invoke(nextPatient);
-        }
+        OnNextPatient?.Invoke(nextPatient);
     }
 
     private void CancelTweens(bool setPosition = true)

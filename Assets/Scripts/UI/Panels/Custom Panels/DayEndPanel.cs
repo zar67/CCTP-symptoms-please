@@ -43,14 +43,20 @@ public class DayEndPanel : Panel
         GameData.TotalPatientsSeen += PatientManager.PatientSeenInDay;
         GameData.TotalScore += DayCycle.Score;
 
-        foreach (ModificationsData.DayActivationData mod in m_modificationData.GetActivationsForDay(GameData.DayNumber))
+        if (m_modificationData.DayHasModifcationActivations(GameData.DayNumber))
         {
-            ModificationsManager.ActivateTopic(mod.Topic, mod.Description);
+            foreach (ModificationsData.DayActivationData mod in m_modificationData.GetActivationsForDay(GameData.DayNumber))
+            {
+                ModificationsManager.ActivateTopic(mod.Topic, mod.Description);
+            }
         }
 
-        foreach (Topic mod in m_modificationData.GetDeactivationsForDay(GameData.DayNumber))
+        if (m_modificationData.DayHasModifcationDeactivations(GameData.DayNumber))
         {
-            ModificationsManager.DeactivateTopic(mod);
+            foreach (Topic mod in m_modificationData.GetDeactivationsForDay(GameData.DayNumber))
+            {
+                ModificationsManager.DeactivateTopic(mod);
+            }
         }
 
         SaveSystem.Save();

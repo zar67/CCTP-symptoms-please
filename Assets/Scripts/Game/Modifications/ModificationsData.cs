@@ -32,6 +32,22 @@ public class ModificationsData : GameScriptableObject
 
     private Dictionary<Topic, TopicData> m_topicDataDictionary = new Dictionary<Topic, TopicData>();
 
+    public bool DayHasModifcationActivations(int day)
+    {
+        foreach (TopicData topicData in m_topicDatas)
+        {
+            foreach (DayData activation in topicData.ActivationDays)
+            {
+                if (activation.DayNumber == day)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public IEnumerable<DayActivationData> GetActivationsForDay(int day)
     {
         foreach (TopicData topicData in m_topicDatas)
@@ -48,6 +64,22 @@ public class ModificationsData : GameScriptableObject
                 }
             }
         }
+    }
+
+    public bool DayHasModifcationDeactivations(int day)
+    {
+        foreach (TopicData topicData in m_topicDatas)
+        {
+            foreach (DayData deactivation in topicData.DeactivationDays)
+            {
+                if (deactivation.DayNumber == day)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public IEnumerable<Topic> GetDeactivationsForDay(int day)

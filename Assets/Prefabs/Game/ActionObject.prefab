@@ -129,3 +129,5 @@ MonoBehaviour:
   m_canvasRectTransform: {fileID: 0}
   m_deskRectTransform: {fileID: 0}
   m_dragRectTransform: {fileID: 3204820665399835993}
+  m_clickableImage: {fileID: 3204820665556531779}
+  m_allAfflictionDatas: {fileID: 11400000, guid: 7d0351a36ade4174481b3c4de8b912fc, type: 2}

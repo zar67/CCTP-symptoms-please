@@ -109,6 +109,7 @@ public class ModificationsData : GameScriptableObject
     private void OnValidate()
     {
         m_topicDataDictionary = new Dictionary<Topic, TopicData>();
+
         foreach (TopicData topicData in m_topicDatas)
         {
             if (!m_topicDataDictionary.ContainsKey(topicData.Topic))

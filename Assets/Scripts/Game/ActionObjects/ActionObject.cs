@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
 {
@@ -12,11 +15,15 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     [Header("Action Values")]
     [SerializeField] private ActionType m_actionType = default;
 
-    [Header("References")]
+    [Header("Display References")]
     [SerializeField] private Canvas m_canvas = default;
     [SerializeField] private RectTransform m_canvasRectTransform = default;
     [SerializeField] private RectTransform m_deskRectTransform = default;
     [SerializeField] private RectTransform m_dragRectTransform = default;
+    [SerializeField] private Image m_clickableImage = default;
+
+    [Header("Affliction References")]
+    [SerializeField] private AllAfflictionDatas m_allAfflictionDatas = default;
 
     private Vector2 m_startingPosition;
 
@@ -72,5 +79,59 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public void OnPointerDown(PointerEventData eventData)
     {
         m_dragRectTransform.SetAsLastSibling();
+    }
+
+    private void Awake()
+    {
+        bool requiredAction = false;
+        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        {
+            foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topicData in ModificationsManager.ActiveTopics)
+            {
+                if (affliction.Topic == topicData.Key && affliction.GetTreatments().Contains(m_actionType))
+                {
+                    requiredAction = true;
+                }
+            }
+        }
+
+        m_clickableImage.enabled = requiredAction;
+    }
+
+    private void OnEnable()
+    {
+        ModificationsManager.OnTopicActivated += OnTopicActivated;
+        ModificationsManager.OnTopicDeactivated += OnTopicDeactivated;
+    }
+
+    private void OnDisable()
+    {
+        ModificationsManager.OnTopicActivated -= OnTopicActivated;
+        ModificationsManager.OnTopicDeactivated -= OnTopicDeactivated;
+    }
+
+    private void OnTopicDeactivated(Topic topic)
+    {
+        bool requiredAction = false;
+        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        {
+            if (affliction.GetTreatments().Contains(m_actionType))
+            {
+                requiredAction = true;
+            }
+        }
+
+        m_clickableImage.enabled = requiredAction;
+    }
+
+    private void OnTopicActivated(Topic topic)
+    {
+        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        {
+            if (affliction.Topic == topic && affliction.GetTreatments().Contains(m_actionType))
+            {
+                m_clickableImage.enabled = true;
+            }
+        }
     }
 }

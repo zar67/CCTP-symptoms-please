@@ -20,6 +20,9 @@ public class ModificationsManager : MonoBehaviour, ISaveable
         public Dictionary<Topic, ModificationInstanceData> UnhandledTopics; // New Topics that haven't been added to a day yet.
     }
 
+    public static event Action<Topic> OnTopicActivated;
+    public static event Action<Topic> OnTopicDeactivated;
+
     public static IEnumerable<KeyValuePair<Topic, ModificationInstanceData>> ActiveTopics => m_activeTopics;
 
     public static IEnumerable<KeyValuePair<Topic, ModificationInstanceData>> UnhandledTopics => m_unhandledTopics;
@@ -44,6 +47,8 @@ public class ModificationsManager : MonoBehaviour, ISaveable
             m_activeTopics.Add(topic, data);
             m_unhandledTopics.Add(topic, data);
         }
+
+        OnTopicActivated?.Invoke(topic);
     }
 
     public static void DeactivateTopic(Topic topic)
@@ -53,6 +58,8 @@ public class ModificationsManager : MonoBehaviour, ISaveable
             m_activeTopics.Remove(topic);
             m_activeTopics.Remove(topic);
         }
+
+        OnTopicDeactivated?.Invoke(topic);
     }
 
     public static bool IsTopicActive(Topic topic)

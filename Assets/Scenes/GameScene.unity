@@ -1048,6 +1048,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1194302274}
     - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
+      propertyPath: m_disableIfNotNeeded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_canvasRectTransform
       value: 
       objectReference: {fileID: 27033162}
@@ -1484,6 +1488,10 @@ PrefabInstance:
       propertyPath: m_deskRectTransform
       value: 
       objectReference: {fileID: 1194302274}
+    - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
+      propertyPath: m_disableIfNotNeeded
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_canvasRectTransform
       value: 
@@ -2005,6 +2013,10 @@ PrefabInstance:
       propertyPath: m_deskRectTransform
       value: 
       objectReference: {fileID: 1194302274}
+    - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
+      propertyPath: m_disableIfNotNeeded
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2048360689, guid: aef8f09f1aa7cb24abbf4384365511d9, type: 3}
       propertyPath: m_canvasRectTransform
       value: 

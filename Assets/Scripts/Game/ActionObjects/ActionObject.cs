@@ -14,6 +14,7 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     [Header("Action Values")]
     [SerializeField] private ActionType m_actionType = default;
+    [SerializeField] private bool m_disableIfNotNeeded = true;
 
     [Header("Display References")]
     [SerializeField] private Canvas m_canvas = default;
@@ -83,19 +84,22 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     private void Awake()
     {
-        bool requiredAction = false;
-        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        if (m_disableIfNotNeeded)
         {
-            foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topicData in ModificationsManager.ActiveTopics)
+            bool requiredAction = false;
+            foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
             {
-                if (affliction.Topic == topicData.Key && affliction.GetTreatments().Contains(m_actionType))
+                foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topicData in ModificationsManager.ActiveTopics)
                 {
-                    requiredAction = true;
+                    if (affliction.Topic == topicData.Key && affliction.GetTreatments().Contains(m_actionType))
+                    {
+                        requiredAction = true;
+                    }
                 }
             }
-        }
 
-        m_clickableImage.enabled = requiredAction;
+            m_clickableImage.enabled = requiredAction;
+        }
     }
 
     private void OnEnable()
@@ -112,25 +116,31 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     private void OnTopicDeactivated(Topic topic)
     {
-        bool requiredAction = false;
-        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        if (m_disableIfNotNeeded)
         {
-            if (affliction.GetTreatments().Contains(m_actionType))
+            bool requiredAction = false;
+            foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
             {
-                requiredAction = true;
+                if (affliction.GetTreatments().Contains(m_actionType))
+                {
+                    requiredAction = true;
+                }
             }
-        }
 
-        m_clickableImage.enabled = requiredAction;
+            m_clickableImage.enabled = requiredAction;
+        }
     }
 
     private void OnTopicActivated(Topic topic)
     {
-        foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
+        if (m_disableIfNotNeeded)
         {
-            if (affliction.Topic == topic && affliction.GetTreatments().Contains(m_actionType))
+            foreach (AfflictionData affliction in m_allAfflictionDatas.AfflictionDatas)
             {
-                m_clickableImage.enabled = true;
+                if (affliction.Topic == topic && affliction.GetTreatments().Contains(m_actionType))
+                {
+                    m_clickableImage.enabled = true;
+                }
             }
         }
     }

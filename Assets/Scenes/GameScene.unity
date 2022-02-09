@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab6e17e02e410a41bc8be4161787493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_realtimeSecondsPerInGameDay: 50000
+  m_realtimeSecondsPerInGameDay: 60
   m_totalHouseInGameDay: 8
   m_minuteHand: {fileID: 1824377406}
   m_hourHand: {fileID: 1931939692}

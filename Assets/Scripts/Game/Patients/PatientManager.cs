@@ -207,26 +207,33 @@ public class PatientManager : MonoBehaviour
 
         for (int i = 0; i < patientCount; i++)
         {
-            int index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
-
-            while (!ModificationsManager.IsTopicActive(m_afflictionDatas.GetAfflictionAtIndex(index).Topic))
-            {
-                index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
-            }
-
-            var newPatient = new PatientData()
-            {
-                ID = GameData.Patients.Count,
-                Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
-                PlayerStrikes = 0,
-                AppointmentSummary = m_afflictionDatas.GetAfflictionAtIndex(index).GetAfflictionSummary(),
-                AfflictionData = m_afflictionDatas.GetAfflictionAtIndex(index),
-                AvatarData = m_avatarData.GenerateRandomData()
-            };
-
-            GameData.Patients.Add(newPatient.ID, newPatient);
-            PatientsInDay.Add(newPatient.ID);
+            GenerateNewPatient();
         }
+    }
+
+    private PatientData GenerateNewPatient()
+    {
+        int index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
+
+        while (!ModificationsManager.IsTopicActive(m_afflictionDatas.GetAfflictionAtIndex(index).Topic))
+        {
+            index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
+        }
+
+        var newPatient = new PatientData()
+        {
+            ID = GameData.Patients.Count,
+            Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
+            PlayerStrikes = 0,
+            AppointmentSummary = m_afflictionDatas.GetAfflictionAtIndex(index).GetAfflictionSummary(),
+            AfflictionData = m_afflictionDatas.GetAfflictionAtIndex(index),
+            AvatarData = m_avatarData.GenerateRandomData()
+        };
+
+        GameData.Patients.Add(newPatient.ID, newPatient);
+        PatientsInDay.Add(newPatient.ID);
+
+        return newPatient;
     }
 
     private void ShowNextPatient()
@@ -273,6 +280,11 @@ public class PatientManager : MonoBehaviour
 
     private IEnumerator DelayPatient()
     {
+        if (m_currentPatientIndex >= m_numberPatientsInDay)
+        {
+            GenerateNewPatient();
+        }
+
         yield return new WaitForSeconds(m_delayBetweenPatients);
         ShowNextPatient();
     }

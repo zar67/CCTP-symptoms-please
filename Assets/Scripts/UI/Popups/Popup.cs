@@ -74,7 +74,7 @@ namespace SymptomsPlease.UI.Popups
             m_popupData.ClosePopup(Type);
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             m_animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             PlayOpenAnimation();

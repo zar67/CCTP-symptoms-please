@@ -13,8 +13,9 @@ public class AdviceBookPopup : Popup
 
     private List<string> m_usedAdviceSlips = new List<string>();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         PatientManager.OnNextPatient += OnNextPatient;
     }
 

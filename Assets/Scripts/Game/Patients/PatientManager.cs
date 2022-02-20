@@ -10,6 +10,8 @@ public class PatientManager : MonoBehaviour
     public struct PatientSeenData
     {
         public bool HasHelpedPatient;
+        public PatientData PatientData;
+        public ActionType ActionTaken;
         public ActionEffectiveness ActionEffectiveness;
         public List<DayEventType> TriggeredEvents;
         public float ScoreGained;
@@ -18,9 +20,8 @@ public class PatientManager : MonoBehaviour
     public static event Action<PatientSeenData> OnPatientSeen;
     public static event Action<PatientData> OnNextPatient;
 
-    public static PatientData CurrentPatient => GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+    public static PatientData CurrentPatient { get; private set; }
 
-    public static List<int> PatientsInDay { get; private set; } = new List<int>();
     public static int PatientSeenInDay { get; private set; } = 0;
     public static int PatientsHelpedInDay { get; private set; } = 0;
 
@@ -60,7 +61,6 @@ public class PatientManager : MonoBehaviour
         PatientsHelpedInDay = 0;
         PatientsStrikedOutInDay = 0;
 
-        GeneratePatients();
         ShowNextPatient();
     }
 
@@ -118,15 +118,12 @@ public class PatientManager : MonoBehaviour
 
     private void OnDayTimerComplete()
     {
-        for (int i = m_currentPatientIndex; i < PatientsInDay.Count; i++)
+        DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
         {
-            DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
-            {
-                EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
-                PatientID = PatientsInDay[i],
-                NewAppointmentDay = GameData.DayNumber + 1
-            });
-        }
+            EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
+            PatientID = CurrentPatient.ID,
+            NewAppointmentDay = GameData.DayNumber + 1
+        });
     }
 
     private void HandleCompletePatient(ActionEffectiveness effectiveness, int scoreGained)
@@ -168,69 +165,47 @@ public class PatientManager : MonoBehaviour
             GameData.Patients.Remove(CurrentPatient.ID);
         }
 
-        PatientSeenInDay++;
-
-        bool helped = (int)effectiveness > 2;
-        if ((int)effectiveness > 2)
-        {
-            PatientsHelpedInDay++;
-        }
-
-        m_currentPatientIndex++;
-
         var patientSeenData = new PatientSeenData()
         {
-            HasHelpedPatient = helped,
+            HasHelpedPatient = (int)effectiveness > 2,
+            PatientData = CurrentPatient,
+            ActionTaken = CurrentAction,
             ActionEffectiveness = effectiveness,
             TriggeredEvents = triggeredEvents,
             ScoreGained = scoreGained
         };
+
+        m_currentPatientIndex++;
+        PatientSeenInDay++;
+        if ((int)effectiveness > 2)
+        {
+            PatientsHelpedInDay++;
+        }
 
         OnPatientSeen?.Invoke(patientSeenData);
 
         m_moveOutTween = m_patientHolder.DOAnchorPos(m_tweenEndPosition, m_tweenAnimationDuration).OnComplete(DelayNextPatient);
     }
 
-    private void GeneratePatients()
+    private PatientData GenerateNewPatient()
     {
-        m_currentPatientIndex = 0;
-        PatientsInDay = new List<int>();
-        int patientCount = m_basePatientsInDay;
-
-        var usedEvents = new List<DayEvent>();
-        foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
+        if (DayEventsManager.DayEvents.Count != 0)
         {
-            if (patientCount == 0)
+            foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
             {
-                break;
-            }
-
-            if (dayEvent is NewAppointmentEvent appointmentEvent)
-            {
-                PatientData eventPatient = GameData.Patients[appointmentEvent.PatientID];
-                if (GameData.DayNumber == appointmentEvent.NewAppointmentDay &&
-                    ModificationsManager.IsTopicActive(eventPatient.AfflictionData.Topic))
+                if (dayEvent is NewAppointmentEvent appointmentEvent)
                 {
-                    PatientsInDay.Add(eventPatient.ID);
-                    usedEvents.Add(dayEvent);
-                    patientCount--;
+                    PatientData eventPatient = GameData.Patients[appointmentEvent.PatientID];
+                    if (GameData.DayNumber == appointmentEvent.NewAppointmentDay &&
+                        ModificationsManager.IsTopicActive(eventPatient.AfflictionData.Topic))
+                    {
+                        DayEventsManager.DayEvents.Remove(dayEvent);
+                        return eventPatient;
+                    }
                 }
             }
         }
 
-        foreach (DayEvent dayEvent in usedEvents)
-        {
-            DayEventsManager.DayEvents.Remove(dayEvent);
-        }
-
-        for (int i = 0; i < patientCount; i++)
-        {
-            GenerateNewPatient();
-        }
-    }
-
-    private PatientData GenerateNewPatient()
-    {
         int index = Random.Range(0, m_afflictionDatas.AfflictionsCount);
 
         while (!ModificationsManager.IsTopicActive(m_afflictionDatas.GetAfflictionAtIndex(index).Topic))
@@ -249,7 +224,6 @@ public class PatientManager : MonoBehaviour
         };
 
         GameData.Patients.Add(newPatient.ID, newPatient);
-        PatientsInDay.Add(newPatient.ID);
 
         return newPatient;
     }
@@ -257,13 +231,13 @@ public class PatientManager : MonoBehaviour
     private void ShowNextPatient()
     {
         CancelTweens();
-        PatientData nextPatient = GameData.Patients[PatientsInDay[m_currentPatientIndex]];
+        CurrentPatient = GenerateNewPatient();
 
         m_patientHolder.anchoredPosition = m_tweenStartPosition;
-        m_patientDisplay.ShowAvatar(nextPatient.AvatarData);
+        m_patientDisplay.ShowAvatar(CurrentPatient.AvatarData);
         m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
 
-        OnNextPatient?.Invoke(nextPatient);
+        OnNextPatient?.Invoke(CurrentPatient);
     }
 
     private void CancelTweens(bool setPosition = true)

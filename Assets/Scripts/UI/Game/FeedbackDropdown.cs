@@ -2,11 +2,15 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FeedbackDropdown : MonoBehaviour
 {
     [SerializeField] private RectTransform m_backgroundTransform = default;
     [SerializeField] private TextMeshProUGUI m_effectivenessText = default;
+    [SerializeField] private TextMeshProUGUI m_afflictionText = default;
+    [SerializeField] private TextMeshProUGUI m_actionText = default;
+    [SerializeField] private TextMeshProUGUI m_scoreText = default;
 
     [Header("Background Tween Postion")]
     [SerializeField] private Vector3 m_hiddenPosition = new Vector3(0.0f, -5.0f, 0.0f);
@@ -16,6 +20,10 @@ public class FeedbackDropdown : MonoBehaviour
     [SerializeField] private float m_tweenInDuration = 0.4f;
     [SerializeField] private float m_displayDuration = 0.7f;
     [SerializeField] private float m_tweenOutDuration = 0.4f;
+
+    [Header("Data References")]
+    [SerializeField] private ActionEffectivenessData m_actionEffectivnessData = default;
+    [SerializeField] private ActionsData m_actionsData = default;
 
     private void OnEnable()
     {
@@ -30,7 +38,12 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void OnPatientSeen(PatientManager.PatientSeenData data)
     {
-        m_effectivenessText.text = data.ActionEffectiveness.ToString();
+        m_afflictionText.text = data.PatientData.AfflictionData.DisplayName;
+        m_actionText.text = m_actionsData.GetInfoForAction(data.ActionTaken).DisplayName;
+
+        m_effectivenessText.text = m_actionEffectivnessData.GetInfoForEffectiveness(data.ActionEffectiveness).DisplayText;
+        m_scoreText.text = data.ScoreGained < 0 ? data.ScoreGained.ToString() : "+" + data.ScoreGained.ToString();
+
         m_backgroundTransform.DOAnchorPos(m_shownPosition, m_tweenInDuration).OnComplete(OnTweenInComplete);
     }
 

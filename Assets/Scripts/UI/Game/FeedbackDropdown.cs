@@ -37,7 +37,15 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void OnPatientSeen(PatientManager.PatientSeenData data)
     {
-        m_afflictionText.text = data.PatientData.AfflictionData.DisplayName;
+        if (data.ActionEffectiveness > ActionEffectiveness.GOOD)
+        {
+            m_afflictionText.text = data.PatientData.AfflictionData.DisplayName;
+        }
+        else
+        {
+            m_afflictionText.text = "???";
+        }
+
         m_actionText.text = m_actionsData.GetInfoForAction(data.ActionTaken).DisplayName;
 
         m_effectivenessText.text = m_actionEffectivnessData.GetInfoForEffectiveness(data.ActionEffectiveness).DisplayText;

@@ -1,5 +1,4 @@
 using SymptomsPlease.UI.Popups;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,26 +14,21 @@ public class PatientDisplayPopup : Popup
     [SerializeField] private SymptomBubble m_symptomsBubblePrefab = default;
     [SerializeField] private Transform m_symptomsParent = default;
 
-    public override void Initialise()
+    public override void OnOpenBegin()
     {
-        base.Initialise();
+        base.OnOpenBegin();
 
-        PatientDisplay.OnPatientSelected += OnPatientSelected;
-    }
-
-    private void OnPatientSelected(PatientData data)
-    {
-        m_avatarDisplay.UpdateSprites(data.AvatarData);
-        m_nameText.text = data.Name;
-        m_appointmentsText.text = data.PlayerStrikes.ToString();
+        m_avatarDisplay.UpdateSprites(PatientManager.CurrentPatient.AvatarData);
+        m_nameText.text = PatientManager.CurrentPatient.Name;
+        m_appointmentsText.text = PatientManager.CurrentPatient.PlayerStrikes.ToString();
 
         m_previousActionsText.text = "";
-        foreach (ActionType action in data.PreviousActions)
+        foreach (ActionType action in PatientManager.CurrentPatient.PreviousActions)
         {
             m_previousActionsText.text += action.ToString() + ", ";
         }
 
-        DisplayKnownSymptoms(data);
+        DisplayKnownSymptoms(PatientManager.CurrentPatient);
     }
 
     private void DisplayKnownSymptoms(PatientData data)

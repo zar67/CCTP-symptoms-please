@@ -971,7 +971,7 @@ MonoBehaviour:
   m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
   m_popupType: popup_sti_information
   m_canClose: 1
-  m_pauseGameWhileOpen: 0
+  m_pauseGameWhileOpen: 1
   m_animator: {fileID: 8355155925368980968}
   m_animatorOpenTrigger: open
   m_animatorCloseTrigger: close

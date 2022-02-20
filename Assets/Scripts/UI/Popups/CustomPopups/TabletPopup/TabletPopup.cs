@@ -2,11 +2,10 @@ using SymptomsPlease.UI.Popups;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabletInformationContent : MonoBehaviour
+public class TabletPopup : Popup
 {
     [Header("Popup References")]
     [SerializeField] private string m_stiInformationPopupName = "";
-    [SerializeField] private PopupData m_popupsData = default;
 
     [SerializeField] private AllAfflictionDatas m_afflictionDatas = default;
     [SerializeField] private STIInfoButton m_infoButtonPrefab = default;
@@ -16,7 +15,7 @@ public class TabletInformationContent : MonoBehaviour
 
     private void Start()
     {
-        m_stiInformationPopup = (STIInformationPopup)m_popupsData.GetPopup(m_stiInformationPopupName);
+        m_stiInformationPopup = (STIInformationPopup)m_popupData.GetPopup(m_stiInformationPopupName);
     }
 
     private void OnEnable()

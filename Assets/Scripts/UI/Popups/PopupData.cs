@@ -1,7 +1,6 @@
 ﻿using SymptomsPlease.Debugging.Logging;
 using SymptomsPlease.Managers;
 using SymptomsPlease.ScriptableObjects;
-using SymptomsPlease.ScriptableObjects.Variables;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +9,9 @@ namespace SymptomsPlease.UI.Popups
     [CreateAssetMenu(fileName = "PopupData", menuName = "SymptomsPlease/UI/Popups/PopupData")]
     public class PopupData : GameScriptableObject
     {
-        [SerializeField] private BoolVariable m_gamePaused = default;
-
         public Dictionary<string, Popup> InstantiatedPopups = new Dictionary<string, Popup>();
 
-        private HashSet<string> m_openedPopups = new HashSet<string>();
+        private List<string> m_openedPopups = new List<string>();
 
         public Popup GetPopup(string type)
         {
@@ -65,7 +62,14 @@ namespace SymptomsPlease.UI.Popups
 
                 if (InstantiatedPopups[type].PauseGameWhenOpen)
                 {
-                    GamePausedHandler.PauseGame(false);
+                    if (m_openedPopups.Count == 0)
+                    {
+                        GamePausedHandler.PauseGame(false);
+                    }
+                    else
+                    {
+                        GamePausedHandler.PauseGame(InstantiatedPopups[m_openedPopups[m_openedPopups.Count - 1]].PauseGameWhenOpen);
+                    }
                 }
             }
         }

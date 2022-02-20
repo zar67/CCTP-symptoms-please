@@ -5,21 +5,12 @@ namespace SymptomsPlease.Managers
 {
     public class GamePausedHandler : MonoBehaviour
     {
-        [SerializeField] private BoolVariable m_gamePaused = default;
+        public static bool IsGamePaused { get; private set; }
 
-        private void OnEnable()
+        public static void PauseGame(bool paused)
         {
-            m_gamePaused.OnValueChanged.Subscribe(HandleGamePausedChange);
-        }
-
-        private void OnDisable()
-        {
-            m_gamePaused.OnValueChanged.UnSubscribe(HandleGamePausedChange);
-        }
-
-        private void HandleGamePausedChange()
-        {
-            Time.timeScale = m_gamePaused.Value ? 0 : 1;
+            IsGamePaused = paused;
+            Time.timeScale = paused ? 0 : 1;
         }
     }
 }

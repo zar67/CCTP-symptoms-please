@@ -1,4 +1,5 @@
 ﻿using SymptomsPlease.Debugging.Logging;
+using SymptomsPlease.Managers;
 using SymptomsPlease.ScriptableObjects;
 using SymptomsPlease.ScriptableObjects.Variables;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace SymptomsPlease.UI.Popups
 
                 if (InstantiatedPopups[type].PauseGameWhenOpen)
                 {
-                    m_gamePaused.Value = true;
+                    GamePausedHandler.PauseGame(true);
                 }
 
                 return InstantiatedPopups[type];
@@ -62,7 +63,10 @@ namespace SymptomsPlease.UI.Popups
                 InstantiatedPopups[type].PlayCloseAnimation();
                 m_openedPopups.Remove(type);
 
-                m_gamePaused.Value = false;
+                if (InstantiatedPopups[type].PauseGameWhenOpen)
+                {
+                    GamePausedHandler.PauseGame(false);
+                }
             }
         }
 

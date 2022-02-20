@@ -37,7 +37,7 @@ public class DayStartPanel : Panel
             Destroy(child.gameObject);
         }
 
-        foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.ActiveTopics)
+        foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.UnhandledTopics)
         {
             foreach (AfflictionData affliction in m_afflictionDatas.GetAfflictionsWithTopic(topic.Key))
             {
@@ -51,7 +51,6 @@ public class DayStartPanel : Panel
     public override void OnClose()
     {
         base.OnClose();
-
         ModificationsManager.ClearNewTopics();
     }
 }

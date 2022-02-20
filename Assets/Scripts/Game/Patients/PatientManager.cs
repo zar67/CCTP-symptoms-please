@@ -132,6 +132,7 @@ public class PatientManager : MonoBehaviour
     private void HandleCompletePatient(ActionEffectiveness effectiveness, int scoreGained)
     {
         var triggeredEvents = new List<DayEventType>();
+
         if (effectiveness < ActionEffectiveness.BEST)
         {
             CurrentPatient.PlayerStrikes++;
@@ -163,6 +164,8 @@ public class PatientManager : MonoBehaviour
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_CURED);
             triggeredEvents.Add(DayEventType.PATIENT_CURED);
+
+            GameData.Patients.Remove(CurrentPatient.ID);
         }
 
         PatientSeenInDay++;

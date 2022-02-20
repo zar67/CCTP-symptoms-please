@@ -21,7 +21,7 @@ public class SocialMediaModificationsDisplay : MonoBehaviour
             ModificationsManager.ActivateTopic(Topic.PUBLIC_LICE, m_modificationsData.GetDefaultDescriptionForTopic(Topic.PUBLIC_LICE));
         }
 
-        foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.ActiveTopics)
+        foreach (KeyValuePair<Topic, ModificationsManager.ModificationInstanceData> topic in ModificationsManager.UnhandledTopics)
         {
             ModificationDisplay display = Instantiate(m_displayPrefab, m_scrollViewContent);
             display.SetText(topic.Value.Description);

@@ -1104,7 +1104,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1fa72859b6dd4c24babf27136eef85af, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1134,7 +1134,6 @@ MonoBehaviour:
   m_nameText: {fileID: 3325699011646406804}
   m_generateNameButton: {fileID: 83292311925133461}
   m_saveNameButton: {fileID: 2669124417734936919}
-  m_validNamesData: {fileID: 11400000, guid: 1918009666224c9478cca0ad64c92c36, type: 2}
 --- !u!1 &8408168229123953269
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_displayName: HPV
+  m_description: 
   m_topic: 5
-  m_writtenSymptoms:
-  - Genital Warts
-  - Painless Genital Lumps
-  m_iconSymptoms: []
+  m_symptoms:
+  - {fileID: 11400000, guid: eb2932057580c604bad574fa115120f1, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 0
@@ -34,3 +33,4 @@ MonoBehaviour:
     Effectiveness: 2
   - Type: 6
     Effectiveness: 3
+  m_adviceEffectivenessMap: []

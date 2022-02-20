@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SymptomBubble : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class SymptomBubble : MonoBehaviour
     [SerializeField] private CanvasGroup m_canvasGroup = default;
     [SerializeField] private TextMeshProUGUI m_writtenSymptomText = default;
 
-    public void SetSymptomData(string text)
+    public void SetText(string text)
     {
         m_writtenSymptomText.text = text;
     }

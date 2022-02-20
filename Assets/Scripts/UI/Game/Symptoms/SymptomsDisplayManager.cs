@@ -47,9 +47,9 @@ public class SymptomsDisplayManager : MonoBehaviour
     {
         int count = 0;
 
-        foreach (string writtenSymptom in patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length)))
+        foreach (SymptomsData symptom in patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length)))
         {
-            m_symptomBubbles[count].SetSymptomData(writtenSymptom);
+            m_symptomBubbles[count].SetText(symptom.Description);
             count++;
         }
 
@@ -61,7 +61,6 @@ public class SymptomsDisplayManager : MonoBehaviour
                 m_symptomBubbles[i].CanvasGroup.alpha = 0;
 
                 Tween newTween = m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f);
-                newTween.SetDelay((i * m_delayBetweenBubbles) + m_delayBetweenBubbles);
                 m_fadeInTweens.Add(newTween);
             }
             else

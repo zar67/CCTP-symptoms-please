@@ -14,16 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_displayName: Syphilis
+  m_description: 
   m_topic: 7
-  m_writtenSymptoms:
-  - Reddish Brown Rash
-  - Fever
-  - Swollen Lymph Nodes
-  - Sore Throat
-  - Body Aches
-  - Mouth Sores
-  - Fatigue
-  m_iconSymptoms: []
+  m_symptoms:
+  - {fileID: 11400000, guid: e16d638e51aa8d94193fa150a3fa98ab, type: 2}
+  - {fileID: 11400000, guid: a5f2a14397836ae46b288095cb7b9103, type: 2}
+  - {fileID: 11400000, guid: 64d2cb08b89ceeb4e90ad88c6dff3dee, type: 2}
+  - {fileID: 11400000, guid: 33b41a02150402d41af37f90d9bbdac3, type: 2}
+  - {fileID: 11400000, guid: a2584a835572a15428fc52fd1b850e67, type: 2}
+  - {fileID: 11400000, guid: 89adcd99aa76d4b48bdacee085a3df7f, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 0
@@ -39,3 +38,4 @@ MonoBehaviour:
     Effectiveness: 3
   - Type: 6
     Effectiveness: 3
+  m_adviceEffectivenessMap: []

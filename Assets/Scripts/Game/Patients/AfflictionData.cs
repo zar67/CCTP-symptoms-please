@@ -1,4 +1,5 @@
 using SymptomsPlease.ScriptableObjects;
+using SymptomsPlease.Utilities.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ public class AfflictionData : GameScriptableObject
     [SerializeField] private string m_displayName = "";
     [SerializeField] private string m_description = "";
     [SerializeField] private Topic m_topic = default;
-    [SerializeField] private string[] m_symptoms = { };
+    [SerializeField] private SymptomsData[] m_symptoms = { };
 
     [SerializeField] private ActionEffectivenessMap[] m_actionEffectivenessMap = { };
     [SerializeField] private AdviceEffectivnessMap[] m_adviceEffectivenessMap = { };
@@ -45,10 +46,10 @@ public class AfflictionData : GameScriptableObject
 
     public string GetAfflictionSummary()
     {
-        return m_symptoms[Random.Range(0, m_symptoms.Length)];
+        return m_symptoms[Random.Range(0, m_symptoms.Length)].Description;
     }
 
-    public string GetSymptomAtIndex(int index)
+    public SymptomsData GetSymptomAtIndex(int index)
     {
         return m_symptoms[index];
     }
@@ -75,9 +76,10 @@ public class AfflictionData : GameScriptableObject
         }
     }
 
-    public IEnumerable<string> GetRandomSymptoms(PatientData patientData, int numberSymptoms)
+    public IEnumerable<SymptomsData> GetRandomSymptoms(PatientData patientData, int numberSymptoms)
     {
         var workingSymptoms = m_symptoms.ToList();
+        workingSymptoms.Shuffle();
 
         if (numberSymptoms > m_symptoms.Length)
         {
@@ -86,13 +88,35 @@ public class AfflictionData : GameScriptableObject
 
         for (int i = 0; i < numberSymptoms; i++)
         {
-            int randomIndex = Random.Range(0, workingSymptoms.Count);
-            int actualIndex = Array.IndexOf(m_symptoms, workingSymptoms[randomIndex]);
+            SymptomsData newSymptom = null;
 
-            yield return workingSymptoms[randomIndex];
+            foreach(SymptomsData symptom in workingSymptoms)
+            {
+                bool compatible = true;
+                foreach (int id in patientData.SymptomsShown)
+                {
+                    if (!patientData.AfflictionData.GetSymptomAtIndex(id).IsSymptomCompatible(symptom))
+                    {
+                        compatible = false;
+                    }
+                }
 
-            workingSymptoms.RemoveAt(randomIndex);
-            patientData.SymptomsShown.Add(actualIndex);
+                if (compatible)
+                {
+                    newSymptom = symptom;
+                    break;
+                }
+            }
+
+            if (newSymptom == null)
+            {
+                break;
+            }
+
+            yield return newSymptom;
+
+            workingSymptoms.Remove(newSymptom);
+            patientData.SymptomsShown.Add(Array.IndexOf(m_symptoms, newSymptom));
         }
     }
 

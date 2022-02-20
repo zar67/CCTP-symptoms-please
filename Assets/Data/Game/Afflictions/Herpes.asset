@@ -14,19 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_displayName: Herpes
+  m_description: 
   m_topic: 2
-  m_writtenSymptoms:
-  - Genital Tingling
-  - Genital Pain
-  - Genital Itching
-  - Genital Blisters
-  - Mouth Blisters
-  - Burning Blisters
-  - Painful Urination
-  - Swollen Glands
-  - Fever
-  - Body Aches
-  m_iconSymptoms: []
+  m_symptoms:
+  - {fileID: 11400000, guid: 055126b74d66a6647afc78515abff3e6, type: 2}
+  - {fileID: 11400000, guid: 1916e9beaa71b454190fe7344fd3cdcd, type: 2}
+  - {fileID: 11400000, guid: 2b6d21929862d134b9de173db903b4ec, type: 2}
+  - {fileID: 11400000, guid: 39f533aa895562243bcd9ec0e8c7f4df, type: 2}
+  - {fileID: 11400000, guid: a5f2a14397836ae46b288095cb7b9103, type: 2}
+  - {fileID: 11400000, guid: 7fe92afda12cdea42a3109144477f8c9, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 0
@@ -42,3 +38,4 @@ MonoBehaviour:
     Effectiveness: 2
   - Type: 6
     Effectiveness: 3
+  m_adviceEffectivenessMap: []

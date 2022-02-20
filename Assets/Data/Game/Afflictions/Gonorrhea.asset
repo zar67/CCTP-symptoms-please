@@ -14,19 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_developerDescription: 
   m_displayName: Gonorrhea
+  m_description: 
   m_topic: 1
-  m_writtenSymptoms:
-  - White Vaginal Discharge
-  - Green Vaginal Discharge
-  - Yellow Vaginal Discharge
-  - Bloody Vaginal Discharge
-  - Pain Urinating
-  - Bleeding Between Periods
-  - Fever
-  - Sore Throat
-  - Yellow Penile Discharge
-  - Sore Penis Opening
-  m_iconSymptoms: []
+  m_symptoms:
+  - {fileID: 11400000, guid: 7cb793458321a4e4fa3f7e69f87f3c3d, type: 2}
+  - {fileID: 11400000, guid: 39f533aa895562243bcd9ec0e8c7f4df, type: 2}
+  - {fileID: 11400000, guid: a9c51d862ec96974a80dede4af7ded11, type: 2}
+  - {fileID: 11400000, guid: 860d4a9b7aca1cd4c8f89e4625d48e9e, type: 2}
+  - {fileID: 11400000, guid: a5f2a14397836ae46b288095cb7b9103, type: 2}
+  - {fileID: 11400000, guid: 33b41a02150402d41af37f90d9bbdac3, type: 2}
+  - {fileID: 11400000, guid: d9b7c3c84038ff14280525632295aa13, type: 2}
+  - {fileID: 11400000, guid: 80176f826edc36247b9f3d34400b5faf, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 4
@@ -42,3 +40,4 @@ MonoBehaviour:
     Effectiveness: 3
   - Type: 6
     Effectiveness: 3
+  m_adviceEffectivenessMap: []

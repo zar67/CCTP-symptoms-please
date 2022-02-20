@@ -17,10 +17,10 @@ MonoBehaviour:
   m_description: 
   m_topic: 6
   m_symptoms:
-  - Genital Redness
-  - Genital Itching
-  - Lice In Pubic Hair
-  - Eggs In Pubic Hair
+  - {fileID: 11400000, guid: cd03fe3cd95a9f545b36b16ac7075285, type: 2}
+  - {fileID: 11400000, guid: 1916e9beaa71b454190fe7344fd3cdcd, type: 2}
+  - {fileID: 11400000, guid: f31c1de32288d5c4388b4b7099376311, type: 2}
+  - {fileID: 11400000, guid: 88410e5cc22640b4498dd004193779c9, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
     Effectiveness: 0

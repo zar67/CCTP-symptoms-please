@@ -24,7 +24,7 @@ public class STIInformationPopup : Popup
         for (int i = 0; i < affliction.SymptomsCount; i++)
         {
             SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_symptomsHolder);
-            newbubble.SetSymptomData(affliction.GetSymptomAtIndex(i));
+            newbubble.SetText(affliction.GetSymptomAtIndex(i).Description);
         }
 
         foreach (Transform child in m_treatmentsHolder)
@@ -35,13 +35,13 @@ public class STIInformationPopup : Popup
         foreach(ActionType type in affliction.GetTreatments())
         {
             SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
-            newbubble.SetSymptomData(type.ToString());
+            newbubble.SetText(type.ToString());
         }
 
         foreach (string advice in affliction.GetAdviceTreatment())
         {
             SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
-            newbubble.SetSymptomData("Advice: " + advice.ToString());
+            newbubble.SetText("Advice: " + advice.ToString());
         }
     }
 }

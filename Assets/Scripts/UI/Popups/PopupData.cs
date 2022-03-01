@@ -13,6 +13,11 @@ namespace SymptomsPlease.UI.Popups
 
         private List<string> m_openedPopups = new List<string>();
 
+        public void ClearOpenedPopupsList()
+        {
+            m_openedPopups = new List<string>();
+        }
+
         public Popup GetPopup(string type)
         {
             if (InstantiatedPopups.ContainsKey(type))

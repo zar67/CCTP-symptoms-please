@@ -11,6 +11,7 @@ namespace SymptomsPlease.UI.Popups
         private void Awake()
         {
             m_popupData.InstantiatedPopups = new Dictionary<string, Popup>();
+            m_popupData.ClearOpenedPopupsList();
 
             Popup[] popups = m_parentManagerObject.GetComponentsInChildren<Popup>(true);
             foreach (Popup popup in popups)

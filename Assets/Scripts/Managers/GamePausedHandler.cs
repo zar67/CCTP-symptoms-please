@@ -1,5 +1,4 @@
-﻿using SymptomsPlease.ScriptableObjects.Variables;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SymptomsPlease.Managers
 {

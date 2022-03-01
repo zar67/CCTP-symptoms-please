@@ -19,17 +19,20 @@ public class DayTimer : MonoBehaviour
     private const float MINUTE_HAND_END_ROTATION = -360;
 
     private float m_dayTime = 0;
+    private bool m_dayStarted = false;
     private bool m_isDayOver = false;
 
     private void Awake()
     {
+        DayCycle.OnDayStarted += OnDayStarted;
+
         m_minuteHand.eulerAngles = new Vector3(0, 0, 0);
         m_hourHand.eulerAngles = new Vector3(0, 0, 90f);
     }
 
     private void Update()
     {
-        if (!m_isDayOver)
+        if (m_dayStarted && !m_isDayOver)
         {
             m_dayTime += Time.deltaTime;
 
@@ -49,5 +52,10 @@ public class DayTimer : MonoBehaviour
             float minuteRotation = (MINUTE_HAND_START_ROTATION - MINUTE_HAND_END_ROTATION) * (hourProgress / (m_realtimeSecondsPerInGameDay / m_totalHouseInGameDay));
             m_minuteHand.eulerAngles = new Vector3(0, 0, MINUTE_HAND_START_ROTATION - minuteRotation);
         }
+    }
+
+    private void OnDayStarted()
+    {
+        m_dayStarted = true;
     }
 }

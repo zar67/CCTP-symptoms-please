@@ -1163,6 +1163,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8201071207120718626, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
+      propertyPath: m_text
+      value: Painful Urination
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
 --- !u!224 &568911488 stripped
@@ -3498,6 +3502,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8201071207120718626, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
+      propertyPath: m_text
+      value: Headache
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
 --- !u!224 &1409925776 stripped
@@ -3854,6 +3862,10 @@ PrefabInstance:
     - target: {fileID: 5940743840166170667, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201071207120718626, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
+      propertyPath: m_text
+      value: Genital Redness
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
@@ -4239,6 +4251,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8201071207120718626, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
+      propertyPath: m_text
+      value: Gential Pain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
 --- !u!224 &1949175771 stripped
@@ -4510,6 +4526,13 @@ MonoBehaviour:
     State: 0
     ShowLoadingScreen: 1
     SceneInfo: {fileID: 11400000, guid: ea3ab7ae60e01574b93ef657b3b6cdb6, type: 2}
+  m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_ftuePopups:
+  - popup_ftue_symptoms
+  - popup_ftue_actions
+  - popup_ftue_advice
+  - popup_ftue_information
+  - popup_ftue_testing
 --- !u!4 &2106982218
 Transform:
   m_ObjectHideFlags: 0
@@ -4618,6 +4641,10 @@ PrefabInstance:
     - target: {fileID: 5940743840166170667, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201071207120718626, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}
+      propertyPath: m_text
+      value: Fatigue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90e57810f49c7499d644f1304bf83a, type: 3}

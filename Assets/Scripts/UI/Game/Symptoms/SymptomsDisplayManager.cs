@@ -6,14 +6,20 @@ public class SymptomsDisplayManager : MonoBehaviour
 {
     [SerializeField] private SymptomBubble[] m_symptomBubbles = { };
     [SerializeField] private float m_delayBetweenBubbles = 0.9f;
+    [SerializeField] private float m_fadeDuration = 0.5f;
 
     private List<Tween> m_fadeInTweens = new List<Tween>();
 
     private void Awake()
     {
+        DayCycle.OnDayStarted += OnDayStarted;
+    }
+
+    private void OnDayStarted()
+    {
         foreach (SymptomBubble bubble in m_symptomBubbles)
         {
-            bubble.CanvasGroup.alpha = 0;
+            bubble.CanvasGroup.DOFade(0, m_fadeDuration);
         }
     }
 
@@ -39,7 +45,7 @@ public class SymptomsDisplayManager : MonoBehaviour
 
         foreach (SymptomBubble bubble in m_symptomBubbles)
         {
-            bubble.CanvasGroup.DOFade(0, 0.5f);
+            bubble.CanvasGroup.DOFade(0, m_fadeDuration);
         }
     }
 
@@ -60,7 +66,7 @@ public class SymptomsDisplayManager : MonoBehaviour
                 m_symptomBubbles[i].gameObject.SetActive(true);
                 m_symptomBubbles[i].CanvasGroup.alpha = 0;
 
-                Tween newTween = m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, 1.0f);
+                Tween newTween = m_symptomBubbles[i].CanvasGroup.DOFade(1.0f, m_fadeDuration);
                 m_fadeInTweens.Add(newTween);
             }
             else

@@ -57,11 +57,11 @@ public class PatientManager : MonoBehaviour
 
     private void Awake()
     {
+        DayCycle.OnDayStarted += OnDayStarted;
+
         PatientSeenInDay = 0;
         PatientsHelpedInDay = 0;
         PatientsStrikedOutInDay = 0;
-
-        ShowNextPatient();
     }
 
     private void OnEnable()
@@ -76,6 +76,11 @@ public class PatientManager : MonoBehaviour
         ActionObject.OnDraggableOnPatient -= OnPlayerAction;
         AdviceBookPopup.OnAdviceGiven -= OnAdviceGiven;
         DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
+    }
+
+    private void OnDayStarted()
+    {
+        ShowNextPatient();
     }
 
     private void OnAdviceGiven(string advice)

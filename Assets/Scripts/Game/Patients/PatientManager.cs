@@ -1,4 +1,6 @@
 using DG.Tweening;
+using SymptomsPlease.Transitions;
+using SymptomsPlease.UI.Popups;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,6 +52,14 @@ public class PatientManager : MonoBehaviour
     [Header("STI Testing")]
     [SerializeField] private STITestResults m_stiResultsDisplay = default;
 
+    [Header("FTUE")]
+    [SerializeField] private PopupData m_popupData = default;
+    [SerializeField] private string m_actionFTUEPopup = "popup_ftue_actions";
+    [SerializeField] private string m_testKitFTUEPopup = "popup_ftue_testing";
+    [SerializeField] private string m_adviceFTUEPopup = "popup_ftue_advice";
+    [SerializeField] private AfflictionData m_initialAffliction = default;
+    [SerializeField] private AfflictionData m_initialAdviceAffliction = default;
+
     private static int m_currentPatientIndex = default;
 
     private Tween m_moveOutTween = null;
@@ -57,11 +67,11 @@ public class PatientManager : MonoBehaviour
 
     private void Awake()
     {
-        DayCycle.OnDayStarted += OnDayStarted;
-
         PatientSeenInDay = 0;
         PatientsHelpedInDay = 0;
         PatientsStrikedOutInDay = 0;
+
+        TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
     }
 
     private void OnEnable()
@@ -78,9 +88,10 @@ public class PatientManager : MonoBehaviour
         DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
     }
 
-    private void OnDayStarted()
+    private void OnTransitionComplete(TransitionData data)
     {
         ShowNextPatient();
+        TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);
     }
 
     private void OnAdviceGiven(string advice)
@@ -194,6 +205,38 @@ public class PatientManager : MonoBehaviour
 
     private PatientData GenerateNewPatient()
     {
+        if ((!FTUEManager.SeenActionsFTUE && PatientSeenInDay == 0) || (!FTUEManager.SeenTestKitResultsFTUE && PatientSeenInDay == 1))
+        {
+            var ftuePatient = new PatientData()
+            {
+                ID = GameData.Patients.Count,
+                Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
+                PlayerStrikes = 0,
+                AppointmentSummary = m_initialAffliction.GetAfflictionSummary(),
+                AfflictionData = m_initialAffliction,
+                AvatarData = m_avatarData.GenerateRandomData()
+            };
+
+            GameData.Patients.Add(ftuePatient.ID, ftuePatient);
+            return ftuePatient;
+        }
+        
+        if (!FTUEManager.SeenAdviceFTUE && PatientSeenInDay == 2)
+        {
+            var ftuePatient = new PatientData()
+            {
+                ID = GameData.Patients.Count,
+                Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
+                PlayerStrikes = 0,
+                AppointmentSummary = m_initialAdviceAffliction.GetAfflictionSummary(),
+                AfflictionData = m_initialAdviceAffliction,
+                AvatarData = m_avatarData.GenerateRandomData()
+            };
+
+            GameData.Patients.Add(ftuePatient.ID, ftuePatient);
+            return ftuePatient;
+        }
+
         if (DayEventsManager.DayEvents.Count != 0)
         {
             foreach (DayEvent dayEvent in DayEventsManager.DayEvents)
@@ -240,9 +283,27 @@ public class PatientManager : MonoBehaviour
 
         m_patientHolder.anchoredPosition = m_tweenStartPosition;
         m_patientDisplay.ShowAvatar(CurrentPatient.AvatarData);
-        m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration);
+        m_moveInTween = m_patientHolder.DOAnchorPos(m_tweenCenteredPosition, m_tweenAnimationDuration).OnComplete(OnPatientCentered);
 
         OnNextPatient?.Invoke(CurrentPatient);
+    }
+    private void OnPatientCentered()
+    {
+        if (!FTUEManager.SeenActionsFTUE && PatientSeenInDay == 0)
+        {
+            m_popupData.OpenPopup(m_actionFTUEPopup);
+            FTUEManager.SeenActionsFTUE = true;
+        }
+        else if (!FTUEManager.SeenTestingFTUE && PatientSeenInDay == 1)
+        {
+            m_popupData.OpenPopup(m_testKitFTUEPopup);
+            FTUEManager.SeenTestingFTUE = true;
+        }
+        else if (!FTUEManager.SeenAdviceFTUE && PatientSeenInDay == 2)
+        {
+            m_popupData.OpenPopup(m_adviceFTUEPopup);
+            FTUEManager.SeenAdviceFTUE = true;
+        }
     }
 
     private void CancelTweens(bool setPosition = true)

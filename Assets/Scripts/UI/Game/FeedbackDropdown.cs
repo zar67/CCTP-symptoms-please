@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SymptomsPlease.UI.Popups;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class FeedbackDropdown : MonoBehaviour
     [Header("Data References")]
     [SerializeField] private ActionEffectivenessData m_actionEffectivnessData = default;
     [SerializeField] private ActionsData m_actionsData = default;
+
+    [Header("FTUE")]
+    [SerializeField] private PopupData m_popupData = default;
+    [SerializeField] private string m_actionResultsFTUEPopup = "popup_ftue_actions_result";
+    [SerializeField] private string m_infoFTUEPopup = "popup_ftue_information";
 
     private void OnEnable()
     {
@@ -61,17 +67,23 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void OnTweenInComplete()
     {
-        StartCoroutine(DelayTweenOut());
+        if (!FTUEManager.SeenActionsResultsFTUE && PatientManager.PatientSeenInDay == 1)
+        {
+            m_popupData.OpenPopup(m_actionResultsFTUEPopup).OnCloseEvent += OnFTUEActionResultsClosed;
+            FTUEManager.SeenActionsResultsFTUE = true;
+        }
+
+        m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenOutDuration).SetDelay(m_displayDuration);
     }
 
-    private IEnumerator DelayTweenOut()
+    private void OnFTUEActionResultsClosed()
     {
-        yield return new WaitForSeconds(m_displayDuration);
-        TweenOut();
-    }
+        if (!FTUEManager.SeenInformationFTUE)
+        {
+            m_popupData.OpenPopup(m_infoFTUEPopup);
+            FTUEManager.SeenInformationFTUE = true;
+        }
 
-    private void TweenOut()
-    {
-        m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenOutDuration);
+        m_popupData.GetPopup(m_actionResultsFTUEPopup).OnCloseEvent -= OnFTUEActionResultsClosed;
     }
 }

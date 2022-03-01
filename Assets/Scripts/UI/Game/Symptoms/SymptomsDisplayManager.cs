@@ -1,25 +1,25 @@
 using DG.Tweening;
+using SymptomsPlease.UI.Popups;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SymptomsDisplayManager : MonoBehaviour
 {
     [SerializeField] private SymptomBubble[] m_symptomBubbles = { };
-    [SerializeField] private float m_delayBetweenBubbles = 0.9f;
     [SerializeField] private float m_fadeDuration = 0.5f;
+
+    [Header("FTUE")]
+    [SerializeField] private PopupData m_popupData = default;
+    [SerializeField] private string m_symptomsFTUEPopup = "popup_ftue_symptoms";
 
     private List<Tween> m_fadeInTweens = new List<Tween>();
 
     private void Awake()
     {
-        DayCycle.OnDayStarted += OnDayStarted;
-    }
-
-    private void OnDayStarted()
-    {
         foreach (SymptomBubble bubble in m_symptomBubbles)
         {
-            bubble.CanvasGroup.DOFade(0, m_fadeDuration);
+            bubble.CanvasGroup.alpha = 0;
         }
     }
 
@@ -74,5 +74,18 @@ public class SymptomsDisplayManager : MonoBehaviour
                 m_symptomBubbles[i].gameObject.SetActive(false);
             }
         }
+
+        if (!FTUEManager.SeenSymptomsFTUE && PatientManager.PatientSeenInDay == 0)
+        {
+            StartCoroutine(ShowSymptomsFTUE());
+            FTUEManager.SeenSymptomsFTUE = true;
+        }
+    }
+
+    private IEnumerator ShowSymptomsFTUE()
+    {
+        yield return new WaitForSeconds(m_fadeDuration);
+
+        m_popupData.OpenPopup(m_symptomsFTUEPopup);
     }
 }

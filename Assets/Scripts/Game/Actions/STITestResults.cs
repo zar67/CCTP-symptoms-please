@@ -20,9 +20,12 @@ public class STITestResults : MonoBehaviour
     [SerializeField] private float m_tweenInDuration = 0.4f;
     [SerializeField] private float m_tweenOutDuration = 0.4f;
 
+    [Header("FTUE")]
+    [SerializeField] private string m_testKitResultsFTUEPopup = "popup_ftue_test_kit_result";
+
     public void ShowResults(PatientData data)
     {
-        m_backgroundTransform.DOAnchorPos(m_shownPosition, m_tweenInDuration);
+        m_backgroundTransform.DOAnchorPos(m_shownPosition, m_tweenInDuration).OnComplete(OnResultsShown);
     }
 
     private void OnEnable()
@@ -40,5 +43,14 @@ public class STITestResults : MonoBehaviour
     {
         m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenOutDuration);
         m_popupData.OpenPopup(m_stiResultsPopupID);
+    }
+
+    private void OnResultsShown()
+    {
+        if (!FTUEManager.SeenTestKitResultsFTUE && PatientManager.PatientSeenInDay == 1)
+        {
+            m_popupData.OpenPopup(m_testKitResultsFTUEPopup);
+            FTUEManager.SeenTestKitResultsFTUE = true;
+        }
     }
 }

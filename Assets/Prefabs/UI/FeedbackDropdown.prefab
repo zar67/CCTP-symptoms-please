@@ -610,6 +610,8 @@ MonoBehaviour:
   m_tweenOutDuration: 0.3
   m_actionEffectivnessData: {fileID: 11400000, guid: bfc7319c65164a044ae208ee5f064810, type: 2}
   m_actionsData: {fileID: 11400000, guid: 43e1b59a1fcb88e4e90a22714d1ea32f, type: 2}
+  m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_actionResultsFTUEPopup: popup_ftue_actions_result
 --- !u!1 &6463130551047206812
 GameObject:
   m_ObjectHideFlags: 0

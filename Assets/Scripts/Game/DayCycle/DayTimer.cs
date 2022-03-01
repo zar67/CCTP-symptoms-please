@@ -1,3 +1,5 @@
+using SymptomsPlease.Transitions;
+using SymptomsPlease.UI.Popups;
 using System;
 using UnityEngine;
 
@@ -12,27 +14,31 @@ public class DayTimer : MonoBehaviour
     [SerializeField] private Transform m_minuteHand = default;
     [SerializeField] private Transform m_hourHand = default;
 
-    private const float HOUR_HAND_START_ROTATION = 90f;
-    private const float HOUR_HAND_END_ROTATION = -150f;
+    [Header("Hand Rotation Values")]
+    [SerializeField] private float m_hourHandStartRotation = 0;
+    [SerializeField] private float m_hourHandEndRotation = -360;
 
-    private const float MINUTE_HAND_START_ROTATION = 0;
-    private const float MINUTE_HAND_END_ROTATION = -360;
+    [SerializeField] private float m_minuteHandStartRotation = 0;
+    [SerializeField] private float m_minuteHandEndRotation = -360;
+
+    [Header("FTUE")]
+    [SerializeField] private PopupData m_popupData = default;
+    [SerializeField] private string m_timerFTUEPopup = "popup_ftue_timer";
 
     private float m_dayTime = 0;
-    private bool m_dayStarted = false;
     private bool m_isDayOver = false;
 
     private void Awake()
     {
-        DayCycle.OnDayStarted += OnDayStarted;
-
         m_minuteHand.eulerAngles = new Vector3(0, 0, 0);
-        m_hourHand.eulerAngles = new Vector3(0, 0, 90f);
+        m_hourHand.eulerAngles = new Vector3(0, 0, 0);
+
+        TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
     }
 
     private void Update()
     {
-        if (m_dayStarted && !m_isDayOver)
+        if (!m_isDayOver)
         {
             m_dayTime += Time.deltaTime;
 
@@ -44,18 +50,24 @@ public class DayTimer : MonoBehaviour
                 m_isDayOver = true;
             }
 
-            float hourRotation = (HOUR_HAND_START_ROTATION - HOUR_HAND_END_ROTATION) * dayProgress;
-            m_hourHand.eulerAngles = new Vector3(0, 0, HOUR_HAND_START_ROTATION - hourRotation);
+            float hourRotation = (m_hourHandStartRotation - m_hourHandEndRotation) * dayProgress;
+            m_hourHand.eulerAngles = new Vector3(0, 0, m_hourHandStartRotation - hourRotation);
 
             float hourProgress = m_dayTime % (m_realtimeSecondsPerInGameDay / m_totalHouseInGameDay);
 
-            float minuteRotation = (MINUTE_HAND_START_ROTATION - MINUTE_HAND_END_ROTATION) * (hourProgress / (m_realtimeSecondsPerInGameDay / m_totalHouseInGameDay));
-            m_minuteHand.eulerAngles = new Vector3(0, 0, MINUTE_HAND_START_ROTATION - minuteRotation);
+            float minuteRotation = (m_minuteHandStartRotation - m_minuteHandEndRotation) * (hourProgress / (m_realtimeSecondsPerInGameDay / m_totalHouseInGameDay));
+            m_minuteHand.eulerAngles = new Vector3(0, 0, m_minuteHandStartRotation - minuteRotation);
         }
     }
 
-    private void OnDayStarted()
+    private void OnTransitionComplete(TransitionData data)
     {
-        m_dayStarted = true;
+        if (!FTUEManager.SeenTimerFTUE)
+        {
+            m_popupData.OpenPopup(m_timerFTUEPopup);
+            FTUEManager.SeenTimerFTUE = true;
+        }
+
+        TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);
     }
 }

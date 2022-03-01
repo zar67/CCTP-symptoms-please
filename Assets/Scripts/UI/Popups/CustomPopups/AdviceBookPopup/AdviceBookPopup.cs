@@ -22,18 +22,23 @@ public class AdviceBookPopup : Popup
     private void OnNextPatient(PatientData patient)
     {
         m_usedAdviceSlips = new List<string>();
+        UpdateDisplay(patient);
     }
 
     public override void OnOpenBegin()
     {
-        PatientData currentPatient = PatientManager.CurrentPatient;
+        base.OnOpenBegin();
+        UpdateDisplay(PatientManager.CurrentPatient);
+    }
 
+    private void UpdateDisplay(PatientData data)
+    {
         foreach (Transform child in m_adviceHolder)
         {
             Destroy(child.gameObject);
         }
 
-        foreach (AfflictionData.AdviceEffectivnessMap advice in currentPatient.AfflictionData.Advice)
+        foreach (AfflictionData.AdviceEffectivnessMap advice in data.AfflictionData.Advice)
         {
             if (!m_usedAdviceSlips.Contains(advice.Advice))
             {

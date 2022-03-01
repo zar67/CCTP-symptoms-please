@@ -14,21 +14,35 @@ public class PatientDisplayPopup : Popup
     [SerializeField] private SymptomBubble m_symptomsBubblePrefab = default;
     [SerializeField] private Transform m_symptomsParent = default;
 
+    private void Start()
+    {
+        PatientManager.OnNextPatient += OnNextPatient;
+    }
+
     public override void OnOpenBegin()
     {
         base.OnOpenBegin();
+        UpdateDisplay(PatientManager.CurrentPatient);
+    }
 
-        m_avatarDisplay.UpdateSprites(PatientManager.CurrentPatient.AvatarData);
-        m_nameText.text = PatientManager.CurrentPatient.Name;
-        m_appointmentsText.text = PatientManager.CurrentPatient.PlayerStrikes.ToString();
+    private void OnNextPatient(PatientData data)
+    {
+        UpdateDisplay(data);
+    }
+
+    private void UpdateDisplay(PatientData data)
+    {
+        m_avatarDisplay.UpdateSprites(data.AvatarData);
+        m_nameText.text = data.Name;
+        m_appointmentsText.text = data.PlayerStrikes.ToString();
 
         m_previousActionsText.text = "";
-        foreach (ActionType action in PatientManager.CurrentPatient.PreviousActions)
+        foreach (ActionType action in data.PreviousActions)
         {
             m_previousActionsText.text += action.ToString() + ", ";
         }
 
-        DisplayKnownSymptoms(PatientManager.CurrentPatient);
+        DisplayKnownSymptoms(data);
     }
 
     private void DisplayKnownSymptoms(PatientData data)

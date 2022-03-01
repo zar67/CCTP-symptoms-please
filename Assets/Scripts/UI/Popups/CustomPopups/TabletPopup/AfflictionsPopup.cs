@@ -2,7 +2,7 @@ using SymptomsPlease.UI.Popups;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabletPopup : Popup
+public class AfflictionsPopup : Popup
 {
     [Header("Popup References")]
     [SerializeField] private string m_stiInformationPopupName = "";

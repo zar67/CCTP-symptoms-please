@@ -129,6 +129,8 @@ public class AvatarAttribute : MonoBehaviour
 
     private void OnNegativeButton()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
+
         m_currentIndex--;
 
         if (m_currentIndex < 0)
@@ -144,10 +146,13 @@ public class AvatarAttribute : MonoBehaviour
         }
 
         UpdateDisplay();
+        OnValueChanged?.Invoke(m_attributeID, m_currentIndex);
     }
 
     private void OnPositiveButton()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
+
         m_currentIndex++;
 
         if (m_currentIndex > m_attributeValues.Length - 1)
@@ -161,8 +166,6 @@ public class AvatarAttribute : MonoBehaviour
                 m_currentIndex = m_attributeValues.Length - 1;
             }
         }
-
-        m_currentIndex %= m_attributeValues.Length;
 
         UpdateDisplay();
         OnValueChanged?.Invoke(m_attributeID, m_currentIndex);

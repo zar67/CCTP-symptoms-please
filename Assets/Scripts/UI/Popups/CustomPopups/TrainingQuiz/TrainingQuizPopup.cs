@@ -96,6 +96,7 @@ public class TrainingQuizPopup : Popup
 
     private void OnQuestionAnswered()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
         bool answerCorrect = m_currentQuestionData.QuestionData.IsCorrect(m_currentAnswer);
 
         m_resultsText.text = answerCorrect ? "Correct!" : "Oops! That's not right.";
@@ -118,6 +119,7 @@ public class TrainingQuizPopup : Popup
 
     private void OnNextQuestion()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
         m_currentQuestionData = m_trainingQuizQuestions.GetRandomQuestion();
 
         m_questionText.text = m_currentQuestionData.QuestionData.Question;

@@ -31,6 +31,8 @@ public class NameChangePopup : Popup
 
     private void OnGenerateName()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
+
         List<string> availableNames = GameData.AvailablePlayerNames;
         int randomIndex = Random.Range(0, availableNames.Count);
         string newName = availableNames[randomIndex];
@@ -48,6 +50,8 @@ public class NameChangePopup : Popup
 
     private void OnSaveName()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
+
         if (m_previouslyGeneratedName != "")
         {
             FirebaseDatabaseManager.UnresevePlayerName(GameData.PlayerName);

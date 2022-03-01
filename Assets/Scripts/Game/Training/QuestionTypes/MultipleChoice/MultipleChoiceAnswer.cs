@@ -52,6 +52,7 @@ public class MultipleChoiceAnswer : MonoBehaviour
 
     private void OnAnswerClicked()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
         OnSelected?.Invoke(this);
     }
 }

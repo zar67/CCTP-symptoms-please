@@ -31,6 +31,7 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_startingPosition = m_dragRectTransform.position;
+        AudioManager.Instance.Play(EAudioClipType.PICK_UP);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,6 +59,7 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        AudioManager.Instance.Play(EAudioClipType.DROP);
         var corners = new Vector3[4];
         m_deskRectTransform.GetWorldCorners(corners);
         var deskWorldRect = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);

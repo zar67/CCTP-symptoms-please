@@ -40,6 +40,11 @@ public class FeedbackDropdown : MonoBehaviour
         if (data.ActionEffectiveness > ActionEffectiveness.GOOD)
         {
             m_afflictionText.text = data.PatientData.AfflictionData.DisplayName;
+            AudioManager.Instance.Play(EAudioClipType.CURED);
+        }
+        if (data.ActionEffectiveness < ActionEffectiveness.NEUTRAL)
+        {
+            AudioManager.Instance.Play(EAudioClipType.INCORRECT);
         }
         else
         {

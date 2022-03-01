@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 876767926478130780}
   - component: {fileID: 8911240895141697181}
   - component: {fileID: 533199361008967225}
+  - component: {fileID: 499003215638645184}
   m_Layer: 5
   m_Name: ProfileButton
   m_TagString: Untagged
@@ -325,6 +326,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 499003215638645184}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &533199361008967225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +358,19 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_profile
     AddToPrevious: 1
+--- !u!114 &499003215638645184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487902236436052321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &3229850561541544283
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +874,7 @@ GameObject:
   - component: {fileID: 6829428936489423637}
   - component: {fileID: 5781917414032961006}
   - component: {fileID: 6908369562759681494}
+  - component: {fileID: 7784716917347570874}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -970,6 +997,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7784716917347570874}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6908369562759681494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,6 +1029,19 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_day_start
     AddToPrevious: 1
+--- !u!114 &7784716917347570874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891532579409264778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &6014275232451778942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1169,7 @@ GameObject:
   - component: {fileID: 53067620051833993}
   - component: {fileID: 6646613555140409588}
   - component: {fileID: 1360385041256206566}
+  - component: {fileID: 7070781272657663703}
   m_Layer: 5
   m_Name: OnlineButton
   m_TagString: Untagged
@@ -1239,6 +1292,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7070781272657663703}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1360385041256206566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,6 +1324,19 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_online
     AddToPrevious: 1
+--- !u!114 &7070781272657663703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6295768156518699640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &6873510243406117935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1407,7 @@ GameObject:
   - component: {fileID: 6977926021102346613}
   - component: {fileID: 1677297193972837612}
   - component: {fileID: 1231036859435800542}
+  - component: {fileID: 5458122749931877488}
   m_Layer: 5
   m_Name: TrainingButton
   m_TagString: Untagged
@@ -1451,6 +1530,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5458122749931877488}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1231036859435800542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,6 +1562,19 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_training
     AddToPrevious: 1
+--- !u!114 &5458122749931877488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7584841962537588153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &7845536607979457374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,6 +1970,7 @@ GameObject:
   - component: {fileID: 7471974306128425621}
   - component: {fileID: 7538170267309895825}
   - component: {fileID: 6151036777720755171}
+  - component: {fileID: 400979325939966371}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -1988,6 +2093,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 400979325939966371}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6151036777720755171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,3 +2125,16 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_settings
     AddToPrevious: 1
+--- !u!114 &400979325939966371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211987368304004101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0

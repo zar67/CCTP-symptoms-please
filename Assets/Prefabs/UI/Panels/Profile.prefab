@@ -1451,6 +1451,7 @@ GameObject:
   - component: {fileID: 6864433784365175233}
   - component: {fileID: 6711802093512574201}
   - component: {fileID: 6039147745491566227}
+  - component: {fileID: 4104378759740173484}
   m_Layer: 5
   m_Name: EditNameButton
   m_TagString: Untagged
@@ -1573,6 +1574,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4104378759740173484}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6039147745491566227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1588,6 +1601,19 @@ MonoBehaviour:
   m_popupdata: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
   m_popupType: popup_name_change
   m_open: 1
+--- !u!114 &4104378759740173484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275753161770537761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &6357730307784624550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1761,7 @@ GameObject:
   - component: {fileID: 648182479772164644}
   - component: {fileID: 4134131672034527935}
   - component: {fileID: 799880320910286289}
+  - component: {fileID: 6418481884973609095}
   m_Layer: 5
   m_Name: EditAvatarButton
   m_TagString: Untagged
@@ -1857,6 +1884,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6418481884973609095}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &799880320910286289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1872,6 +1911,19 @@ MonoBehaviour:
   m_popupdata: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
   m_popupType: popup_customise_avatar
   m_open: 1
+--- !u!114 &6418481884973609095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533232452369703760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &6760759242055643553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1937,7 @@ GameObject:
   - component: {fileID: 6545981782000820282}
   - component: {fileID: 447680220660427373}
   - component: {fileID: 7489242572984192372}
+  - component: {fileID: 330461719495282873}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2007,6 +2060,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 330461719495282873}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7489242572984192372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2022,6 +2087,19 @@ MonoBehaviour:
   m_panelManager: {fileID: 11400000, guid: 8b6a78e56c1fa58439eea20ec68b2215, type: 2}
   m_showLoadingScreen: 0
   m_transitionEffect: transition_fade
+--- !u!114 &330461719495282873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760759242055643553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &6836268376096528810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,6 +3019,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
+--- !u!224 &559703287530313283 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5659350912175307915, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
+  m_PrefabInstance: {fileID: 5282294134191762120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1715732493329352724 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6810000209135592156, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
@@ -2952,8 +3035,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a5288eb33631543a353b181e7ab438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &559703287530313283 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5659350912175307915, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
-  m_PrefabInstance: {fileID: 5282294134191762120}
-  m_PrefabAsset: {fileID: 0}

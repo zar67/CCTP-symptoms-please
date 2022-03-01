@@ -80,6 +80,7 @@ namespace SymptomsPlease.UI.Popups
             PlayOpenAnimation();
 
             m_closeButton.onClick.AddListener(() => m_popupData.ClosePopup(Type));
+            m_closeButton.onClick.AddListener(() => AudioManager.Instance.Play(EAudioClipType.CLICK));
 
             if (!m_canClose)
             {

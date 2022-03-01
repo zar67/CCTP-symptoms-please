@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2066664733627472163}
   - component: {fileID: 7265128395746786651}
   - component: {fileID: 3610135761222281021}
+  - component: {fileID: 8131236253082820678}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -135,6 +136,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8131236253082820678}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3610135761222281021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +163,19 @@ MonoBehaviour:
   m_panelManager: {fileID: 11400000, guid: 8b6a78e56c1fa58439eea20ec68b2215, type: 2}
   m_showLoadingScreen: 0
   m_transitionEffect: transition_fade
+--- !u!114 &8131236253082820678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105891733474058965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &493570285824386663
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +957,7 @@ GameObject:
   - component: {fileID: 2484240612403387470}
   - component: {fileID: 3575242812157679554}
   - component: {fileID: 2465000959794906475}
+  - component: {fileID: 5270380689981875506}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -1053,6 +1080,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5270380689981875506}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2465000959794906475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,6 +1112,19 @@ MonoBehaviour:
     ShowLoadingScreen: 0
     PanelID: panel_credits
     AddToPrevious: 1
+--- !u!114 &5270380689981875506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783668305308116961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &3954809280890548527
 GameObject:
   m_ObjectHideFlags: 0

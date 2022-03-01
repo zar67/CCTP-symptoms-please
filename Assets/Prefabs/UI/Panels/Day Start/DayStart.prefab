@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 8467589473958022463}
   - component: {fileID: 2520998901620641962}
   - component: {fileID: 4972693116176828491}
+  - component: {fileID: 890742694294930285}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -276,6 +277,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 890742694294930285}
+        m_TargetAssemblyTypeName: PlayAudioComponent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4972693116176828491}
         m_TargetAssemblyTypeName: SymptomsPlease.Transitions.Scenes.SceneTransitionComponent,
           Assembly-CSharp
@@ -308,6 +321,19 @@ MonoBehaviour:
     State: 0
     ShowLoadingScreen: 0
     SceneInfo: {fileID: 11400000, guid: 2476af95ac06db548a14ae7f08d13ed0, type: 2}
+--- !u!114 &890742694294930285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267150844802872107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad14c1bc73b77e4da8a8c82bf0e34f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: 0
 --- !u!1 &1418766827379051117
 GameObject:
   m_ObjectHideFlags: 0

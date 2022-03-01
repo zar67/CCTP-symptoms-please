@@ -108,6 +108,7 @@ public class CustomiseAvatarPopup : Popup
 
     private void OnSaveAvatar()
     {
+        AudioManager.Instance.Play(EAudioClipType.CLICK);
         SaveSystem.Save();
         m_popupData.ClosePopup(m_popupType);
     }

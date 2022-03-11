@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class AdviceBookPopup : Popup
 {
-    public static event Action<string> OnAdviceGiven;
+    public static event Action<string> OnAdviceSelected;
 
     [Header("Advice Popup Variables")]
     [SerializeField] private Transform m_adviceHolder = default;
-    [SerializeField] private AdviceObject m_adviceObject = default;
+    [SerializeField] private AdviceBookObject m_adviceObject = default;
 
     private List<string> m_usedAdviceSlips = new List<string>();
 
@@ -42,10 +42,10 @@ public class AdviceBookPopup : Popup
         {
             if (!m_usedAdviceSlips.Contains(advice.Advice))
             {
-                AdviceObject newAdvice = Instantiate(m_adviceObject, m_adviceHolder);
+                AdviceBookObject newAdvice = Instantiate(m_adviceObject, m_adviceHolder);
                 newAdvice.SelectButton.onClick.AddListener(() =>
                 {
-                    OnAdviceGiven?.Invoke(advice.Advice);
+                    OnAdviceSelected?.Invoke(advice.Advice);
                     m_popupData.ClosePopup(m_popupType);
                     m_usedAdviceSlips.Add(advice.Advice);
                 });

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AdviceObject : MonoBehaviour
+public class AdviceBookObject : MonoBehaviour
 {
     public Button SelectButton => m_selectButton;
 

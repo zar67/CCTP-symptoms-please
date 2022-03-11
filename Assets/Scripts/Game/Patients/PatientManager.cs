@@ -77,14 +77,12 @@ public class PatientManager : MonoBehaviour
     private void OnEnable()
     {
         ActionObject.OnDraggableOnPatient += OnPlayerAction;
-        AdviceBookPopup.OnAdviceGiven += OnAdviceGiven;
         DayTimer.OnDayTimeComplete += OnDayTimerComplete;
     }
 
     private void OnDisable()
     {
         ActionObject.OnDraggableOnPatient -= OnPlayerAction;
-        AdviceBookPopup.OnAdviceGiven -= OnAdviceGiven;
         DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
     }
 
@@ -94,25 +92,21 @@ public class PatientManager : MonoBehaviour
         TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);
     }
 
-    private void OnAdviceGiven(string advice)
-    {
-        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetAdviceEffectiveness(advice);
-        int effectivenessIntValue = (int)effectiveness;
-
-        int scoreGained = (int)((effectivenessIntValue - 2) * m_scoreMultiplier);
-        DayCycle.IncreaseScore(scoreGained);
-
-        if (effectiveness == ActionEffectiveness.BEST)
-        {
-            HandleCompletePatient(effectiveness, scoreGained);
-        }
-    }
-
     private void OnPlayerAction(ActionObject action)
     {
         CurrentAction = action.ActionType;
 
-        ActionEffectiveness effectiveness = CurrentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
+        ActionEffectiveness effectiveness = ActionEffectiveness.WORST;
+        if (action.ActionType == ActionType.GIVE_ADVICE)
+        {
+            var advice = action as AdviceObject;
+            effectiveness = CurrentPatient.AfflictionData.GetAdviceEffectiveness(advice.Advice);
+        }
+        else
+        {
+            effectiveness = CurrentPatient.AfflictionData.GetActionEffectiveness(action.ActionType);
+        }
+
         int effectivenessIntValue = (int)effectiveness;
 
         CurrentPatient.PreviousActions.Add(action.ActionType);

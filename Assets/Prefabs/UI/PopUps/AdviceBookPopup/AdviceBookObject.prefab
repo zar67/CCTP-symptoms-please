@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6112834473348647636}
   - component: {fileID: 2214717589970840143}
   - component: {fileID: 5663887323439051987}
-  - component: {fileID: 1526373319813802514}
   m_Layer: 5
   m_Name: SelectButton
   m_TagString: Untagged
@@ -121,35 +120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2214717589970840143}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1526373319813802514}
-        m_TargetAssemblyTypeName: SymptomsPlease.UI.Popups.PopupTriggerComponent,
-          Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1526373319813802514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438773094526240150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a63c3c7a7aed98f429510bb196f5cc6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_popupdata: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
-  m_popupType: popup_tablet
-  m_open: 0
+      m_Calls: []
 --- !u!1 &3035589310274718656
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +303,7 @@ GameObject:
   - component: {fileID: 8318016988286228924}
   - component: {fileID: 5589695663831456129}
   m_Layer: 5
-  m_Name: AdviceObject
+  m_Name: AdviceBookObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

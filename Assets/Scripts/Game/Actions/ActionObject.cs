@@ -13,22 +13,22 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public ActionType ActionType => m_actionType;
 
     [Header("Action Values")]
-    [SerializeField] private ActionType m_actionType = default;
-    [SerializeField] private bool m_disableIfNotNeeded = true;
+    [SerializeField] protected ActionType m_actionType = default;
+    [SerializeField] protected bool m_disableIfNotNeeded = true;
 
     [Header("Display References")]
-    [SerializeField] private Canvas m_canvas = default;
-    [SerializeField] private RectTransform m_canvasRectTransform = default;
-    [SerializeField] private RectTransform m_deskRectTransform = default;
-    [SerializeField] private RectTransform m_dragRectTransform = default;
-    [SerializeField] private Image m_clickableImage = default;
+    [SerializeField] protected Canvas m_canvas = default;
+    [SerializeField] protected RectTransform m_canvasRectTransform = default;
+    [SerializeField] protected RectTransform m_deskRectTransform = default;
+    [SerializeField] protected RectTransform m_dragRectTransform = default;
+    [SerializeField] protected Image m_clickableImage = default;
 
     [Header("Affliction References")]
-    [SerializeField] private AllAfflictionDatas m_allAfflictionDatas = default;
+    [SerializeField] protected AllAfflictionDatas m_allAfflictionDatas = default;
 
     private Vector2 m_startingPosition;
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
         m_startingPosition = m_dragRectTransform.position;
         AudioManager.Instance.Play(EAudioClipType.PICK_UP);

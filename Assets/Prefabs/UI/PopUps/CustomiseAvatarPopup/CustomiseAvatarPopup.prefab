@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5746683960754093890}
   - component: {fileID: 3871261404109954670}
   - component: {fileID: 4478558961283116281}
+  - component: {fileID: 5053822972167870362}
+  - component: {fileID: 3113776952678381217}
   m_Layer: 5
   m_Name: OverlayEffect
   m_TagString: Untagged
@@ -75,6 +77,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5053822972167870362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291020501251166336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4478558961283116281}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3113776952678381217}
+        m_TargetAssemblyTypeName: SymptomsPlease.UI.Popups.PopupTriggerComponent,
+          Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3113776952678381217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291020501251166336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63c3c7a7aed98f429510bb196f5cc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_popupdata: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_popupType: popup_customise_avatar
+  m_open: 0
 --- !u!1 &2209299841358684520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,6 +3764,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c0c09bd041f9a146bd011d53dd5cdff, type: 3}
+--- !u!224 &2627661385840416600 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8014344304071391139, guid: 4c0c09bd041f9a146bd011d53dd5cdff, type: 3}
+  m_PrefabInstance: {fileID: 5426837228907061499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7478644829875577863 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3208397385631089916, guid: 4c0c09bd041f9a146bd011d53dd5cdff, type: 3}
@@ -3701,11 +3780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479344b5eb10d5440b9d6a2ab5d474e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2627661385840416600 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8014344304071391139, guid: 4c0c09bd041f9a146bd011d53dd5cdff, type: 3}
-  m_PrefabInstance: {fileID: 5426837228907061499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7709416750001284652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3807,11 +3881,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
---- !u!224 &2627661384987974311 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5659350912175307915, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
-  m_PrefabInstance: {fileID: 7709416750001284652}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3782076646175606000 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6810000209135592156, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
@@ -3823,6 +3892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a5288eb33631543a353b181e7ab438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2627661384987974311 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5659350912175307915, guid: 99696b61be83f38498a6c3342aac46a9, type: 3}
+  m_PrefabInstance: {fileID: 7709416750001284652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8082375308681231354
 PrefabInstance:
   m_ObjectHideFlags: 0

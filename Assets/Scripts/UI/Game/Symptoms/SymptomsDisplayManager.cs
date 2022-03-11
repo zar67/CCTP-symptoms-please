@@ -8,9 +8,10 @@ public class SymptomsDisplayManager : MonoBehaviour
 {
     [SerializeField] private SymptomBubble[] m_symptomBubbles = { };
     [SerializeField] private float m_fadeDuration = 0.5f;
+    [SerializeField] private PopupData m_popupData = default;
+    [SerializeField] private string m_symptomInformationPopup = "popup_symptom_information";
 
     [Header("FTUE")]
-    [SerializeField] private PopupData m_popupData = default;
     [SerializeField] private string m_symptomsFTUEPopup = "popup_ftue_symptoms";
 
     private List<Tween> m_fadeInTweens = new List<Tween>();
@@ -27,12 +28,14 @@ public class SymptomsDisplayManager : MonoBehaviour
     {
         PatientManager.OnPatientSeen += OnPatientSeen;
         PatientManager.OnNextPatient += OnNextPatient;
+        SymptomBubble.OnSymptomSelected += OnSymptomSelected;
     }
 
     private void OnDisable()
     {
         PatientManager.OnPatientSeen -= OnPatientSeen;
         PatientManager.OnNextPatient -= OnNextPatient;
+        SymptomBubble.OnSymptomSelected -= OnSymptomSelected;
     }
 
     private void OnPatientSeen(PatientManager.PatientSeenData data)
@@ -55,7 +58,7 @@ public class SymptomsDisplayManager : MonoBehaviour
 
         foreach (SymptomsData symptom in patient.AfflictionData.GetRandomSymptoms(patient, Random.Range(1, m_symptomBubbles.Length)))
         {
-            m_symptomBubbles[count].SetText(symptom.Description);
+            m_symptomBubbles[count].SetData(symptom);
             count++;
         }
 
@@ -80,6 +83,11 @@ public class SymptomsDisplayManager : MonoBehaviour
             StartCoroutine(ShowSymptomsFTUE());
             FTUEManager.SeenSymptomsFTUE = true;
         }
+    }
+
+    private void OnSymptomSelected(SymptomsData data)
+    {
+        m_popupData.OpenPopup(m_symptomInformationPopup);
     }
 
     private IEnumerator ShowSymptomsFTUE()

@@ -55,7 +55,7 @@ public class PatientDisplayPopup : Popup
         foreach (int symptom in data.SymptomsShown)
         {
             SymptomBubble newBubble = Instantiate(m_symptomsBubblePrefab, m_symptomsParent);
-            newBubble.SetText(data.AfflictionData.GetSymptomAtIndex(symptom).Description);
+            newBubble.SetData(data.AfflictionData.GetSymptomAtIndex(symptom));
         }
     }
 }

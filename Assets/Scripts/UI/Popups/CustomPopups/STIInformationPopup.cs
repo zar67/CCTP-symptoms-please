@@ -9,7 +9,7 @@ public class STIInformationPopup : Popup
     [SerializeField] private TextMeshProUGUI m_descriptionText = default;
     [SerializeField] private Transform m_symptomsHolder = default;
     [SerializeField] private Transform m_treatmentsHolder = default;
-    [SerializeField] private SymptomBubble m_symptomBubblePrefab = default;
+    [SerializeField] private InformationHolder m_informationHolderPrefab = default;
 
     public void UpdateDisplay(AfflictionData affliction)
     {
@@ -23,7 +23,7 @@ public class STIInformationPopup : Popup
 
         for (int i = 0; i < affliction.SymptomsCount; i++)
         {
-            SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_symptomsHolder);
+            InformationHolder newbubble = Instantiate(m_informationHolderPrefab, m_symptomsHolder);
             newbubble.SetText(affliction.GetSymptomAtIndex(i).Description);
         }
 
@@ -34,13 +34,13 @@ public class STIInformationPopup : Popup
 
         foreach(ActionType type in affliction.GetTreatments())
         {
-            SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
+            InformationHolder newbubble = Instantiate(m_informationHolderPrefab, m_treatmentsHolder);
             newbubble.SetText(type.ToString());
         }
 
         foreach (string advice in affliction.GetAdviceTreatment())
         {
-            SymptomBubble newbubble = Instantiate(m_symptomBubblePrefab, m_treatmentsHolder);
+            InformationHolder newbubble = Instantiate(m_informationHolderPrefab, m_treatmentsHolder);
             newbubble.SetText("Advice: " + advice.ToString());
         }
     }

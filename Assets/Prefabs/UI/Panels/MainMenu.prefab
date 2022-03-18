@@ -380,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3229850561541544282}
-  - component: {fileID: 3229850561541544281}
+  - component: {fileID: 5844273836708197869}
   - component: {fileID: 3948612164035989221}
   m_Layer: 5
   m_Name: MainMenu
@@ -415,7 +415,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3229850561541544281
+--- !u!114 &5844273836708197869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3229850561541544283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e45ebce39a93dcf4bb11b3ca7accbc46, type: 3}
+  m_Script: {fileID: 11500000, guid: 10f2a9fe0c09b6c4e84e02969210549e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelID: panel_main_menu
@@ -435,6 +435,8 @@ MonoBehaviour:
   - {fileID: 8911240895141697181}
   - {fileID: 6646613555140409588}
   - {fileID: 1677297193972837612}
+  m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_ftueDisclaimerPopup: popup_ftue_disclaimer
 --- !u!114 &3948612164035989221
 MonoBehaviour:
   m_ObjectHideFlags: 0

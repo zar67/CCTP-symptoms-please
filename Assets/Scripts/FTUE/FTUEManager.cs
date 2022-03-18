@@ -1,5 +1,19 @@
 using SymptomsPlease.SaveSystem;
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum EFTUEType
+{
+    DISCLAIMER_POPUP,
+    SEEN_TIMER_FTUE,
+    SEEN_SYMPTOMS_FTUE,
+    SEEN_ACTIONS_FTUE,
+    SEEN_ACTIONS_RESULTS_FTUE,
+    SEEN_INFORMATION_FTUE,
+    SEEN_TESTING_FTUE,
+    SEEN_TEST_KIT_RESULTS_FTUE,
+    SEEN_ADVICE_FTUE
+}
 
 public class FTUEManager : MonoBehaviour, ISaveable
 {
@@ -7,38 +21,27 @@ public class FTUEManager : MonoBehaviour, ISaveable
 
     public struct SaveData
     {
-        public bool SeenTimerFTUE;
-        public bool SeenSymptomsFTUE;
-        public bool SeenActionsFTUE;
-        public bool SeenActionsResultsFTUE;
-        public bool SeenInformationFTUE;
-        public bool SeenTestingFTUE;
-        public bool SeenTestKitResultsFTUE;
-        public bool SeenAdviceFTUE;
+        public HashSet<EFTUEType> HandledFTUEs;
     }
 
-    public static bool SeenTimerFTUE { get; set; } = false;
-    public static bool SeenSymptomsFTUE { get; set; } = false;
-    public static bool SeenActionsFTUE { get; set; } = false;
-    public static bool SeenActionsResultsFTUE { get; set; } = false;
-    public static bool SeenInformationFTUE { get; set; } = false;
-    public static bool SeenTestingFTUE { get; set; } = false;
-    public static bool SeenTestKitResultsFTUE { get; set; } = false;
-    public static bool SeenAdviceFTUE { get; set; } = false;
+    private static HashSet<EFTUEType> m_handledFTUEs = new HashSet<EFTUEType>();
+
+    public static void HandleFTUEType(EFTUEType type)
+    {
+        m_handledFTUEs.Add(type);
+    }
+
+    public static bool IsFTUETypeHandled(EFTUEType type)
+    {
+        return m_handledFTUEs.Contains(type);
+    }
 
     public void LoadFromSaveFile(SaveFile file)
     {
         if (file is GameSave)
         {
             SaveData data = file.LoadObject<SaveData>(SAVE_IDENTIFIER);
-            SeenTimerFTUE = data.SeenTimerFTUE;
-            SeenSymptomsFTUE = data.SeenSymptomsFTUE;
-            SeenActionsFTUE = data.SeenActionsFTUE;
-            SeenActionsResultsFTUE = data.SeenActionsResultsFTUE;
-            SeenInformationFTUE = data.SeenInformationFTUE;
-            SeenTestingFTUE = data.SeenTestingFTUE;
-            SeenTestKitResultsFTUE = data.SeenTestKitResultsFTUE;
-            SeenAdviceFTUE = data.SeenAdviceFTUE;
+            m_handledFTUEs = data.HandledFTUEs;
         }   
     }
 
@@ -48,14 +51,7 @@ public class FTUEManager : MonoBehaviour, ISaveable
         {
             file.SaveObject(SAVE_IDENTIFIER, new SaveData()
             {
-                SeenTimerFTUE = SeenTimerFTUE,
-                SeenSymptomsFTUE = SeenSymptomsFTUE,
-                SeenActionsFTUE = SeenActionsFTUE,
-                SeenActionsResultsFTUE = SeenActionsResultsFTUE,
-                SeenInformationFTUE = SeenInformationFTUE,
-                SeenTestingFTUE = SeenTestingFTUE,
-                SeenTestKitResultsFTUE = SeenTestKitResultsFTUE,
-                SeenAdviceFTUE = SeenAdviceFTUE
+                HandledFTUEs = m_handledFTUEs
             });
         }
     }
@@ -68,16 +64,23 @@ public class FTUEManager : MonoBehaviour, ISaveable
             {
                 file.SaveObject(SAVE_IDENTIFIER, new SaveData()
                 {
-                    SeenTimerFTUE = false,
-                    SeenSymptomsFTUE = false,
-                    SeenActionsFTUE = false,
-                    SeenActionsResultsFTUE = false,
-                    SeenInformationFTUE = false,
-                    SeenTestingFTUE = false,
-                    SeenTestKitResultsFTUE = false,
-                    SeenAdviceFTUE = false
+                    HandledFTUEs = new HashSet<EFTUEType>()
                 });
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        SaveFile.OnCreated.Subscribe(SaveFileCreation);
+        SaveFile.OnLoad.Subscribe(LoadFromSaveFile);
+        SaveFile.OnSave.Subscribe(PopulateToSaveFile);
+    }
+
+    private void OnDisable()
+    {
+        SaveFile.OnCreated.UnSubscribe(SaveFileCreation);
+        SaveFile.OnLoad.UnSubscribe(LoadFromSaveFile);
+        SaveFile.OnSave.UnSubscribe(PopulateToSaveFile);
     }
 }

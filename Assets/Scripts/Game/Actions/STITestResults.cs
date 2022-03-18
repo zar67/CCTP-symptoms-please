@@ -47,10 +47,10 @@ public class STITestResults : MonoBehaviour
 
     private void OnResultsShown()
     {
-        if (!FTUEManager.SeenTestKitResultsFTUE && PatientManager.PatientSeenInDay == 1)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_TEST_KIT_RESULTS_FTUE) && PatientManager.PatientSeenInDay == 1)
         {
             m_popupData.OpenPopup(m_testKitResultsFTUEPopup);
-            FTUEManager.SeenTestKitResultsFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_TEST_KIT_RESULTS_FTUE);
         }
     }
 }

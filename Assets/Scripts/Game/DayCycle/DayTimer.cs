@@ -62,10 +62,10 @@ public class DayTimer : MonoBehaviour
 
     private void OnTransitionComplete(TransitionData data)
     {
-        if (!FTUEManager.SeenTimerFTUE)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_TIMER_FTUE))
         {
             m_popupData.OpenPopup(m_timerFTUEPopup);
-            FTUEManager.SeenTimerFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_TIMER_FTUE);
         }
 
         TransitionManager.OnTransitionComplete.UnSubscribe(OnTransitionComplete);

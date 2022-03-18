@@ -78,10 +78,10 @@ public class SymptomsDisplayManager : MonoBehaviour
             }
         }
 
-        if (!FTUEManager.SeenSymptomsFTUE && PatientManager.PatientSeenInDay == 0)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_SYMPTOMS_FTUE) && PatientManager.PatientSeenInDay == 0)
         {
             StartCoroutine(ShowSymptomsFTUE());
-            FTUEManager.SeenSymptomsFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_SYMPTOMS_FTUE);
         }
     }
 

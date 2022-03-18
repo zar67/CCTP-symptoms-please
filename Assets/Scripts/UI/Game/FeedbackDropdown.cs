@@ -67,10 +67,10 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void OnTweenInComplete()
     {
-        if (!FTUEManager.SeenActionsResultsFTUE && PatientManager.PatientSeenInDay == 1)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ACTIONS_RESULTS_FTUE) && PatientManager.PatientSeenInDay == 1)
         {
             m_popupData.OpenPopup(m_actionResultsFTUEPopup).OnCloseEvent += OnFTUEActionResultsClosed;
-            FTUEManager.SeenActionsResultsFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_ACTIONS_RESULTS_FTUE);
         }
 
         m_backgroundTransform.DOAnchorPos(m_hiddenPosition, m_tweenOutDuration).SetDelay(m_displayDuration);
@@ -78,10 +78,10 @@ public class FeedbackDropdown : MonoBehaviour
 
     private void OnFTUEActionResultsClosed()
     {
-        if (!FTUEManager.SeenInformationFTUE)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_INFORMATION_FTUE))
         {
             m_popupData.OpenPopup(m_infoFTUEPopup);
-            FTUEManager.SeenInformationFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_INFORMATION_FTUE);
         }
 
         m_popupData.GetPopup(m_actionResultsFTUEPopup).OnCloseEvent -= OnFTUEActionResultsClosed;

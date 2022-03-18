@@ -199,7 +199,8 @@ public class PatientManager : MonoBehaviour
 
     private PatientData GenerateNewPatient()
     {
-        if ((!FTUEManager.SeenActionsFTUE && PatientSeenInDay == 0) || (!FTUEManager.SeenTestKitResultsFTUE && PatientSeenInDay == 1))
+        if ((!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ACTIONS_FTUE) && PatientSeenInDay == 0) || 
+            (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_TEST_KIT_RESULTS_FTUE) && PatientSeenInDay == 1))
         {
             var ftuePatient = new PatientData()
             {
@@ -215,7 +216,7 @@ public class PatientManager : MonoBehaviour
             return ftuePatient;
         }
         
-        if (!FTUEManager.SeenAdviceFTUE && PatientSeenInDay == 2)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ADVICE_FTUE) && PatientSeenInDay == 2)
         {
             var ftuePatient = new PatientData()
             {
@@ -283,20 +284,20 @@ public class PatientManager : MonoBehaviour
     }
     private void OnPatientCentered()
     {
-        if (!FTUEManager.SeenActionsFTUE && PatientSeenInDay == 0)
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ACTIONS_FTUE) && PatientSeenInDay == 0)
         {
             m_popupData.OpenPopup(m_actionFTUEPopup);
-            FTUEManager.SeenActionsFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_ACTIONS_FTUE);
         }
-        else if (!FTUEManager.SeenTestingFTUE && PatientSeenInDay == 1)
+        else if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_TESTING_FTUE) && PatientSeenInDay == 1)
         {
             m_popupData.OpenPopup(m_testKitFTUEPopup);
-            FTUEManager.SeenTestingFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_TESTING_FTUE);
         }
-        else if (!FTUEManager.SeenAdviceFTUE && PatientSeenInDay == 2)
+        else if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ADVICE_FTUE) && PatientSeenInDay == 2)
         {
             m_popupData.OpenPopup(m_adviceFTUEPopup);
-            FTUEManager.SeenAdviceFTUE = true;
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_ADVICE_FTUE);
         }
     }
 

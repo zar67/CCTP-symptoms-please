@@ -1,6 +1,8 @@
 using Firebase.Auth;
 using Firebase.Database;
+using SymptomsPlease.SaveSystem;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class FirebaseDatabaseManager : MonoBehaviour
@@ -9,6 +11,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     public const string ONLINE_PERMISSION_REFERENCE = "online_enabled";
     public const string USERNAME_REFERENCE = "username";
     public const string SCORE_REFERENCE = "score";
+    public const string SAVE_DATA_REFERENCE = "save_data";
 
     public const string VALID_NAMES_REFERENCE = "valid_names";
 
@@ -104,5 +107,25 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 Debug.LogError("Failed to update score in database");
             }
         });
+    }
+
+    public static void UploadSaveData()
+    {
+        SaveSystem.Save();
+        string currentProfile = SaveSystem.CurrentProfile.CurrentSave.FilePath;
+        string allData = File.ReadAllText(currentProfile);
+
+        FirebaseDatabase.DefaultInstance.RootReference.Child(USERS_REFERENCE).Child(FirebaseAuthManager.CurrentUser.UserId).Child(SAVE_DATA_REFERENCE).SetValueAsync(allData).ContinueWith(task =>
+        {
+            if (task.Exception != null)
+            {
+                Debug.LogError("Failed to update score in database");
+            }
+        });
+    }
+
+    private void OnApplicationQuit()
+    {
+        UploadSaveData();
     }
 }

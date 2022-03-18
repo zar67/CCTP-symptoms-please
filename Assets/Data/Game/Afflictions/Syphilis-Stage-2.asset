@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced2a40ef1bb9734dbeed2ba5496f2a0, type: 3}
+  m_Name: Syphilis-Stage-2
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  m_displayName: Syphilis
+  m_description: 
+  m_topic: 7
+  m_symptoms:
+  - {fileID: 11400000, guid: e16d638e51aa8d94193fa150a3fa98ab, type: 2}
+  - {fileID: 11400000, guid: a5f2a14397836ae46b288095cb7b9103, type: 2}
+  - {fileID: 11400000, guid: 64d2cb08b89ceeb4e90ad88c6dff3dee, type: 2}
+  - {fileID: 11400000, guid: 33b41a02150402d41af37f90d9bbdac3, type: 2}
+  - {fileID: 11400000, guid: a2584a835572a15428fc52fd1b850e67, type: 2}
+  - {fileID: 11400000, guid: 89adcd99aa76d4b48bdacee085a3df7f, type: 2}
+  m_actionEffectivenessMap:
+  - Type: 0
+    Effectiveness: 0
+  - Type: 1
+    Effectiveness: 4
+  - Type: 2
+    Effectiveness: 0
+  - Type: 3
+    Effectiveness: 3
+  - Type: 4
+    Effectiveness: 3
+  - Type: 5
+    Effectiveness: 3
+  - Type: 6
+    Effectiveness: 3
+  m_adviceEffectivenessMap: []

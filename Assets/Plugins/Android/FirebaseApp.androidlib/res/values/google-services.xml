@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://symptoms-please-c41cd-default-rtdb.europe-west1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">909507828988</string>
+  <string name="google_storage_bucket" translatable="false">symptoms-please-c41cd.appspot.com</string>
+  <string name="project_id" translatable="false">symptoms-please-c41cd</string>
+  <string name="google_api_key" translatable="false">AIzaSyBqb9Q9_lrKxTkA1T_voiOQXDYsQEANih4</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBqb9Q9_lrKxTkA1T_voiOQXDYsQEANih4</string>
+  <string name="google_app_id" translatable="false">1:909507828988:android:cb4e8359b89c6f0eaacb79</string>
+  <string name="default_android_client_id" translatable="false">909507828988-eo12e3g7pksv923b749judohln6bgrdg.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">909507828988-1i41r5i51vfv5fv221cdro8pnbr7sehm.apps.googleusercontent.com</string>
+</resources>

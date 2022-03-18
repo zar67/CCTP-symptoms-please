@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1adec4766dad84045bd2d4765a1952c1, type: 3}
+  m_Name: ActionsData
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  m_effectivnessIcons:
+  - Action: 0
+    DisplayName: Antibiotics
+  - Action: 1
+    DisplayName: Injection
+  - Action: 2
+    DisplayName: Repeat Prescription
+  - Action: 3
+    DisplayName: Blood Test Kit
+  - Action: 4
+    DisplayName: Swab Test Kit
+  - Action: 5
+    DisplayName: Urine Test Kit
+  - Action: 6
+    DisplayName: Condoms
+  - Action: 7
+    DisplayName: Advice

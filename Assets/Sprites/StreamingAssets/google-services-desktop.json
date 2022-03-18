@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "909507828988",
+    "firebase_url": "https://symptoms-please-c41cd-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "symptoms-please-c41cd",
+    "storage_bucket": "symptoms-please-c41cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909507828988:android:cb4e8359b89c6f0eaacb79",
+        "android_client_info": {
+          "package_name": "com.RowbotGames.SymptomsPlease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909507828988-eo12e3g7pksv923b749judohln6bgrdg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.RowbotGames.SymptomsPlease",
+            "certificate_hash": "8815b121fdafbf68d1c5c613c3b09d442baedc3e"
+          }
+        },
+        {
+          "client_id": "909507828988-1i41r5i51vfv5fv221cdro8pnbr7sehm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqb9Q9_lrKxTkA1T_voiOQXDYsQEANih4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909507828988-1i41r5i51vfv5fv221cdro8pnbr7sehm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "909507828988-s2g814ol6b9vn0jbvalrcdm5209ts9d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.RowbotGames.SymptomsPlease"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

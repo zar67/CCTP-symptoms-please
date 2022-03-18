@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32928268ac36fd04ea8f8b7eb4372369, type: 3}
+  m_Name: ModificationData
+  m_EditorClassIdentifier: 
+  m_developerDescription: 
+  m_topicDatas:
+  - Topic: 0
+    DefaultDescription: When I am away from home, I sometimes get love sick... Well
+      they call it chlamydia
+    ActivationDays: []
+    DeactivationDays: []
+  - Topic: 6
+    DefaultDescription: 'Me: I got a very nasty reaction to the pubic lice lotion
+      you prescribed me Dr: Where exactly did you apply it? Me: On the train... Dr:
+      ...'
+    ActivationDays: []
+    DeactivationDays: []
+  - Topic: 1
+    DefaultDescription: When I first heard of gonorrhea... I thought it was an anti-diarrhea
+      medicine.
+    ActivationDays:
+    - DayNumber: 3
+      Description: When I first heard of gonorrhea... I thought it was an anti-diarrhea
+        medicine.
+    DeactivationDays: []
+  - Topic: 2
+    DefaultDescription: What does a Pokemon call a herpes outbreak? Bulbasores
+    ActivationDays:
+    - DayNumber: 6
+      Description: There's a fine line between heroes and herpes.
+    DeactivationDays: []
+  - Topic: 3
+    DefaultDescription: 'The other day my doctor told me I have hiv Me: are you positive?
+      Doctor: no you are'
+    ActivationDays:
+    - DayNumber: 10
+      Description: 'The other day my doctor told me I have hiv Me: are you positive?
+        Doctor: no you are'
+    DeactivationDays: []
+  - Topic: 4
+    DefaultDescription: Did anyone see the news story about the HIV virus mutating
+      to affect citrus plants? It can cause lemon AIDS.
+    ActivationDays:
+    - DayNumber: 15
+      Description: Did anyone see the news story about the HIV virus mutating to
+        affect citrus plants? It can cause lemon AIDS.
+    DeactivationDays: []
+  - Topic: 5
+    DefaultDescription: I thought getting the vaccine meant I wouldn't get HPV...
+    ActivationDays:
+    - DayNumber: 20
+      Description: I thought getting the vaccine meant I wouldn't get HPV...
+    DeactivationDays: []
+  - Topic: 7
+    DefaultDescription: "There\u2019s no I in Team..... .....but there\u2019s two
+      in syphilis"
+    ActivationDays:
+    - DayNumber: 30
+      Description: "There\u2019s no I in Team..... .....but there\u2019s two in syphilis"
+    DeactivationDays: []

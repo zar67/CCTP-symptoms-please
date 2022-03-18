@@ -36,7 +36,7 @@ public class ActionObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector2 mousePosition = eventData.position;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(m_canvasRectTransform, mousePosition, m_canvas.worldCamera, out Vector2 finalPosition);
         finalPosition = m_canvas.transform.TransformPoint(finalPosition);
 

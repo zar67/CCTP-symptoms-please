@@ -85,10 +85,9 @@ namespace SymptomsPlease.SaveSystem
             }
 
             Profiles = new List<GameProfile>();
-            string[] profiles = Directory.GetDirectories(PROFILES_DIRECTORY);
-            foreach (string profileDir in profiles)
+            foreach (string profileDir in Directory.EnumerateDirectories(PROFILES_DIRECTORY))
             {
-                string name = profileDir.Split('\\')[1];
+                string name = Path.GetFileName(profileDir);
                 string[] saves = Directory.GetFiles(profileDir + "/saves");
 
                 var profile = new GameProfile(profileDir, name, SaveFilesAsText);
@@ -119,16 +118,6 @@ namespace SymptomsPlease.SaveSystem
                 CurrentProfile.CreateNewSave(SaveFilesAsText);
                 CurrentProfile.SetCurrentSave(0);
             }
-        }
-
-        private void Awake()
-        {
-            //LoadSaveDataFromFiles();
-            //Load();
-
-            //Debug.Log(GameData.AvailablePlayerNames.Count);
-
-            //FirebaseAuthManager.LoginUser(GameData.PlayerName);
         }
     }
 }

@@ -23,12 +23,15 @@ namespace SymptomsPlease.SaveSystem
             CurrentProfile = Profiles[index];
         }
 
-        public static void Save()
+        public static void Save(bool upload = true)
         {
             CurrentProfile.Save();
             CurrentProfile.CurrentSave.Save();
 
-            FirebaseDatabaseManager.UploadSaveData();
+            if (upload)
+            {
+                FirebaseDatabaseManager.UploadSaveData();
+            }
         }
 
         public static void Load()

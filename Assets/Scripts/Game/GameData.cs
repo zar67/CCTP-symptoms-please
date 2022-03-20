@@ -272,7 +272,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
 
             int randomIndex = Random.Range(0, AvailablePlayerNames.Count);
             m_playerName = AvailablePlayerNames[randomIndex];
-            SaveSystem.Save();
+            SaveSystem.Save(false);
             FirebaseDatabaseManager.ReservePlayerName(m_playerName);
         }
 

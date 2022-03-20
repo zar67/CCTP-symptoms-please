@@ -12,7 +12,8 @@ public enum EFTUEType
     SEEN_INFORMATION_FTUE,
     SEEN_TESTING_FTUE,
     SEEN_TEST_KIT_RESULTS_FTUE,
-    SEEN_ADVICE_FTUE
+    SEEN_ADVICE_FTUE,
+    SEEN_ADVICE_SLIP_FTUE
 }
 
 public class FTUEManager : MonoBehaviour, ISaveable

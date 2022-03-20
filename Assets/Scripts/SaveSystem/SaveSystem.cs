@@ -27,6 +27,8 @@ namespace SymptomsPlease.SaveSystem
         {
             CurrentProfile.Save();
             CurrentProfile.CurrentSave.Save();
+
+            FirebaseDatabaseManager.UploadSaveData();
         }
 
         public static void Load()

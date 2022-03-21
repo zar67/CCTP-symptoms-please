@@ -22,6 +22,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
         public int DayNumber;
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
+        public int NextPatientID;
         public AvatarIndexData AvatarData;
         public PatientData[] PatientsData;
     }
@@ -64,6 +65,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
     public static int DayNumber;
     public static int TotalPatientsHelped;
     public static int TotalPatientsSeen;
+    public static int NextPatientID;
 
     public static AvatarIndexData AvatarData;
 
@@ -104,6 +106,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                     DayNumber = 1,
                     TotalPatientsHelped = 0,
                     TotalPatientsSeen = 0,
+                    NextPatientID = 0,
                     AvatarData = new AvatarIndexData(),
                     PatientsData = new PatientData[] { }
                 });
@@ -121,6 +124,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
             DayNumber = data.DayNumber;
             TotalPatientsHelped = data.TotalPatientsHelped;
             TotalPatientsSeen = data.TotalPatientsSeen;
+            NextPatientID = data.NextPatientID;
             AvatarData = data.AvatarData;
 
             Patients = new Dictionary<int, PatientData>();
@@ -142,6 +146,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                 DayNumber = DayNumber,
                 TotalPatientsHelped = TotalPatientsHelped,
                 TotalPatientsSeen = TotalPatientsSeen,
+                NextPatientID = NextPatientID,
                 AvatarData = AvatarData,
                 PatientsData = Patients.Values.ToArray()
             });
@@ -267,7 +272,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
 
             int randomIndex = Random.Range(0, AvailablePlayerNames.Count);
             m_playerName = AvailablePlayerNames[randomIndex];
-            SaveSystem.Save();
+            SaveSystem.Save(false);
             FirebaseDatabaseManager.ReservePlayerName(m_playerName);
         }
 

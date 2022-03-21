@@ -99,6 +99,8 @@ MonoBehaviour:
   m_hiddenPosition: {x: 150, y: -150, z: 0}
   m_shownPosition: {x: 150, y: 100, z: 0}
   m_tweenInDuration: 0.2
+  m_popupData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_adviceSlipFTUEPopup: popup_ftue_advice_slip
 --- !u!1 &134678747025592431
 GameObject:
   m_ObjectHideFlags: 0

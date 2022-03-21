@@ -111,7 +111,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
     public static void UploadSaveData()
     {
-        SaveSystem.Save();
         string currentProfile = SaveSystem.CurrentProfile.CurrentSave.FilePath;
         string allData = File.ReadAllText(currentProfile);
 
@@ -122,10 +121,5 @@ public class FirebaseDatabaseManager : MonoBehaviour
                 Debug.LogError("Failed to update score in database");
             }
         });
-    }
-
-    private void OnApplicationQuit()
-    {
-        UploadSaveData();
     }
 }

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SymptomsPlease.SaveSystem;
 using SymptomsPlease.Transitions;
 using SymptomsPlease.UI.Popups;
 using System;
@@ -258,7 +259,7 @@ public class PatientManager : MonoBehaviour
 
         var newPatient = new PatientData()
         {
-            ID = GameData.Patients.Count,
+            ID = GameData.NextPatientID,
             Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
             PlayerStrikes = 0,
             AppointmentSummary = m_afflictionDatas.GetAfflictionAtIndex(index).GetAfflictionSummary(),
@@ -267,6 +268,9 @@ public class PatientManager : MonoBehaviour
         };
 
         GameData.Patients.Add(newPatient.ID, newPatient);
+        GameData.NextPatientID++;
+
+        SaveSystem.Save();
 
         return newPatient;
     }

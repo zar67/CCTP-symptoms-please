@@ -10,19 +10,21 @@ public class AdviceObject : ActionObject
         get; private set;
     }
 
-    [SerializeField] private Vector3 m_hiddenPosition;
-    [SerializeField] private Vector3 m_shownPosition;
-    [SerializeField] private float m_tweenInDuration = 0.2f;
-
     [Header("FTUE")]
     [SerializeField] private PopupData m_popupData = default;
     [SerializeField] private string m_adviceSlipFTUEPopup = "popup_ftue_advice_slip";
 
     private Tween m_moveInTween = null;
 
-    public void SetAdvice(string advice)
+    public void ShowAdvice(string advice)
     {
         Advice = advice;
+
+        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ADVICE_SLIP_FTUE))
+        {
+            m_popupData.OpenPopup(m_adviceSlipFTUEPopup);
+            FTUEManager.HandleFTUEType(EFTUEType.SEEN_ADVICE_SLIP_FTUE);
+        }
     }
 
     public void SetReferences(Canvas canvas, RectTransform canvasRectTransform, RectTransform deskRectTransform)
@@ -41,32 +43,5 @@ public class AdviceObject : ActionObject
             m_moveInTween.Kill();
             m_moveInTween = null;
         }
-    }
-
-    private void Awake()
-    {
-        if (!FTUEManager.IsFTUETypeHandled(EFTUEType.SEEN_ADVICE_SLIP_FTUE))
-        {
-            m_popupData.OpenPopup(m_adviceSlipFTUEPopup);
-            FTUEManager.HandleFTUEType(EFTUEType.SEEN_ADVICE_SLIP_FTUE);
-        }
-    }
-
-    private void OnEnable()
-    {
-        OnDraggableOnPatient += OnAdviceGiven;
-
-        m_dragRectTransform.position = m_hiddenPosition;
-        m_moveInTween = m_dragRectTransform.DOMove(m_shownPosition, m_tweenInDuration);
-    }
-
-    private void OnDisable()
-    {
-        OnDraggableOnPatient -= OnAdviceGiven;
-    }
-
-    private void OnAdviceGiven(ActionObject advice)
-    {
-        Destroy(gameObject);
     }
 }

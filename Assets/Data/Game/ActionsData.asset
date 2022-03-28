@@ -17,16 +17,18 @@ MonoBehaviour:
   - Action: 0
     DisplayName: Antibiotics
   - Action: 1
-    DisplayName: Injection
+    DisplayName: Antibiotics
   - Action: 2
-    DisplayName: Repeat Prescription
+    DisplayName: Injection
   - Action: 3
-    DisplayName: Blood Test Kit
+    DisplayName: Repeat Prescription
   - Action: 4
-    DisplayName: Swab Test Kit
+    DisplayName: Blood Test Kit
   - Action: 5
-    DisplayName: Urine Test Kit
+    DisplayName: Swab Test Kit
   - Action: 6
-    DisplayName: Condoms
+    DisplayName: Urine Test Kit
   - Action: 7
+    DisplayName: Condoms
+  - Action: 8
     DisplayName: Advice

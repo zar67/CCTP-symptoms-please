@@ -29,12 +29,14 @@ MonoBehaviour:
   - Type: 2
     Effectiveness: 0
   - Type: 3
-    Effectiveness: 2
+    Effectiveness: 0
   - Type: 4
     Effectiveness: 2
   - Type: 5
     Effectiveness: 2
   - Type: 6
+    Effectiveness: 2
+  - Type: 7
     Effectiveness: 3
   m_adviceEffectivenessMap:
   - Advice: Get some special shampoo

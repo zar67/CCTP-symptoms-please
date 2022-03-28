@@ -28,12 +28,12 @@ public class DayCycle : MonoBehaviour
 
     private void OnEnable()
     {
-        DayTimer.OnDayTimeComplete += OnDayTimerComplete;
+        DayTimer.OnDayTimerComplete += OnDayTimerComplete;
     }
 
     private void OnDisable()
     {
-        DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
+        DayTimer.OnDayTimerComplete -= OnDayTimerComplete;
     }
 
     private void OnDayTimerComplete()

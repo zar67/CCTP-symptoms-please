@@ -32,7 +32,7 @@ MonoBehaviour:
   - Type: 0
     Effectiveness: 4
   - Type: 1
-    Effectiveness: 0
+    Effectiveness: 1
   - Type: 2
     Effectiveness: 0
   - Type: 3
@@ -42,6 +42,8 @@ MonoBehaviour:
   - Type: 5
     Effectiveness: 3
   - Type: 6
+    Effectiveness: 3
+  - Type: 7
     Effectiveness: 3
   m_adviceEffectivenessMap:
   - Advice: Practice safe sex

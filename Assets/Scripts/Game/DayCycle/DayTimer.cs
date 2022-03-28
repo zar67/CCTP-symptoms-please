@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class DayTimer : MonoBehaviour
 {
-    public static event Action OnDayTimeComplete;
+    public static event Action OnDayTimerComplete;
+
+    public static bool IsTimerComplete => m_isTimerComplete;
 
     [SerializeField] private float m_realtimeSecondsPerInGameDay = 120;
     [SerializeField] private float m_totalHouseInGameDay = 8;
@@ -26,7 +28,7 @@ public class DayTimer : MonoBehaviour
     [SerializeField] private string m_timerFTUEPopup = "popup_ftue_timer";
 
     private float m_dayTime = 0;
-    private bool m_isDayOver = false;
+    private static bool m_isTimerComplete = false;
 
     private void Awake()
     {
@@ -38,7 +40,7 @@ public class DayTimer : MonoBehaviour
 
     private void Update()
     {
-        if (!m_isDayOver)
+        if (!m_isTimerComplete)
         {
             m_dayTime += Time.deltaTime;
 
@@ -46,8 +48,8 @@ public class DayTimer : MonoBehaviour
 
             if (dayProgress >= 1)
             {
-                OnDayTimeComplete?.Invoke();
-                m_isDayOver = true;
+                OnDayTimerComplete?.Invoke();
+                m_isTimerComplete = true;
             }
 
             float hourRotation = (m_hourHandStartRotation - m_hourHandEndRotation) * dayProgress;

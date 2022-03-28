@@ -39,5 +39,5 @@ MonoBehaviour:
   - Type: 7
     Effectiveness: 3
   m_adviceEffectivenessMap:
-  - Advice: Get some special shampoo
+  - Advice: Buy some de-licing shampoo from the pharmacy.
     Effectiveness: 4

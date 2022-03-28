@@ -1,5 +1,4 @@
 using DG.Tweening;
-using SymptomsPlease.SaveSystem;
 using SymptomsPlease.Transitions;
 using SymptomsPlease.UI.Popups;
 using System;
@@ -44,7 +43,6 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private Vector3 m_tweenEndPosition = new Vector3(3.0f, 0.0f, 0.0f);
 
     [Header("Patients")]
-    [SerializeField] private int m_basePatientsInDay = 10;
     [SerializeField] private float m_delayBetweenPatients = 0.5f;
     [SerializeField] private AvatarData m_avatarData = default;
     [SerializeField] private AllAfflictionDatas m_afflictionDatas = default;
@@ -78,13 +76,13 @@ public class PatientManager : MonoBehaviour
     private void OnEnable()
     {
         ActionObject.OnDraggableOnPatient += OnPlayerAction;
-        DayTimer.OnDayTimeComplete += OnDayTimerComplete;
+        DayTimer.OnDayTimerComplete += OnDayTimerComplete;
     }
 
     private void OnDisable()
     {
         ActionObject.OnDraggableOnPatient -= OnPlayerAction;
-        DayTimer.OnDayTimeComplete -= OnDayTimerComplete;
+        DayTimer.OnDayTimerComplete -= OnDayTimerComplete;
     }
 
     private void OnTransitionComplete(TransitionData data)
@@ -95,6 +93,11 @@ public class PatientManager : MonoBehaviour
 
     private void OnPlayerAction(ActionObject action)
     {
+        if (DayTimer.IsTimerComplete)
+        {
+            return;
+        }
+
         CurrentAction = action.ActionType;
 
         ActionEffectiveness effectiveness = ActionEffectiveness.WORST;
@@ -270,13 +273,16 @@ public class PatientManager : MonoBehaviour
         GameData.Patients.Add(newPatient.ID, newPatient);
         GameData.NextPatientID++;
 
-        SaveSystem.Save();
-
         return newPatient;
     }
 
     private void ShowNextPatient()
     {
+        if (DayTimer.IsTimerComplete)
+        {
+            return;
+        }
+
         CancelTweens();
         CurrentPatient = GenerateNewPatient();
 
@@ -337,11 +343,6 @@ public class PatientManager : MonoBehaviour
 
     private IEnumerator DelayPatient()
     {
-        if (m_currentPatientIndex >= m_basePatientsInDay)
-        {
-            GenerateNewPatient();
-        }
-
         yield return new WaitForSeconds(m_delayBetweenPatients);
         ShowNextPatient();
     }

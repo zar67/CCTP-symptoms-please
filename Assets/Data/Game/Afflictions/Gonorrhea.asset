@@ -27,9 +27,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 80176f826edc36247b9f3d34400b5faf, type: 2}
   m_actionEffectivenessMap:
   - Type: 0
-    Effectiveness: 4
+    Effectiveness: 1
   - Type: 1
-    Effectiveness: 0
+    Effectiveness: 4
   - Type: 2
     Effectiveness: 0
   - Type: 3
@@ -39,5 +39,7 @@ MonoBehaviour:
   - Type: 5
     Effectiveness: 3
   - Type: 6
+    Effectiveness: 3
+  - Type: 7
     Effectiveness: 3
   m_adviceEffectivenessMap: []

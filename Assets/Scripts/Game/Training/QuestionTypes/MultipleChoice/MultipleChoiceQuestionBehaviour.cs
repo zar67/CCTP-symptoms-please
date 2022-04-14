@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -5,10 +6,18 @@ public class MultipleChoiceQuestionBehaviour : QuestionTypeBehaviour
 {
     [SerializeField] private MultipleChoiceAnswer[] m_questionAnswers = default;
 
+    private List<MultipleChoiceAnswer> m_selectedAnswers = new List<MultipleChoiceAnswer>();
+
+    private MultipleChoiceQuestionData m_questionData = default;
+
     public override void Initialise(QuestionTypeData data)
     {
+        m_selectedAnswers = new List<MultipleChoiceAnswer>();
+
         if (data is MultipleChoiceQuestionData multipleChoiceData)
         {
+            m_questionData = multipleChoiceData;
+
             var answers = multipleChoiceData.CorrectAnswers.ToList();
 
             if (multipleChoiceData.CorrectAnswers.Length < m_questionAnswers.Length)
@@ -54,19 +63,48 @@ public class MultipleChoiceQuestionBehaviour : QuestionTypeBehaviour
         }
     }
 
-    public void OnAnswerSelected(MultipleChoiceAnswer selectedAnswer)
+    public override void AnswerSubmitted(string answer)
     {
-        foreach (MultipleChoiceAnswer answer in m_questionAnswers)
+        foreach (MultipleChoiceAnswer multipleChoiceAnswer in m_questionAnswers)
         {
-            if (answer == selectedAnswer)
+            multipleChoiceAnswer.AnswerSubmitted(
+                m_selectedAnswers.Contains(multipleChoiceAnswer), 
+                m_questionData.CorrectAnswers.Contains(multipleChoiceAnswer.AnswerText)
+            );
+        }
+    }
+
+    public override int GetAnswerScore(string answer)
+    {
+        int score = 0;
+
+        foreach (MultipleChoiceAnswer selectedAnswer in m_selectedAnswers)
+        {
+            if (m_questionData.CorrectAnswers.Contains(selectedAnswer.AnswerText))
             {
-                answer.Select();
-                InvokeAnswerChanged(answer.AnswerText);
+                score += 1;
             }
             else
             {
-                answer.Deselect();
+                score -= 1;
             }
+        }
+
+        return score;
+    }
+
+    public void OnAnswerSelected(MultipleChoiceAnswer selectedAnswer)
+    {
+        if (m_selectedAnswers.Contains(selectedAnswer))
+        {
+            selectedAnswer.Deselect();
+            m_selectedAnswers.Remove(selectedAnswer);
+        }
+        else
+        {
+            selectedAnswer.Select();
+            InvokeAnswerChanged(selectedAnswer.AnswerText);
+            m_selectedAnswers.Add(selectedAnswer);
         }
     }
 

@@ -21,14 +21,12 @@ public class TrainingQuizPopup : Popup
     [SerializeField] private TextMeshProUGUI m_questionText = default;
 
     [Header("Answer References")]
-    [SerializeField] private GameObject m_answerHolder = default;
     [SerializeField] private AnswerTypeReference[] m_answerHolders = default;
     [SerializeField] private Button m_submitAnswerButton = default;
 
     [Header("Result References")]
-    [SerializeField] private GameObject m_resultsHolder = default;
+    [SerializeField] private TextMeshProUGUI m_scoreText = default;
     [SerializeField] private Button m_nextQuestionButton = default;
-    [SerializeField] private TextMeshProUGUI m_resultsText = default;
 
     [Header("Questions Data")]
     [SerializeField] private TrainingQuizQuestions m_trainingQuizQuestions = default;
@@ -41,6 +39,7 @@ public class TrainingQuizPopup : Popup
     private int m_totalQuestions = 0;
 
     private string m_currentAnswer = "";
+    private int m_currentScore = 0;
 
     public override void Initialise()
     {
@@ -59,9 +58,11 @@ public class TrainingQuizPopup : Popup
 
         m_questionsCorrect = 0;
         m_totalQuestions = 0;
+        m_currentScore = 0;
 
         m_questionsCorrectText.text = m_questionsCorrect.ToString();
         m_totalQuestionsText.text = m_totalQuestions.ToString();
+        m_scoreText.text = "0";
 
         OnNextQuestion();
     }
@@ -97,9 +98,12 @@ public class TrainingQuizPopup : Popup
     private void OnQuestionAnswered()
     {
         AudioManager.Instance.Play(EAudioClipType.CLICK);
-        bool answerCorrect = m_currentQuestionData.QuestionData.IsCorrect(m_currentAnswer);
+        int score = m_answerHolderDictionary[m_currentQuestionData.QuestionType].GetAnswerScore(m_currentAnswer);
+        bool answerCorrect = score > 0;
 
-        m_resultsText.text = answerCorrect ? "Correct!" : "Oops! That's not right.";
+        GameData.TotalScore += score;
+        m_currentScore += score;
+        m_scoreText.text = m_currentScore.ToString();
 
         TrainingManager.RegisterQuestion(m_currentQuestionData.Topic, answerCorrect);
 
@@ -113,8 +117,10 @@ public class TrainingQuizPopup : Popup
         m_questionsCorrectText.text = m_questionsCorrect.ToString();
         m_totalQuestionsText.text = m_totalQuestions.ToString();
 
-        m_resultsHolder.SetActive(true);
-        m_answerHolder.SetActive(false);
+        m_nextQuestionButton.gameObject.SetActive(true);
+        m_submitAnswerButton.gameObject.SetActive(false);
+
+        m_answerHolderDictionary[m_currentQuestionData.QuestionType].AnswerSubmitted(m_currentAnswer);
     }
 
     private void OnNextQuestion()
@@ -134,7 +140,7 @@ public class TrainingQuizPopup : Popup
             }
         }
 
-        m_resultsHolder.SetActive(false);
-        m_answerHolder.SetActive(true);
+        m_nextQuestionButton.gameObject.SetActive(false);
+        m_submitAnswerButton.gameObject.SetActive(true);
     }
 }

@@ -46,7 +46,7 @@ public class AfflictionData : GameScriptableObject
 
     public string GetAfflictionSummary()
     {
-        return m_symptoms[Random.Range(0, m_symptoms.Length)].Description;
+        return m_symptoms[Random.Range(0, m_symptoms.Length)].DisplayName;
     }
 
     public SymptomsData GetSymptomAtIndex(int index)

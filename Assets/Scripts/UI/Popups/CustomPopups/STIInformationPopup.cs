@@ -24,7 +24,7 @@ public class STIInformationPopup : Popup
         for (int i = 0; i < affliction.SymptomsCount; i++)
         {
             InformationHolder newbubble = Instantiate(m_informationHolderPrefab, m_symptomsHolder);
-            newbubble.SetText(affliction.GetSymptomAtIndex(i).Description);
+            newbubble.SetText(affliction.GetSymptomAtIndex(i).DisplayName);
         }
 
         foreach (Transform child in m_treatmentsHolder)

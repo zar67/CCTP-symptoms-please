@@ -18,7 +18,7 @@ public class SymptomBubble : MonoBehaviour
     public void SetData(SymptomsData data)
     {
         m_symptomData = data;
-        m_writtenSymptomText.text = data.Description;
+        m_writtenSymptomText.text = data.DisplayName;
     }
 
     private void OnEnable()

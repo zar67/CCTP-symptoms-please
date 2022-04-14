@@ -5,12 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SymptomsPlease/Game/SymptomsData")]
 public class SymptomsData : GameScriptableObject
 {
+    public string DisplayName => m_displayName;
     public string Description => m_description;
 
-    public Sprite Icon => m_icon;
-
+    [SerializeField] private string m_displayName = "";
     [SerializeField] private string m_description = "";
-    [SerializeField] private Sprite m_icon = default;
     [SerializeField] private SymptomsData[] m_uncompatibleSymptoms = { };
 
     public bool IsSymptomCompatible(SymptomsData symptom)

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SorePenisOpening
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Sore Penis Opening
-  m_icon: {fileID: 0}
+  m_displayName: Sore Penis Opening
+  m_description: The patient has a sore penis opening.
   m_uncompatibleSymptoms:
   - {fileID: 11400000, guid: 33207a633e89cf749bf322219b319afd, type: 2}
   - {fileID: 11400000, guid: 860d4a9b7aca1cd4c8f89e4625d48e9e, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RectalDischarge
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Rectal Discharge
-  m_icon: {fileID: 0}
+  m_displayName: Rectal Discharge
+  m_description: The patient has unusual discharge from their anus.
   m_uncompatibleSymptoms: []

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Headache
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Headache
-  m_icon: {fileID: 0}
+  m_displayName: Headache
+  m_description: The patient has frequent and unual headaches.
   m_uncompatibleSymptoms: []

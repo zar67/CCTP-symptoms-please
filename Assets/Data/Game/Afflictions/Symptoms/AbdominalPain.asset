@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AbdominalPain
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Abdominal Pain
-  m_icon: {fileID: 0}
+  m_displayName: Abdominal Pain
+  m_description: The patient has pain in their stomach area.
   m_uncompatibleSymptoms: []

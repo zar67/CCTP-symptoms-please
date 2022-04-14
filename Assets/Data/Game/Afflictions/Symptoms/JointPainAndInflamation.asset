@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: JointPainAndInflamation
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Joint Pain and Inflamation
-  m_icon: {fileID: 0}
+  m_displayName: Joint Pain and Inflamation
+  m_description: The patient is suffering from unusual join pain and inflamation.
   m_uncompatibleSymptoms: []

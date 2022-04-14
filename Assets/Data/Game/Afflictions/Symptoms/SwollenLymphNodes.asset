@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SwollenLymphNodes
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Swollen Lymph Nodes
-  m_icon: {fileID: 0}
+  m_displayName: Swollen Lymph Nodes
+  m_description: The patient has unusually swollen lymph nodes.
   m_uncompatibleSymptoms: []

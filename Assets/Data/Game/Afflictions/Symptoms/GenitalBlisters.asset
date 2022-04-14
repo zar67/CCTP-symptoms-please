@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GenitalBlisters
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: GenitalBlisters
-  m_icon: {fileID: 0}
+  m_displayName: Genital Blisters
+  m_description: The patient has blisters forming on their genitalia.
   m_uncompatibleSymptoms: []

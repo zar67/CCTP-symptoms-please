@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fever
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Fever
-  m_icon: {fileID: 0}
+  m_displayName: Fever
+  m_description: The patient has a very high temperature.
   m_uncompatibleSymptoms: []

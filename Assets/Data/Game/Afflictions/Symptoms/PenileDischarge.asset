@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PenileDischarge
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Penis Discharge
-  m_icon: {fileID: 0}
+  m_displayName: Penis Discharge
+  m_description: The patient is having unusual discharge from their penis.
   m_uncompatibleSymptoms:
   - {fileID: 11400000, guid: 7cb793458321a4e4fa3f7e69f87f3c3d, type: 2}
   - {fileID: 11400000, guid: 33207a633e89cf749bf322219b319afd, type: 2}

@@ -55,6 +55,17 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is AIDs treated?
+        CorrectAnswers:
+        - Repeat Prescription
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Cream from Pharmacy
   - Topic: 0
     Questions:
     - Type: 0
@@ -96,6 +107,17 @@ MonoBehaviour:
         - Unintended Weight Loss
         - Unusual Heavy Period
         - Unusual Rectal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Chlamydia treated?
+        CorrectAnswers:
+        - Antibiotics
+        IncorrectAnswers:
+        - Injection
+        - Repeat Prescription
+        - Condoms
+        - Lice Shampoo
+        - Cream from Pharmacy
   - Topic: 1
     Questions:
     - Type: 0
@@ -137,6 +159,17 @@ MonoBehaviour:
         - Testicle Pain
         - Unintended Weight Loss
         - Unusual Rectal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Gonorrhea treated?
+        CorrectAnswers:
+        - Antibiotics
+        IncorrectAnswers:
+        - Injection
+        - Repeat Prescription
+        - Condoms
+        - Lice Shampoo
+        - Cream from Pharmacy
   - Topic: 2
     Questions:
     - Type: 0
@@ -178,6 +211,17 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Herpes treated?
+        CorrectAnswers:
+        - Repeat Prescription
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Cream from Pharmacy
   - Topic: 3
     Questions:
     - Type: 0
@@ -219,6 +263,17 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is HIV treated?
+        CorrectAnswers:
+        - Repeat Prescription
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Cream from Pharmacy
   - Topic: 5
     Questions:
     - Type: 0
@@ -260,6 +315,17 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is HPV treated?
+        CorrectAnswers:
+        - Cream from Pharmacy
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Repeat Prescription
   - Topic: 6
     Questions:
     - Type: 0
@@ -301,6 +367,17 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Pubic Lice treated?
+        CorrectAnswers:
+        - Lice Shampoo
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Repeat Prescription
+        - Cream from Pharmacy
   - Topic: 7
     Questions:
     - Type: 0
@@ -381,3 +458,27 @@ MonoBehaviour:
         - Unusual Heavy Period
         - Unusual Rectal Discharge
         - Unusual Vaginal Discharge
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Stage 1 Syphilis treated?
+        CorrectAnswers:
+        - Injection
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Repeat Prescription
+        - Cream from Pharmacy
+    - Type: 0
+      MultipleChoiceData:
+        Question: How is Stage 2 Syphilis treated?
+        CorrectAnswers:
+        - Injection
+        IncorrectAnswers:
+        - Injection
+        - Antibiotics
+        - Condoms
+        - Lice Shampoo
+        - Repeat Prescription
+        - Cream from Pharmacy

@@ -22,9 +22,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
         public int DayNumber;
         public int TotalPatientsHelped;
         public int TotalPatientsSeen;
-        public int NextPatientID;
         public AvatarIndexData AvatarData;
-        public PatientData[] PatientsData;
     }
 
     public static bool EnabledOnline
@@ -59,13 +57,10 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
 
     public static List<string> AvailablePlayerNames { get; private set; } = new List<string>();
 
-    public static Dictionary<int, PatientData> Patients { get; private set; } = new Dictionary<int, PatientData>();
-
     public static float TotalTimePlayed;
     public static int DayNumber;
     public static int TotalPatientsHelped;
     public static int TotalPatientsSeen;
-    public static int NextPatientID;
 
     public static AvatarIndexData AvatarData;
 
@@ -106,9 +101,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                     DayNumber = 1,
                     TotalPatientsHelped = 0,
                     TotalPatientsSeen = 0,
-                    NextPatientID = 0,
-                    AvatarData = new AvatarIndexData(),
-                    PatientsData = new PatientData[] { }
+                    AvatarData = new AvatarIndexData()
                 });
             }
         }
@@ -124,14 +117,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
             DayNumber = data.DayNumber;
             TotalPatientsHelped = data.TotalPatientsHelped;
             TotalPatientsSeen = data.TotalPatientsSeen;
-            NextPatientID = data.NextPatientID;
             AvatarData = data.AvatarData;
-
-            Patients = new Dictionary<int, PatientData>();
-            foreach (var patient in data.PatientsData)
-            {
-                Patients.Add(patient.ID, patient);
-            }
         }
     }
 
@@ -146,9 +132,7 @@ public class GameData : MonoBehaviour, ISaveable, IEventDependancy
                 DayNumber = DayNumber,
                 TotalPatientsHelped = TotalPatientsHelped,
                 TotalPatientsSeen = TotalPatientsSeen,
-                NextPatientID = NextPatientID,
-                AvatarData = AvatarData,
-                PatientsData = Patients.Values.ToArray()
+                AvatarData = AvatarData
             });
         }
     }

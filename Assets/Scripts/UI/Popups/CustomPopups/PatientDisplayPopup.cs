@@ -33,8 +33,8 @@ public class PatientDisplayPopup : Popup
     private void UpdateDisplay(PatientData data)
     {
         m_avatarDisplay.UpdateSprites(data.AvatarData);
-        m_nameText.text = data.Name;
-        m_appointmentsText.text = data.PlayerStrikes.ToString();
+        m_nameText.text = "Name: " + data.Name;
+        m_appointmentsText.text = "Appointment #: " + data.PlayerStrikes.ToString();
 
         m_previousActionsText.text = "";
         foreach (ActionType action in data.PreviousActions)

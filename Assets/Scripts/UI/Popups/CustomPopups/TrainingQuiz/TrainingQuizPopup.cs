@@ -103,7 +103,7 @@ public class TrainingQuizPopup : Popup
 
         GameData.TotalScore += score;
         m_currentScore += score;
-        m_scoreText.text = m_currentScore.ToString();
+        m_scoreText.text = "Score: " + m_currentScore.ToString();
 
         TrainingManager.RegisterQuestion(m_currentQuestionData.Topic, answerCorrect);
 

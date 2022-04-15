@@ -17,8 +17,8 @@ public class MultipleChoiceAnswer : MonoBehaviour
 
     [SerializeField] private Sprite m_correctSprite = default;
     [SerializeField] private Sprite m_incorrectSprite = default;
-    [SerializeField] private Color m_correctColour = Color.green;
-    [SerializeField] private Color m_incorrectColour = Color.red;
+    [SerializeField] private Sprite m_correctBackgroundSprite = default;
+    [SerializeField] private Sprite m_incorrectBackgroundSprite = default;
 
     public string AnswerText => m_answerText.text;
 
@@ -45,7 +45,8 @@ public class MultipleChoiceAnswer : MonoBehaviour
 
         if (selected)
         {
-            m_buttonImage.color = correct ? m_correctColour : m_incorrectColour;
+            m_buttonImage.color = m_deselectedColour;
+            m_buttonImage.sprite = correct ? m_correctBackgroundSprite : m_incorrectBackgroundSprite;
         }
     }
 

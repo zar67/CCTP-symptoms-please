@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class STIInformationPopup : Popup
 {
+    [Header("Data References")]
+    [SerializeField] private ActionsData m_actionsData = default;
+
     [Header("Information References")]
     [SerializeField] private TextMeshProUGUI m_nameText = default;
     [SerializeField] private TextMeshProUGUI m_descriptionText = default;
@@ -27,16 +30,24 @@ public class STIInformationPopup : Popup
             newbubble.SetText(affliction.GetSymptomAtIndex(i).DisplayName);
         }
 
+        RectTransform symptomsRect = m_symptomsHolder.GetComponent<RectTransform>();
+        symptomsRect.sizeDelta = new Vector2(symptomsRect.sizeDelta.x, 150 * (affliction.SymptomsCount / 3));
+
         foreach (Transform child in m_treatmentsHolder)
         {
             Destroy(child.gameObject);
         }
 
+        int numTreatments = 0;
         foreach(ActionType type in affliction.GetTreatments())
         {
             InformationHolder newbubble = Instantiate(m_informationHolderPrefab, m_treatmentsHolder);
-            newbubble.SetText(type.ToString());
+            newbubble.SetText(m_actionsData.GetInfoForAction(type).DisplayName);
+            numTreatments++;
         }
+
+        RectTransform treatmentsRect = m_treatmentsHolder.GetComponent<RectTransform>();
+        treatmentsRect.sizeDelta = new Vector2(treatmentsRect.sizeDelta.x, 150 * (numTreatments / 3));
 
         foreach (string advice in affliction.GetAdviceTreatment())
         {

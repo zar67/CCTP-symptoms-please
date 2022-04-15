@@ -15,9 +15,9 @@ MonoBehaviour:
   m_developerDescription: 
   m_effectivnessIcons:
   - Action: 0
-    DisplayName: Antibiotics
+    DisplayName: Red Antibiotics
   - Action: 1
-    DisplayName: Antibiotics
+    DisplayName: Blue Antibiotics
   - Action: 2
     DisplayName: Injection
   - Action: 3

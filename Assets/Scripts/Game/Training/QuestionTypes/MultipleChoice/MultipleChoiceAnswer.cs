@@ -17,6 +17,7 @@ public class MultipleChoiceAnswer : MonoBehaviour
 
     [SerializeField] private Sprite m_correctSprite = default;
     [SerializeField] private Sprite m_incorrectSprite = default;
+    [SerializeField] private Sprite m_defaultBackgroundSprite = default;
     [SerializeField] private Sprite m_correctBackgroundSprite = default;
     [SerializeField] private Sprite m_incorrectBackgroundSprite = default;
 
@@ -26,6 +27,7 @@ public class MultipleChoiceAnswer : MonoBehaviour
     {
         m_answerText.text = answerText;
         m_resultIconImage.gameObject.SetActive(false);
+        m_buttonImage.sprite = m_defaultBackgroundSprite;
 
         if (selected)
         {

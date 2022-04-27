@@ -13,12 +13,21 @@ public class MultipleChoiceAnswer : MonoBehaviour
     [SerializeField] private Button m_button = default;
     [SerializeField] private Image m_buttonImage = default;
     [SerializeField] private TextMeshProUGUI m_answerText = default;
+    [SerializeField] private Image m_resultIconImage = default;
+
+    [SerializeField] private Sprite m_correctSprite = default;
+    [SerializeField] private Sprite m_incorrectSprite = default;
+    [SerializeField] private Sprite m_defaultBackgroundSprite = default;
+    [SerializeField] private Sprite m_correctBackgroundSprite = default;
+    [SerializeField] private Sprite m_incorrectBackgroundSprite = default;
 
     public string AnswerText => m_answerText.text;
 
     public void Initialise(string answerText, bool selected = false)
     {
         m_answerText.text = answerText;
+        m_resultIconImage.gameObject.SetActive(false);
+        m_buttonImage.sprite = m_defaultBackgroundSprite;
 
         if (selected)
         {
@@ -27,6 +36,19 @@ public class MultipleChoiceAnswer : MonoBehaviour
         else
         {
             Deselect();
+        }
+    }
+
+    public void AnswerSubmitted(bool selected, bool correct)
+    {
+        m_resultIconImage.gameObject.SetActive(true);
+
+        m_resultIconImage.sprite = correct ? m_correctSprite : m_incorrectSprite;
+
+        if (selected)
+        {
+            m_buttonImage.color = m_deselectedColour;
+            m_buttonImage.sprite = correct ? m_correctBackgroundSprite : m_incorrectBackgroundSprite;
         }
     }
 

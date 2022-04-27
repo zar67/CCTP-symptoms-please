@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Diarrhea
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Diarrhea
-  m_icon: {fileID: 0}
+  m_displayName: Diarrhea
+  m_description: The patient has diarrhea.
   m_uncompatibleSymptoms: []

@@ -5,6 +5,6 @@ public class DayEvent
 
 public class NewAppointmentEvent : DayEvent
 {
-    public int PatientID;
+    public PatientData PatientData;
     public int NewAppointmentDay;
 }

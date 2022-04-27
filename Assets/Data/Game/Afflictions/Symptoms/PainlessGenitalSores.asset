@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PainlessGenitalSores
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Painless Genital Sores
-  m_icon: {fileID: 0}
+  m_displayName: Painless Genital Sores
+  m_description: The patient has sores on their genitals that are painless.
   m_uncompatibleSymptoms: []

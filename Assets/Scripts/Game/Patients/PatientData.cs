@@ -4,7 +4,6 @@ using System.Collections.Generic;
 [Serializable]
 public class PatientData
 {
-    public int ID;
     public string Name;
     public int PlayerStrikes;
     public string AppointmentSummary;

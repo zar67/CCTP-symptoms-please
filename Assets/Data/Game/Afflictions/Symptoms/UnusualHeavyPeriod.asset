@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnusualHeavyPeriod
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Unusual Heavy Period
-  m_icon: {fileID: 0}
+  m_displayName: Unusual Heavy Period
+  m_description: The patient is experiencing unusually heavy periods.
   m_uncompatibleSymptoms:
   - {fileID: 11400000, guid: b210fd9ad72f06f4598e7a7978d77b47, type: 2}
   - {fileID: 11400000, guid: d9b7c3c84038ff14280525632295aa13, type: 2}

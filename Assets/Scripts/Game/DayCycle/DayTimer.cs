@@ -32,6 +32,9 @@ public class DayTimer : MonoBehaviour
 
     private void Awake()
     {
+        m_isTimerComplete = false;
+        m_dayTime = 0;
+
         m_minuteHand.eulerAngles = new Vector3(0, 0, 0);
         m_hourHand.eulerAngles = new Vector3(0, 0, 0);
 

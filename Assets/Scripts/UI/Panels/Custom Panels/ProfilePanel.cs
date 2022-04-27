@@ -26,15 +26,15 @@ public class ProfilePanel : Panel
         UpdateName();
 
         var totalTimePlayed = TimeSpan.FromSeconds(GameData.TotalTimePlayed);
-        m_timePlayedText.text = totalTimePlayed.ToString(@"hh\:mm");
-        m_patientsHelpedText.text = GameData.TotalPatientsHelped.ToString();
+        m_timePlayedText.text = "Time Played: " + totalTimePlayed.ToString(@"hh\:mm");
+        m_patientsHelpedText.text = "Patients Helped: " + GameData.TotalPatientsHelped.ToString();
 
         int successRate = 0;
         if (GameData.TotalPatientsSeen != 0)
         {
             successRate = (int)(GameData.TotalPatientsHelped / (float)GameData.TotalPatientsSeen * 100);
         }
-        m_successRateText.text = successRate.ToString();
+        m_successRateText.text = "Success Rate: " + successRate.ToString() + "%";
     }
 
     public override void OnClose()

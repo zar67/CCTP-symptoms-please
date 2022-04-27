@@ -59,8 +59,6 @@ public class PatientManager : MonoBehaviour
     [SerializeField] private AfflictionData m_initialAffliction = default;
     [SerializeField] private AfflictionData m_initialAdviceAffliction = default;
 
-    private static int m_currentPatientIndex = default;
-
     private Tween m_moveOutTween = null;
     private Tween m_moveInTween = null;
 
@@ -69,14 +67,14 @@ public class PatientManager : MonoBehaviour
         PatientSeenInDay = 0;
         PatientsHelpedInDay = 0;
         PatientsStrikedOutInDay = 0;
-
-        TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
     }
 
     private void OnEnable()
     {
         ActionObject.OnDraggableOnPatient += OnPlayerAction;
         DayTimer.OnDayTimerComplete += OnDayTimerComplete;
+
+        TransitionManager.OnTransitionComplete.Subscribe(OnTransitionComplete);
     }
 
     private void OnDisable()
@@ -135,7 +133,7 @@ public class PatientManager : MonoBehaviour
         DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
         {
             EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
-            PatientID = CurrentPatient.ID,
+            PatientData = CurrentPatient,
             NewAppointmentDay = GameData.DayNumber + 1
         });
     }
@@ -153,7 +151,7 @@ public class PatientManager : MonoBehaviour
                 DayEventsManager.DayEvents.Add(new NewAppointmentEvent()
                 {
                     EventType = DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT,
-                    PatientID = CurrentPatient.ID,
+                    PatientData = CurrentPatient,
                     NewAppointmentDay = GameData.DayNumber + 1
                 });
                 triggeredEvents.Add(DayEventType.PATIENT_BOOKS_NEW_APPOINTMENT);
@@ -175,8 +173,6 @@ public class PatientManager : MonoBehaviour
         {
             DayEventsManager.AddEvent(DayEventType.PATIENT_CURED);
             triggeredEvents.Add(DayEventType.PATIENT_CURED);
-
-            GameData.Patients.Remove(CurrentPatient.ID);
         }
 
         var patientSeenData = new PatientSeenData()
@@ -189,7 +185,6 @@ public class PatientManager : MonoBehaviour
             ScoreGained = scoreGained
         };
 
-        m_currentPatientIndex++;
         PatientSeenInDay++;
         if ((int)effectiveness > 2)
         {
@@ -208,7 +203,6 @@ public class PatientManager : MonoBehaviour
         {
             var ftuePatient = new PatientData()
             {
-                ID = GameData.Patients.Count,
                 Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
                 PlayerStrikes = 0,
                 AppointmentSummary = m_initialAffliction.GetAfflictionSummary(),
@@ -216,7 +210,6 @@ public class PatientManager : MonoBehaviour
                 AvatarData = m_avatarData.GenerateRandomData()
             };
 
-            GameData.Patients.Add(ftuePatient.ID, ftuePatient);
             return ftuePatient;
         }
         
@@ -224,7 +217,6 @@ public class PatientManager : MonoBehaviour
         {
             var ftuePatient = new PatientData()
             {
-                ID = GameData.Patients.Count,
                 Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
                 PlayerStrikes = 0,
                 AppointmentSummary = m_initialAdviceAffliction.GetAfflictionSummary(),
@@ -232,7 +224,6 @@ public class PatientManager : MonoBehaviour
                 AvatarData = m_avatarData.GenerateRandomData()
             };
 
-            GameData.Patients.Add(ftuePatient.ID, ftuePatient);
             return ftuePatient;
         }
 
@@ -242,7 +233,7 @@ public class PatientManager : MonoBehaviour
             {
                 if (dayEvent is NewAppointmentEvent appointmentEvent)
                 {
-                    PatientData eventPatient = GameData.Patients[appointmentEvent.PatientID];
+                    PatientData eventPatient = appointmentEvent.PatientData;
                     if (GameData.DayNumber == appointmentEvent.NewAppointmentDay &&
                         ModificationsManager.IsTopicActive(eventPatient.AfflictionData.Topic))
                     {
@@ -262,16 +253,12 @@ public class PatientManager : MonoBehaviour
 
         var newPatient = new PatientData()
         {
-            ID = GameData.NextPatientID,
             Name = m_validPatientNames[Random.Range(0, m_validPatientNames.Count)],
             PlayerStrikes = 0,
             AppointmentSummary = m_afflictionDatas.GetAfflictionAtIndex(index).GetAfflictionSummary(),
             AfflictionData = m_afflictionDatas.GetAfflictionAtIndex(index),
             AvatarData = m_avatarData.GenerateRandomData()
         };
-
-        GameData.Patients.Add(newPatient.ID, newPatient);
-        GameData.NextPatientID++;
 
         return newPatient;
     }
@@ -280,6 +267,7 @@ public class PatientManager : MonoBehaviour
     {
         if (DayTimer.IsTimerComplete)
         {
+            Debug.Log("TIMER");
             return;
         }
 

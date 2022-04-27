@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5634669465528337024}
   - component: {fileID: 2100136100258068208}
-  - component: {fileID: 3071803534191400103}
+  - component: {fileID: 4257175968353173401}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -168,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000091552734}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2100136100258068208
@@ -193,11 +193,11 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &3071803534191400103
+--- !u!114 &4257175968353173401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a4307016057d46648bfc3a3d51216a61, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3842258263483756744}
   m_HandleRect: {fileID: 87804142306546331}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 48a4652d232517f4492702dda55e6913, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -501,6 +501,10 @@ MonoBehaviour:
   m_modificationsData: {fileID: 11400000, guid: 8f7518a547fa58b44b92ecd463c72cf9, type: 2}
   m_scrollViewContent: {fileID: 5634669465528337024}
   m_displayPrefab: {fileID: 5632025735350073467, guid: 84125a7d25f85a94e8972fd869bcab4c, type: 3}
+  m_popupsData: {fileID: 11400000, guid: 17500eb6ca50139409b886125836291e, type: 2}
+  m_stiInformationPopupName: popup_sti_information
+  m_afflictionDatas: {fileID: 11400000, guid: 7d0351a36ade4174481b3c4de8b912fc, type: 2}
+  m_infoButtonPrefab: {fileID: 5287698213748313613, guid: 9da55a5e2c8921148ae5c14583b22b6e, type: 3}
 --- !u!1 &7545731074228832678
 GameObject:
   m_ObjectHideFlags: 0

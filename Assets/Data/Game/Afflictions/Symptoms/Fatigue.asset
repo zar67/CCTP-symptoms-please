@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fatigue
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Fatigue
-  m_icon: {fileID: 0}
+  m_displayName: Fatigue
+  m_description: The patient is very tired and sleepy all of the time.
   m_uncompatibleSymptoms: []

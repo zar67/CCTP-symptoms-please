@@ -7,7 +7,11 @@ public abstract class QuestionTypeBehaviour : MonoBehaviour
 
     public abstract void Initialise(QuestionTypeData data);
 
-    public static void InvokeAnswerChanged(string answer)
+    public abstract void AnswerSubmitted(string answer);
+
+    public abstract int GetAnswerScore(string answer);
+
+    public void InvokeAnswerChanged(string answer)
     {
         OnAnswerChanged?.Invoke(answer);
     }

@@ -35,4 +35,6 @@ MonoBehaviour:
     Effectiveness: 2
   - Type: 7
     Effectiveness: 3
-  m_adviceEffectivenessMap: []
+  m_adviceEffectivenessMap:
+  - Advice: Cream from Pharmacy
+    Effectiveness: 4

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MouthSores
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Mouth Sores
-  m_icon: {fileID: 0}
+  m_displayName: Mouth Sores
+  m_description: The patient has sores growing around their mouth.
   m_uncompatibleSymptoms: []

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GenitalRedness
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Genital Redness
-  m_icon: {fileID: 0}
+  m_displayName: Genital Redness
+  m_description: The patients genitals are unusually red.
   m_uncompatibleSymptoms: []

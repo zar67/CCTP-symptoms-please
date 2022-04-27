@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UnintendedWeightLoss
   m_EditorClassIdentifier: 
   m_developerDescription: 
-  m_description: Unintended Weight Loss
-  m_icon: {fileID: 0}
+  m_displayName: Unintended Weight Loss
+  m_description: The patient has had a recent loss in weight that wasn't intended.
   m_uncompatibleSymptoms: []
